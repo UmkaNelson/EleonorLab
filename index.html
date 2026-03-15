@@ -1,0 +1,468 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ELEONOR LAB | Архитектурное бюро</title>
+    <meta name="description" content="Архитектурное бюро ELEONOR LAB. Создаем архитектуру будущего.">
+    
+    <!-- Критичные изображения первой загрузки -->
+    <link rel="preload" href="./assets/image/fon-main.png" as="image" fetchpriority="high">
+    <link rel="preload" href="./assets/image/logo-main.png" as="image" fetchpriority="high">
+    <link rel="preload" href="./assets/image/Eleonor11.png" as="image">
+    
+    <!-- Шрифты -->
+    <link rel="stylesheet" href="./css/fonts.css">
+    
+    <!-- CSS файлы -->
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/components.css">
+    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./css/home.css">
+</head>
+<body class="home-page">
+    <!-- Логотип без навигации -->
+    <header class="header home-header">
+        <div class="header-container">
+            <a href="index.html" class="header-logo home-logo">
+                <img src="./assets/image/logo-main.png" alt="ELEONOR LAB" class="logo-image" width="302" height="33" loading="eager" fetchpriority="high" decoding="async">
+            </a>
+            
+            <button class="btn btn-outline btn-oval start-work-btn">
+                начать работу
+            </button>
+        </div>
+    </header>
+
+    <!-- Главный контент -->
+    <main class="home-main">
+        <!-- Первая секция -->
+        <section class="hero-section section-full">
+            <!-- Основной заголовок -->
+            <div class="main-headline">
+                <div class="headline-top">
+                    <div class="headline-row">
+                        <div class="headline-part we-create-arch">
+                            мы создаем <span class="arch-word">архитектуру</span>
+                        </div>
+                    </div>
+                    <div class="headline-row headline-row--design">
+                        <div class="headline-part design-word">и дизайн</div>
+                    </div>
+                </div>
+                <div class="headline-row">
+                    <div class="future-container">
+                        <div class="headline-part future-word">будущего</div>
+                        <div class="loading-animation">
+                            <div class="loading-container">
+                                <div class="loading-strip"></div>
+                                <div class="strip-image"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Фон всей секции -->
+            <div class="hero-bg-image"></div>
+
+            <!-- Кнопка "обсудить проект" в первой секции -->
+            <button class="btn btn-primary btn-oval discuss-project-btn">
+                обсудить проект
+            </button>
+
+        </section>
+
+        <!-- Секция проектов/команды -->
+        <section class="feature-slider" id="media" aria-label="Ключевые проекты и команда">
+            <div class="slider-container">
+                <article class="project-slide active" data-toggle-label="ЭЛЕОНОРА ПОЛУПАНОВА">
+                    <div class="slide-bg" style="background-image: url('./assets/image/Eleonor11.png');"></div>
+                    <div class="slide-gradient"></div>
+
+                    <div class="slide-content">
+                        <div class="slide-brand">ELEONOR LAB</div>
+                        <h2 class="slide-title">ЭЛЕОНОРА<br>ПОЛУПАНОВА</h2>
+                        <a class="slide-cta" href="about.html">
+                            <span class="cta-arrow">→</span> больше о Элеоноре
+                        </a>
+                    </div>
+
+                    <button class="slide-next" type="button">
+                        <span class="slide-next-label">FOOD MARKET</span>
+                        <span class="slide-next-arrow">→</span>
+                    </button>
+                </article>
+
+                <article class="project-slide" data-toggle-label="FOOD MARKET">
+                    <div class="slide-bg" style="background-image: url('./assets/image/pj13.png');"></div>
+                    <div class="slide-gradient"></div>
+
+                    <div class="slide-content">
+                        <div class="slide-brand">ELEONOR LAB</div>
+                        <h2 class="slide-title">FOOD<br>MARKET</h2>
+                        <a class="slide-cta" href="projects.html">
+                            <span class="cta-arrow">→</span> больше о проекте
+                        </a>
+                    </div>
+
+                    <button class="slide-next" type="button">
+                        <span class="slide-next-label">iSaloni TOUR 2026</span>
+                        <span class="slide-next-arrow">→</span>
+                    </button>
+                </article>
+
+                <article class="project-slide" data-toggle-label="iSaloni TOUR 2026">
+                    <div class="slide-bg" style="background-image: url('./assets/image/pj14.png');"></div>
+                    <div class="slide-gradient"></div>
+
+                    <div class="slide-content">
+                        <div class="slide-brand">ELEONOR LAB</div>
+                        <h2 class="slide-title slide-title--mixed">iSaloni TOUR<br>2026</h2>
+                        <a class="slide-cta" href="project-sp.html">
+                            <span class="cta-arrow">→</span> предзапись
+                        </a>
+                    </div>
+
+                    <button class="slide-next" type="button">
+                        <span class="slide-next-label">ЭЛЕОНОРА ПОЛУПАНОВА</span>
+                        <span class="slide-next-arrow">→</span>
+                    </button>
+                </article>
+
+                <div class="slide-peek" aria-hidden="true">
+                    <div class="slide-peek__scrim"></div>
+                    <div class="slide-peek__content">
+                        <div class="slide-peek__brand">ELEONOR LAB</div>
+                        <div class="slide-peek__title">Следующий проект</div>
+                    </div>
+                </div>
+
+        </div>
+    </section>
+
+        <!-- Статистика -->
+        <section class="stats-strip" aria-label="Статистика проектов">
+            <div class="stats-strip__inner">
+                <ul class="stats-strip__list">
+                    <li class="stats-strip__item"><span class="stats-strip__number">2000</span><span class="stats-strip__label"><span class="stats-strip__label-line">проектов</span><span class="stats-strip__label-line">запущено</span></span></li>
+                    <li class="stats-strip__item"><span class="stats-strip__number">150</span><span class="stats-strip__label"><span class="stats-strip__label-line">проектов</span><span class="stats-strip__label-line">HoReCa</span></span></li>
+                    <li class="stats-strip__item"><span class="stats-strip__number">30</span><span class="stats-strip__label"><span class="stats-strip__label-line">международных</span><span class="stats-strip__label-line">проектов</span></span></li>
+                    <li class="stats-strip__item"><span class="stats-strip__number">100</span><span class="stats-strip__label"><span class="stats-strip__label-line">общественных</span><span class="stats-strip__label-line">проектов</span></span></li>
+                    <li class="stats-strip__item"><span class="stats-strip__number">134</span><span class="stats-strip__label">партнёров</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Проектные направления 1 -->
+        <section class="projects-section">
+            <div class="projects-grid projects-grid--layout-a">
+                <article class="project-card project-card--accent project-area-clinic" data-bg="./assets/image/pj1.png" style="background-image: none;">
+                    <div class="project-overlay"></div>
+                    <div class="project-text">
+                        <span class="project-count">100 проектов</span>
+                        <h3 class="project-title">клиники</h3>
+                    </div>
+                </article>
+
+                <article class="project-card project-area-housing" data-bg="./assets/image/pj15.png" style="background-image: none;">
+                    <div class="project-overlay project-overlay--light"></div>
+                    <div class="project-text">
+                        <span class="project-count">100 проектов</span>
+                        <h3 class="project-title">строители</h3>
+                    </div>
+                </article>
+
+                <article class="project-card project-area-horeca" data-bg="./assets/image/pj3.png" style="background-image: none;">
+                    <div class="project-overlay project-overlay--light"></div>
+                    <div class="project-text">
+                        <span class="project-count">100 проектов</span>
+                        <h3 class="project-title">HoReCa</h3>
+                    </div>
+                </article>
+
+                <article class="project-card project-area-food" data-bg="./assets/image/pj17.png" style="background-image: none;">
+                    <div class="project-overlay project-overlay--light"></div>
+                    <div class="project-text">
+                        <span class="project-count">100 проектов</span>
+                        <h3 class="project-title">фудмаркеты</h3>
+                    </div>
+                </article>
+
+                <article class="project-card project-card--plain project-area-design" data-bg="./assets/image/pj16.png" style="background-image: none;">
+                    <div class="project-text">
+                        <span class="project-count">100 проектов</span>
+                        <h3 class="project-title">предметный дизайн</h3>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Проектные направления 2 -->
+        <section class="projects-section">
+            <div class="projects-grid projects-grid--layout-b">
+                <article class="project-card project-area-residence" data-bg="./assets/image/pj3.png" style="background-image: none;">
+                    <div class="project-overlay project-overlay--light"></div>
+                    <div class="project-text">
+                        <span class="project-count">100 проектов</span>
+                        <h3 class="project-title">резиденции</h3>
+                    </div>
+                </article>
+
+                <article class="project-card project-card--plain project-area-builders" data-bg="./assets/image/pj18.jpg" style="background-image: none;">
+                    <div class="project-text">
+                        <span class="project-count">100 проектов</span>
+                        <h3 class="project-title">жилые комплексы</h3>
+                    </div>
+                </article>
+
+                <article class="project-card project-area-landscape" data-bg="./assets/image/pj7.png" style="background-image: none;">
+                    <div class="project-overlay project-overlay--light"></div>
+                    <div class="project-text">
+                        <span class="project-count">100 проектов</span>
+                        <h3 class="project-title">благоустройство</h3>
+                    </div>
+                </article>
+
+                <article class="project-card project-area-public" data-bg="./assets/image/pj8.png" style="background-image: none;">
+                    <div class="project-overlay project-overlay--light"></div>
+                    <div class="project-text">
+                        <span class="project-count">100 проектов</span>
+                        <h3 class="project-title">общественные пространства</h3>
+                    </div>
+                </article>
+
+                <article class="project-card project-area-commercial" data-bg="./assets/image/pj4.png" style="background-image: none;">
+                    <div class="project-overlay project-overlay--light"></div>
+                    <div class="project-text">
+                        <span class="project-count">100 проектов</span>
+                        <h3 class="project-title">коммерческие</h3>
+                    </div>
+                </article>
+
+                <a class="project-card project-area-tour" href="project-sp.html" data-bg="./assets/image/pj12.png" style="background-image: none;">
+                    <div class="project-overlay project-overlay--light"></div>
+                    <div class="project-text">
+                        <span class="project-count">спецпроект</span>
+                        <h3 class="project-title">DESIGN TOUR 2026</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Бегущие строки проектов -->
+        <section class="marquee-section">
+            <div class="marquee-line marquee-line--top">
+                <div class="marquee-track">
+                    <div class="marquee-item">
+                        <span class="marquee-name">Абрау Дюрсо</span>
+                        <span class="marquee-count">5 проектов</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Фудмаркет</span>
+                        <span class="marquee-count">7 проектов</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Dubai</span>
+                        <span class="marquee-count">7 проектов</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Сочи парк</span>
+                        <span class="marquee-count">6 проектов</span>
+                    </div>
+                </div>
+                <div class="marquee-track" aria-hidden="true">
+                    <div class="marquee-item">
+                        <span class="marquee-name">Абрау Дюрсо</span>
+                        <span class="marquee-count">5 проектов</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Фудмаркет</span>
+                        <span class="marquee-count">7 проектов</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Dubai</span>
+                        <span class="marquee-count">7 проектов</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Сочи парк</span>
+                        <span class="marquee-count">6 проектов</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="marquee-line marquee-line--bottom">
+                <div class="marquee-track">
+                    <div class="marquee-item">
+                        <span class="marquee-name">Екатерининская</span>
+                        <span class="marquee-count">16 проектов</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Каналы</span>
+                        <span class="marquee-count">3 проекта</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Парк облаков</span>
+                        <span class="marquee-count">2 проекта</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Точно</span>
+                        <span class="marquee-count">14 проектов</span>
+                    </div>
+                </div>
+                <div class="marquee-track" aria-hidden="true">
+                    <div class="marquee-item">
+                        <span class="marquee-name">Екатерининская</span>
+                        <span class="marquee-count">16 проектов</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Каналы</span>
+                        <span class="marquee-count">3 проекта</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Парк облаков</span>
+                        <span class="marquee-count">2 проекта</span>
+                    </div>
+                    <div class="marquee-item">
+                        <span class="marquee-name">Точно</span>
+                        <span class="marquee-count">14 проектов</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Переключатель бокового меню -->
+        <button class="side-nav-toggle" aria-expanded="false" aria-controls="side-nav" aria-label="Меню">
+            <span class="side-nav-toggle__bars">
+                <span></span><span></span><span></span>
+            </span>
+        </button>
+
+        <!-- Контактная секция -->
+        <section class="contact-cta-section" id="contact">
+            <div class="contact-cta-container">
+                <div class="contact-cta-left">
+                    <div class="contact-cta-top-block">
+                        <h2 class="contact-cta-title">обсудим<br>ваш проект</h2>
+
+                        <form class="contact-cta-form">
+                            <label class="contact-cta-field">
+                                <span class="contact-cta-label">как вас зовут? <span class="required">*</span></span>
+                                <input type="text" name="name" required>
+                            </label>
+
+                            <label class="contact-cta-field">
+                                <span class="contact-cta-label">email <span class="required">*</span></span>
+                                <input type="email" name="email" required>
+                            </label>
+
+                            <button type="button" class="contact-cta-attach">
+                                <span class="attach-icon">+</span>
+                                прикрепить файл
+                            </button>
+
+                            <button type="submit" class="contact-cta-submit">отправить</button>
+                            <p class="contact-cta-consent">Нажимая на кнопку <Отправить>, я даю согласие на обработку своих персональных данных.</p>
+                        </form>
+                    </div>
+
+                    <div class="contact-cta-bottom-block">
+                        <div class="contact-cta-phones">
+                            <div class="contact-cta-phone">+7 961 504 10 41</div>
+                            <div class="contact-cta-subtext">звоните нам</div>
+                        </div>
+
+                        <div class="contact-cta-email">
+                            <div class="contact-cta-mail">eleonor.arch@gmail.com</div>
+                            <div class="contact-cta-subtext">пишите нам</div>
+                        </div>
+
+                        <div class="contact-cta-footer">
+                            <span>© Все права защищены</span>
+                            <div class="contact-cta-years">
+                                <span>2015</span>
+                                <span class="years-line"></span>
+                                <span>2025</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-cta-divider" aria-hidden="true"></div>
+
+                <div class="contact-cta-right">
+                    <div class="contact-cta-top-block">
+                        <form class="contact-cta-form secondary-form">
+                            <label class="contact-cta-field">
+                                <span class="contact-cta-label">компания</span>
+                                <input type="text" name="company">
+                            </label>
+
+                            <label class="contact-cta-field">
+                                <span class="contact-cta-label">телефон</span>
+                                <input type="tel" name="phone">
+                            </label>
+
+                            <div class="contact-cta-methods">
+                                <span class="contact-cta-label">способ связи</span>
+                                <div class="contact-cta-tags">
+                                    <button type="button" class="contact-cta-tag active">письмо</button>
+                                    <button type="button" class="contact-cta-tag">telegram</button>
+                                    <button type="button" class="contact-cta-tag">whats app</button>
+                                    <button type="button" class="contact-cta-tag">звонок</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="contact-cta-bottom-block">
+                        <div class="contact-cta-address">
+                            <p>Мы работаем по будням с 10:00 до 19:00</p>
+                            <p class="contact-cta-social">telegram, youtube, instagram, behance</p>
+                        </div>
+                        <a href="#top" class="contact-cta-top">Наверх ↑</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <nav class="side-nav" id="side-nav">
+            <ul class="side-nav-list">
+                <li class="side-nav-item"><a href="index.html" class="side-nav-link">Главная</a></li>
+                <li class="side-nav-item"><a href="projects.html" class="side-nav-link">Проекты</a></li>
+                <li class="side-nav-item"><a href="about.html" class="side-nav-link">О нас</a></li>
+                <li class="side-nav-item"><a href="stages.html" class="side-nav-link">Этапы работы</a></li>
+                <li class="side-nav-item"><a href="#media" class="side-nav-link">Медиа</a></li>
+                <li class="side-nav-item"><a href="contacts.html" class="side-nav-link">Контакты</a></li>
+            </ul>
+            
+            <!-- Социальные сети -->
+            <div class="side-social">
+                <a href="https://www.behance.net/eleonorlab" class="social-circle" target="_blank" aria-label="Behance">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22 7h-7V5h7v2zm1.5 9h-9c-.8 0-1.5-.7-1.5-1.5v-3C13 10.7 13.7 10 14.5 10h9c.8 0 1.5.7 1.5 1.5v3c0 .8-.7 1.5-1.5 1.5zm-6.5-5v3h5v-3h-5zm-9-5H2v10h6.5c2.2 0 4-1.8 4-4s-1.8-4-4-4zm0 6.5H4v-5h4.5c1.4 0 2.5 1.1 2.5 2.5S9.9 12.5 8.5 12.5z"/>
+                    </svg>
+                </a>
+                <a href="https://www.pinterest.ru/EleonoraLabb/_created/" class="social-circle" target="_blank" aria-label="Pinterest">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 21c-5 0-9-4-9-9s4-9 9-9 9 4 9 9-4 9-9 9z"/>
+                        <path d="M12 6c-3.3 0-6 2.7-6 6 0 2.4 1.4 4.5 3.5 5.5 0-.2 0-.4.1-.6.1-.4.7-2.3.7-2.3s-.2-.4-.2-1c0-1.1.6-1.9 1.4-1.9.7 0 1 .5 1 1.1 0 .7-.5 1.7-.7 2.7-.2.9.5 1.6 1.4 1.6 1.7 0 2.8-2.1 2.8-4.6 0-2.4-1.6-4.1-4.4-4.1-3.1 0-4.9 2.3-4.9 4.7 0 .9.3 1.5.8 2 .2.3.3.4.2.7 0 .2-.2.8-.2 1-.1.3-.3.4-.6.3-1.7-.7-2.5-2.5-2.5-4.5 0-3.3 2.6-6.3 7.5-6.3 4 0 7.1 2.8 7.1 6.5 0 4.1-2.4 7.1-5.9 7.1-1.2 0-2.3-.6-2.7-1.3l-.7 2.8c-.3 1.1-1.1 2.5-1.6 3.3 1.2.4 2.5.6 3.8.6 5 0 9-4 9-9s-4-9-9-9z"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/79615041041" class="social-circle" target="_blank" aria-label="WhatsApp">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.6 6.3A9 9 0 0 0 12 3a9 9 0 0 0-8.1 12.9L3 21l5.3-1.4a9 9 0 0 0 4.3 1.1 9 9 0 0 0 9-9c0-2.2-.8-4.3-2.4-5.8zM12 19.5a7.5 7.5 0 0 1-3.8-1l-.4-.2-3.7 1 1-3.6-.2-.4A7.5 7.5 0 1 1 12 19.5zm4.1-5.6c-.2-.1-1.2-.6-1.4-.7-.2-.1-.4-.1-.6.1-.2.2-.7.7-.9.9-.2.1-.3.2-.5.1-.2-.1-.8-.3-1.5-1-.6-.6-1-1.3-1.1-1.5-.1-.2 0-.3.1-.5.1-.1.2-.3.3-.4.1-.1.1-.2.2-.3.1-.1.1-.3 0-.4-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.2-1 1-1 2.4s1 2.8 1.2 3c.2.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.8-1.3.2-.7.2-1.2.2-1.3-.1-.2-.3-.3-.5-.4z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </main>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>
+
+
+
+
+
