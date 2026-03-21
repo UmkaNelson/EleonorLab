@@ -1916,8 +1916,21 @@
     grid-template-columns: 1fr;
   }
 
+  .project-entry__meta-grid > .project-entry__meta-item {
+    margin-left: 0 !important;
+    text-align: left;
+  }
+
   .project-entry__meta-grid > .project-entry__meta-item:nth-child(2n) {
-    margin-left: clamp(-18px, -4vw, -34px);
+    margin-left: 0;
+  }
+
+  .project-entry__meta-grid > .project-entry__meta-item:nth-child(3) {
+    order: 4;
+  }
+
+  .project-entry__meta-grid > .project-entry__meta-item:nth-child(4) {
+    order: 3;
   }
 
   .project-entry__meta-title {

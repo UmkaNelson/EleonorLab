@@ -161,6 +161,13 @@
   transition: all var(--transition);
 }
 
+.social-circle img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  display: block;
+}
+
 .social-circle:hover {
   background: #000000;
   color: var(--color-gray-light);
