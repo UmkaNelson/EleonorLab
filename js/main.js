@@ -1,6 +1,7 @@
 // ELEONOR LAB - Optimized Main JavaScript
 class EleonorLab {
     constructor() {
+        this.lastHeaderScrollY = window.pageYOffset || 0;
         this.init();
     }
 
@@ -53,28 +54,26 @@ class EleonorLab {
         
         // Инициализация кнопок на главной странице
         this.initHomePageButtons();
+        this.initHeaderCtaButtons();
         this.initFeatureSlider();
         this.initLazyBackgrounds();
+        this.mountHeaderNavigationToggle();
+        this.initHeaderBehavior();
         this.setupSideNavToggle();
         this.initProjectsFilter();
         this.initScrollTopButtons();
+        this.initBackButtons();
         this.toggleDarkNav();
         this.updateHeaderContrast();
+        this.syncSideNavThemeWithToggle();
     }
 
     // Инициализация кнопок на главной странице
     initHomePageButtons() {
         if (!document.body.classList.contains('home-page')) return;
         
-        const startWorkBtn = document.querySelector('.start-work-btn');
         const discussProjectBtn = document.querySelector('.discuss-project-btn');
         const presentationBtn = document.querySelector('.presentation-btn');
-        
-        if (startWorkBtn) {
-            startWorkBtn.addEventListener('click', () => {
-                window.location.href = 'contacts.html';
-            });
-        }
         
         if (discussProjectBtn) {
             discussProjectBtn.addEventListener('click', () => {
@@ -93,6 +92,7 @@ class EleonorLab {
 
     // Scroll Handler
     handleScroll() {
+        this.handleHeaderBehaviorOnScroll();
         this.toggleHeaderShadow();
         this.updateActiveNavLink();
         this.handleScrollAnimations();
@@ -103,6 +103,9 @@ class EleonorLab {
 
     // Resize Handler
     handleResize() {
+        this.mountHeaderNavigationToggle();
+        this.syncHeaderMetrics();
+        this.handleHeaderBehaviorOnScroll(true);
         this.handleMobileMenu();
         this.toggleDarkNav();
         this.updateHeaderContrast();
@@ -307,9 +310,36 @@ class EleonorLab {
         const sideNav = document.getElementById('side-nav');
         if (!toggle || !sideNav) return;
 
+        const syncContrastNow = (keepDark = false) => {
+            this.toggleDarkNav();
+            this.updateHeaderContrast();
+            if (keepDark) {
+                toggle.classList.add('on-dark-contrast');
+            }
+            this.syncSideNavThemeWithToggle();
+        };
+
+        const scheduleSync = (keepDark = false) => {
+            syncContrastNow(keepDark);
+            requestAnimationFrame(() => syncContrastNow(keepDark));
+            [80, 180, 320, 480].forEach(delay => {
+                setTimeout(() => syncContrastNow(keepDark), delay);
+            });
+        };
+
         const updateState = (open) => {
+            // Preserve current contrast when opening the menu:
+            // if toggle is already light on a dark background, keep it light.
+            const wasDarkContrast = toggle.classList.contains('on-dark-contrast');
+
             sideNav.classList.toggle('side-nav--open', open);
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            document.body.classList.toggle('side-nav-open', open);
+            this.handleHeaderBehaviorOnScroll(true);
+
+            // Recalculate contrast immediately after menu state change
+            // so the toggle color does not lag until next scroll/resize.
+            scheduleSync(open && wasDarkContrast);
         };
 
         toggle.addEventListener('click', (e) => {
@@ -323,6 +353,14 @@ class EleonorLab {
             if (!isInside) {
                 updateState(false);
             }
+        });
+
+        sideNav.addEventListener('transitionend', () => {
+            const keepDark =
+                sideNav.classList.contains('side-nav--open') &&
+                toggle.classList.contains('on-dark-contrast');
+            syncContrastNow(keepDark);
+            this.handleHeaderBehaviorOnScroll(true);
         });
     }
 
@@ -388,6 +426,109 @@ class EleonorLab {
                 });
             });
         });
+    }
+
+    initBackButtons() {
+        const buttons = document.querySelectorAll('[data-back-button]');
+        if (buttons.length === 0) return;
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                if (window.history.length > 1) {
+                    window.history.back();
+                    return;
+                }
+
+                window.location.href = 'index.html';
+            });
+        });
+    }
+
+    // Move burger into the header row so logo / CTA / burger share one line
+    mountHeaderNavigationToggle() {
+        const headerContainer = document.querySelector('.header .header-container');
+        const toggle = document.querySelector('.side-nav-toggle');
+        if (!toggle) return;
+
+        if (headerContainer) {
+            if (toggle.parentElement !== headerContainer) {
+                headerContainer.appendChild(toggle);
+            }
+            toggle.classList.add('side-nav-toggle--in-header');
+        } else {
+            toggle.classList.remove('side-nav-toggle--in-header');
+        }
+    }
+
+    // Единая CTA-кнопка в шапке на всех страницах
+    initHeaderCtaButtons() {
+        const headerButtons = document.querySelectorAll('.start-work-btn');
+        if (headerButtons.length === 0) return;
+
+        headerButtons.forEach((button) => {
+            if (button.dataset.boundCta === 'true') return;
+            button.dataset.boundCta = 'true';
+
+            button.addEventListener('click', () => {
+                window.location.href = 'contacts.html';
+            });
+        });
+    }
+
+    syncHeaderMetrics() {
+        const header = document.querySelector('.header');
+        if (!header) return;
+
+        const headerHeight = Math.round(header.getBoundingClientRect().height);
+        if (headerHeight > 0) {
+            document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+        }
+    }
+
+    initHeaderBehavior() {
+        const header = document.querySelector('.header');
+        if (!header) return;
+
+        this.syncHeaderMetrics();
+        this.lastHeaderScrollY = window.pageYOffset || 0;
+        this.handleHeaderBehaviorOnScroll(true);
+    }
+
+    // Reference-like behavior: transparent at top, sticky on scroll, hide on scroll-down, show on scroll-up
+    handleHeaderBehaviorOnScroll(force = false) {
+        const header = document.querySelector('.header');
+        if (!header) return;
+
+        const sideNav = document.getElementById('side-nav');
+        const menuOpen = !!(sideNav && sideNav.classList.contains('side-nav--open'));
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const delta = scrollY - this.lastHeaderScrollY;
+
+        const stickyStart = 12;
+        const hideStart = 140;
+        const minDelta = 6;
+
+        if (scrollY <= stickyStart) {
+            header.classList.add('header--at-top');
+            header.classList.remove('header--sticky', 'header--hidden');
+        } else {
+            header.classList.remove('header--at-top');
+            header.classList.add('header--sticky');
+
+            if (menuOpen) {
+                header.classList.remove('header--hidden');
+            } else if (force || Math.abs(delta) >= minDelta) {
+                if (delta > 0 && scrollY > hideStart) {
+                    header.classList.add('header--hidden');
+                } else if (delta < 0) {
+                    header.classList.remove('header--hidden');
+                }
+            }
+        }
+
+        this.lastHeaderScrollY = scrollY;
     }
 
     // Header Effects
@@ -681,8 +822,15 @@ class EleonorLab {
     toggleDarkNav() {
         const links = document.querySelectorAll('.side-nav .side-nav-link');
         const socials = document.querySelectorAll('.side-nav .social-circle');
-        const darkSections = Array.from(document.querySelectorAll('.contact-cta-section, .projects-min-footer'));
-        if (darkSections.length === 0 || (links.length === 0 && socials.length === 0)) return;
+        const darkSections = this.getDarkSections();
+        if (links.length === 0 && socials.length === 0) return;
+
+        // Prevent stale white/black states when page has no dark sections.
+        if (darkSections.length === 0) {
+            links.forEach(link => link.classList.remove('on-dark-item'));
+            socials.forEach(icon => icon.classList.remove('on-dark-item'));
+            return;
+        }
 
         const isInsideDarkSection = (cx, cy) => darkSections.some(section => {
             const rect = section.getBoundingClientRect();
@@ -708,19 +856,26 @@ class EleonorLab {
 
     // Switch header/logo/button to light theme on dark sections
     updateHeaderContrast() {
-        const darkSections = Array.from(document.querySelectorAll('.contact-cta-section, .projects-min-footer'));
-        if (darkSections.length === 0) return;
+        const darkSections = this.getDarkSections();
+        const logo = document.querySelector('.home-logo');
+        const startBtn = document.querySelector('.start-work-btn');
+        const toggle = document.querySelector('.side-nav-toggle');
+        const sideNav = document.getElementById('side-nav');
+
+        if (darkSections.length === 0) {
+            [logo, startBtn, toggle].forEach(el => {
+                if (el) el.classList.remove('on-dark-contrast');
+            });
+            this.syncSideNavThemeWithToggle();
+            return;
+        }
 
         const isInsideDarkSection = (cx, cy) => darkSections.some(section => {
             const rect = section.getBoundingClientRect();
             return cx >= rect.left && cx <= rect.right && cy >= rect.top && cy <= rect.bottom;
         });
 
-        const elements = [
-            document.querySelector('.home-logo'),
-            document.querySelector('.start-work-btn'),
-            document.querySelector('.side-nav-toggle')
-        ];
+        const elements = [logo, startBtn, toggle];
 
         elements.forEach(el => {
             if (!el) return;
@@ -730,6 +885,43 @@ class EleonorLab {
             const inside = isInsideDarkSection(cx, cy);
             el.classList.toggle('on-dark-contrast', inside);
         });
+
+        // Ensure immediate white contrast for the toggle when menu is open
+        // on dedicated dark-themed pages, even before any scroll event.
+        if (toggle) {
+            const darkPage =
+                document.body.classList.contains('contacts-ref-page') ||
+                document.body.classList.contains('tour-signup-page');
+            const menuOpen = sideNav && sideNav.classList.contains('side-nav--open');
+            if (menuOpen && darkPage) {
+                toggle.classList.add('on-dark-contrast');
+            }
+        }
+
+        this.syncSideNavThemeWithToggle();
+    }
+
+    getDarkSections() {
+        return Array.from(document.querySelectorAll(
+            '.contact-cta-section, ' +
+            '.projects-min-footer, ' +
+            '.contacts-ref, ' +
+            '.contacts-ref-page, ' +
+            '.tour-signup, ' +
+            '.tour-signup--footer, ' +
+            '.tour-signup-page, ' +
+            '.feature-slider'
+        ));
+    }
+
+    // Keep slide-out menu theme aligned with the nav toggle color.
+    syncSideNavThemeWithToggle() {
+        const toggle = document.querySelector('.side-nav-toggle');
+        const sideNav = document.getElementById('side-nav');
+        if (!toggle || !sideNav) return;
+
+        const darkMode = toggle.classList.contains('on-dark-contrast');
+        sideNav.classList.toggle('side-nav--panel-dark', darkMode);
     }
 
     // Utility Methods
@@ -746,7 +938,13 @@ class EleonorLab {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', () => {
-    new EleonorLab();
+    const app = new EleonorLab();
+
+    // Run once after full load to account for late layout shifts (images/fonts).
+    window.addEventListener('load', () => {
+        app.toggleDarkNav();
+        app.updateHeaderContrast();
+    });
 });
 
 // Export for modern browsers

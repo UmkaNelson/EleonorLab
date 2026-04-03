@@ -9,7 +9,7 @@
 .stages-main {
   padding-top: var(--header-height);
   min-height: calc(100vh - var(--header-height));
-  background: #f3f3f3;
+  background: #ffffff;
 }
 
 .stages-page {
@@ -290,7 +290,7 @@
   aspect-ratio: 1/1;
   overflow: hidden;
   cursor: pointer;
-  background: var(--color-gray-light);
+  background: #ffffff;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 0.6s var(--ease-out) forwards;
@@ -433,7 +433,7 @@
 .about-principles {
   margin: 2rem 0;
   padding: 1.5rem;
-  background: var(--color-gray-light);
+  background: #ffffff;
   border-left: 3px solid var(--color-accent);
   transition: all 0.6s var(--ease-out);
 }
@@ -447,7 +447,7 @@
 .founder-quote {
   margin: 2rem 0;
   padding: 2rem;
-  background: var(--color-gray-light);
+  background: #ffffff;
   border-radius: 8px;
   transition: all 0.6s var(--ease-out);
 }
@@ -631,7 +631,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #e8e8e8;
+  background: #ffffff;
   overflow-y: scroll;
 }
 
@@ -1027,13 +1027,37 @@
 }
 
 .sample1-block {
+  width: 100%;
+  margin: 0;
+  padding: clamp(26px, 4.2vw, 44px) clamp(16px, 4vw, 28px) 0;
+}
+
+.sample1-block__container {
   width: min(1200px, 100%);
   margin: 0 auto;
-  padding: clamp(26px, 4.2vw, 44px) clamp(16px, 4vw, 28px) 0;
 }
 
 .sample1-block .about-story__cta {
   margin-top: 0;
+}
+
+/* Project pages: remove "посмотрите все проекты" and align CTA/cards to one line */
+.project-entry ~ .sample1-block .about-quick-projects__all {
+  display: none !important;
+}
+
+.project-entry ~ .sample1-block .about-quick-projects__layout {
+  grid-template-columns: 1fr;
+  column-gap: 0;
+}
+
+.project-entry ~ .sample1-block .about-quick-projects__cards,
+.project-entry ~ .sample1-block .about-quick-projects__more {
+  grid-column: 1;
+}
+
+.project-entry ~ .sample1-block .about-story__cta {
+  max-width: none;
 }
 
 @media (max-width: 1024px) {
@@ -2073,9 +2097,40 @@
   font-family: var(--font-primary);
 }
 
+.contacts-ref__back {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + var(--header-height) + clamp(6px, 1.4vw, 12px));
+  left: clamp(14px, 2.8vw, 24px);
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-primary);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 1200;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.contacts-ref__back:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.contacts-ref__back:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 2px;
+}
+
 .contacts-ref {
   min-height: 100vh;
-  padding: clamp(28px, 5vw, 56px) clamp(16px, 3vw, 26px) clamp(20px, 4vw, 34px);
+  padding: calc(var(--header-height) + clamp(18px, 3vw, 34px)) clamp(16px, 3vw, 26px) clamp(20px, 4vw, 34px);
 }
 
 .contacts-ref__container {
@@ -2328,7 +2383,23 @@
   }
 }
 
+@media (max-width: 768px) {
+  .contacts-ref__back {
+    top: auto;
+    left: auto;
+    right: clamp(10px, 4vw, 16px);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+  }
+}
+
 @media (max-width: 640px) {
+  .contacts-ref__back {
+    right: clamp(10px, 4vw, 14px);
+    width: 34px;
+    height: 34px;
+    font-size: 1.7rem;
+  }
+
   .contacts-ref__main-link {
     font-size: clamp(1.5rem, 9vw, 2.2rem);
   }
@@ -2718,7 +2789,7 @@
 
 /* ===== DESIGN TOUR PROJECT PAGE ===== */
 .tour-project-page {
-  background: #e8e8e8;
+  background: #ffffff;
   color: #000000;
 }
 
@@ -2981,4 +3052,38 @@
     font-size: clamp(1rem, 3.9vw, 1.3rem);
     line-height: 1.28;
   }
+}
+
+/* Project pages: align "Есть задача" and quick cards to the project photo left edge */
+.project-entry ~ .sample1-block {
+  padding-left: clamp(16px, 4vw, 28px);
+  padding-right: clamp(16px, 4vw, 28px);
+}
+
+.project-entry ~ .sample1-block .sample1-block__container {
+  width: min(1200px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.project-entry ~ .sample1-block .about-quick-projects__all {
+  display: none !important;
+}
+
+.project-entry ~ .sample1-block .about-quick-projects__layout {
+  grid-template-columns: 1fr;
+  column-gap: 0;
+}
+
+.project-entry ~ .sample1-block .about-quick-projects__cards,
+.project-entry ~ .sample1-block .about-quick-projects__more {
+  grid-column: 1;
+  margin-left: 0;
+  justify-self: start;
+}
+
+.project-entry ~ .sample1-block .about-story__cta {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
 }
