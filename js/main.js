@@ -2,6 +2,8 @@
 class EleonorLab {
     constructor() {
         this.lastHeaderScrollY = window.pageYOffset || 0;
+        this.headerRevealTimer = null;
+        this.marqueeResizeFrame = null;
         this.init();
     }
 
@@ -56,6 +58,7 @@ class EleonorLab {
         this.initHomePageButtons();
         this.initHeaderCtaButtons();
         this.initFeatureSlider();
+        this.initMarquee();
         this.initLazyBackgrounds();
         this.mountHeaderNavigationToggle();
         this.initHeaderBehavior();
@@ -107,6 +110,13 @@ class EleonorLab {
         this.syncHeaderMetrics();
         this.handleHeaderBehaviorOnScroll(true);
         this.handleMobileMenu();
+        if (this.marqueeResizeFrame) {
+            cancelAnimationFrame(this.marqueeResizeFrame);
+        }
+        this.marqueeResizeFrame = requestAnimationFrame(() => {
+            this.refreshMarquee();
+            this.marqueeResizeFrame = null;
+        });
         this.toggleDarkNav();
         this.updateHeaderContrast();
     }
@@ -310,28 +320,21 @@ class EleonorLab {
         const sideNav = document.getElementById('side-nav');
         if (!toggle || !sideNav) return;
 
-        const syncContrastNow = (keepDark = false) => {
+        const syncContrastNow = () => {
             this.toggleDarkNav();
             this.updateHeaderContrast();
-            if (keepDark) {
-                toggle.classList.add('on-dark-contrast');
-            }
             this.syncSideNavThemeWithToggle();
         };
 
-        const scheduleSync = (keepDark = false) => {
-            syncContrastNow(keepDark);
-            requestAnimationFrame(() => syncContrastNow(keepDark));
+        const scheduleSync = () => {
+            syncContrastNow();
+            requestAnimationFrame(() => syncContrastNow());
             [80, 180, 320, 480].forEach(delay => {
-                setTimeout(() => syncContrastNow(keepDark), delay);
+                setTimeout(() => syncContrastNow(), delay);
             });
         };
 
         const updateState = (open) => {
-            // Preserve current contrast when opening the menu:
-            // if toggle is already light on a dark background, keep it light.
-            const wasDarkContrast = toggle.classList.contains('on-dark-contrast');
-
             sideNav.classList.toggle('side-nav--open', open);
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
             document.body.classList.toggle('side-nav-open', open);
@@ -339,7 +342,7 @@ class EleonorLab {
 
             // Recalculate contrast immediately after menu state change
             // so the toggle color does not lag until next scroll/resize.
-            scheduleSync(open && wasDarkContrast);
+            scheduleSync();
         };
 
         toggle.addEventListener('click', (e) => {
@@ -356,10 +359,7 @@ class EleonorLab {
         });
 
         sideNav.addEventListener('transitionend', () => {
-            const keepDark =
-                sideNav.classList.contains('side-nav--open') &&
-                toggle.classList.contains('on-dark-contrast');
-            syncContrastNow(keepDark);
+            syncContrastNow();
             this.handleHeaderBehaviorOnScroll(true);
         });
     }
@@ -510,6 +510,8 @@ class EleonorLab {
         const hideStart = 140;
         const minDelta = 6;
 
+        clearTimeout(this.headerRevealTimer);
+
         if (scrollY <= stickyStart) {
             header.classList.add('header--at-top');
             header.classList.remove('header--sticky', 'header--hidden');
@@ -526,6 +528,15 @@ class EleonorLab {
                     header.classList.remove('header--hidden');
                 }
             }
+
+            // После остановки скролла шапка должна появляться автоматически.
+            this.headerRevealTimer = setTimeout(() => {
+                const liveHeader = document.querySelector('.header');
+                const liveSideNav = document.getElementById('side-nav');
+                if (!liveHeader) return;
+                if (liveSideNav && liveSideNav.classList.contains('side-nav--open')) return;
+                liveHeader.classList.remove('header--hidden');
+            }, 180);
         }
 
         this.lastHeaderScrollY = scrollY;
@@ -754,6 +765,58 @@ class EleonorLab {
             button.addEventListener('mouseleave', () => slider.classList.remove('peek-hover'));
         });
 
+        // Mobile swipe support (left/right)
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchEndX = 0;
+        let touchEndY = 0;
+        let touchTracking = false;
+        const swipeMinDistance = 42;
+        const swipeMaxVertical = 90;
+
+        slider.addEventListener('touchstart', (e) => {
+            if (!e.touches || e.touches.length !== 1) return;
+            const t = e.touches[0];
+            touchStartX = t.clientX;
+            touchStartY = t.clientY;
+            touchEndX = t.clientX;
+            touchEndY = t.clientY;
+            touchTracking = true;
+        }, { passive: true });
+
+        slider.addEventListener('touchmove', (e) => {
+            if (!touchTracking || !e.touches || e.touches.length !== 1) return;
+            const t = e.touches[0];
+            touchEndX = t.clientX;
+            touchEndY = t.clientY;
+        }, { passive: true });
+
+        slider.addEventListener('touchend', (e) => {
+            if (!touchTracking) return;
+            const changed = e.changedTouches && e.changedTouches[0];
+            if (changed) {
+                touchEndX = changed.clientX;
+                touchEndY = changed.clientY;
+            }
+
+            const dx = touchEndX - touchStartX;
+            const dy = touchEndY - touchStartY;
+            const absDx = Math.abs(dx);
+            const absDy = Math.abs(dy);
+
+            touchTracking = false;
+
+            if (absDx < swipeMinDistance) return;
+            if (absDx <= absDy) return;
+            if (absDy > swipeMaxVertical) return;
+
+            if (dx < 0) {
+                goNext();
+            } else {
+                goPrev();
+            }
+        }, { passive: true });
+
         const keyHandler = (e) => {
             const tag = document.activeElement?.tagName;
             if (tag && ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(tag)) return;
@@ -801,6 +864,45 @@ class EleonorLab {
         });
 
         bgElements.forEach(element => observer.observe(element));
+    }
+
+    // Keep marquee rows seamless by extending tracks to at least viewport width.
+    initMarquee() {
+        const lines = document.querySelectorAll('.marquee-line');
+        if (lines.length === 0) return;
+
+        this.refreshMarquee();
+        requestAnimationFrame(() => this.refreshMarquee());
+        window.addEventListener('load', () => this.refreshMarquee(), { once: true });
+    }
+
+    refreshMarquee() {
+        const lines = Array.from(document.querySelectorAll('.marquee-line'));
+        if (lines.length === 0) return;
+
+        lines.forEach((line) => {
+            const tracks = Array.from(line.querySelectorAll('.marquee-track'));
+            if (tracks.length === 0) return;
+
+            const lineWidth = Math.ceil(line.clientWidth || 0);
+            if (!lineWidth) return;
+
+            const minTrackWidth = lineWidth + 64;
+
+            tracks.forEach((track) => {
+                if (!track.dataset.baseContent) {
+                    track.dataset.baseContent = track.innerHTML;
+                }
+
+                track.innerHTML = track.dataset.baseContent;
+
+                let safety = 0;
+                while (track.scrollWidth < minTrackWidth && safety < 24) {
+                    track.insertAdjacentHTML('beforeend', track.dataset.baseContent);
+                    safety += 1;
+                }
+            });
+        });
     }
 
     // Scroll Management
@@ -856,47 +958,12 @@ class EleonorLab {
 
     // Switch header/logo/button to light theme on dark sections
     updateHeaderContrast() {
-        const darkSections = this.getDarkSections();
         const logo = document.querySelector('.home-logo');
         const startBtn = document.querySelector('.start-work-btn');
         const toggle = document.querySelector('.side-nav-toggle');
-        const sideNav = document.getElementById('side-nav');
-
-        if (darkSections.length === 0) {
-            [logo, startBtn, toggle].forEach(el => {
-                if (el) el.classList.remove('on-dark-contrast');
-            });
-            this.syncSideNavThemeWithToggle();
-            return;
-        }
-
-        const isInsideDarkSection = (cx, cy) => darkSections.some(section => {
-            const rect = section.getBoundingClientRect();
-            return cx >= rect.left && cx <= rect.right && cy >= rect.top && cy <= rect.bottom;
+        [logo, startBtn, toggle].forEach(el => {
+            if (el) el.classList.remove('on-dark-contrast');
         });
-
-        const elements = [logo, startBtn, toggle];
-
-        elements.forEach(el => {
-            if (!el) return;
-            const elRect = el.getBoundingClientRect();
-            const cx = elRect.left + elRect.width / 2;
-            const cy = elRect.top + elRect.height / 2;
-            const inside = isInsideDarkSection(cx, cy);
-            el.classList.toggle('on-dark-contrast', inside);
-        });
-
-        // Ensure immediate white contrast for the toggle when menu is open
-        // on dedicated dark-themed pages, even before any scroll event.
-        if (toggle) {
-            const darkPage =
-                document.body.classList.contains('contacts-ref-page') ||
-                document.body.classList.contains('tour-signup-page');
-            const menuOpen = sideNav && sideNav.classList.contains('side-nav--open');
-            if (menuOpen && darkPage) {
-                toggle.classList.add('on-dark-contrast');
-            }
-        }
 
         this.syncSideNavThemeWithToggle();
     }

@@ -923,15 +923,19 @@
   font-family: var(--font-primary);
   font-size: clamp(2rem, 3.5vw, 3.5rem);
   font-weight: 500;
-  line-height: 1;
-  color: #000000;
+  line-height: 1.02;
+  color: #6f6f6f;
 }
 
 .about-story__cta-text a {
-  color: rgba(202, 111, 135, 0.95);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 6px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.about-story__cta-text a:visited,
+.about-story__cta-text a:hover,
+.about-story__cta-text a:active {
+  color: inherit;
 }
 
 .about-quick-projects {
@@ -948,7 +952,7 @@
   left: 50%;
   width: 100vw;
   height: 1px;
-  background: rgba(182, 188, 225, 0.9);
+  background: #000000;
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -1006,24 +1010,35 @@
 .about-quick-project-card__title {
   margin: 8px 0 0;
   font-family: var(--font-primary);
-  font-size: clamp(0.68rem, 0.82vw, 0.78rem);
-  font-weight: 600;
+  font-size: clamp(0.82rem, 1.05vw, 0.98rem);
+  font-weight: 300;
   line-height: 1.18;
   color: #000000;
   text-transform: uppercase;
 }
 
 .about-quick-project-card__title span {
-  font-size: 0.78em;
-  font-weight: 400;
-  text-transform: lowercase;
+  display: none;
 }
 
 .about-quick-projects__more {
   grid-column: 2;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   color: #000000;
   margin-bottom: clamp(18px, 3vw, 32px);
+}
+
+.about-quick-projects__more::after {
+  content: "\2192";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  margin-left: clamp(10px, 1.4vw, 16px);
+  font-size: 1.2em;
+  line-height: 1;
 }
 
 .sample1-block {
@@ -1135,7 +1150,7 @@
   }
 
   .about-quick-project-card__title {
-    font-size: clamp(0.62rem, 1.12vw, 0.72rem);
+    font-size: clamp(0.78rem, 1.2vw, 0.9rem);
   }
 
   .sample1-block {
@@ -1225,7 +1240,7 @@
   }
 
   .about-quick-project-card__title {
-    font-size: clamp(0.7rem, 2.9vw, 0.8rem);
+    font-size: clamp(0.86rem, 3.6vw, 1rem);
   }
 
   .sample1-block {
@@ -2419,7 +2434,7 @@
 
 /* ===== CONTACTS NAV COLOR OVERRIDE ===== */
 .contacts-ref-page .side-nav-toggle {
-  color: #ffffff;
+  color: #000000;
 }
 
 .contacts-ref-page .side-nav {
@@ -2704,7 +2719,7 @@
 
 /* ===== ISALONI PAGE NAV COLOR OVERRIDE ===== */
 .tour-signup-page .side-nav-toggle {
-  color: #ffffff;
+  color: #000000;
 }
 
 .tour-signup-page .side-nav {

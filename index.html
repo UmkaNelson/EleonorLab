@@ -76,7 +76,7 @@
         <!-- Секция проектов/команды -->
         <section class="feature-slider" id="media" aria-label="Ключевые проекты и команда">
             <div class="slider-container">
-                <article class="project-slide active" data-toggle-label="ЭЛЕОНОРА ПОЛУПАНОВА">
+                <article class="project-slide" data-toggle-label="ЭЛЕОНОРА ПОЛУПАНОВА">
                     <div class="slide-bg" style="background-image: url('./assets/image/Eleonor11.png');"></div>
                     <div class="slide-gradient"></div>
 
@@ -148,7 +148,7 @@
                     </button>
                 </article>
 
-                <article class="project-slide" data-toggle-label="РЕКОНСТРУКЦИЯ СЕННОЙ РЫНОК">
+                <article class="project-slide active" data-toggle-label="РЕКОНСТРУКЦИЯ СЕННОЙ РЫНОК">
                     <div class="slide-bg" style="background-image: url('./assets/image/sly5.png');"></div>
                     <div class="slide-gradient"></div>
 
@@ -180,13 +180,22 @@
         <!-- Статистика -->
         <section class="stats-strip" aria-label="Статистика проектов">
             <div class="stats-strip__inner">
-                <ul class="stats-strip__list">
-                    <li class="stats-strip__item"><span class="stats-strip__number">2000</span><span class="stats-strip__label"><span class="stats-strip__label-line">проектов</span><span class="stats-strip__label-line">запущено</span></span></li>
-                    <li class="stats-strip__item"><span class="stats-strip__number">150</span><span class="stats-strip__label"><span class="stats-strip__label-line">проектов</span><span class="stats-strip__label-line">Horeca</span></span></li>
-                    <li class="stats-strip__item"><span class="stats-strip__number">30</span><span class="stats-strip__label"><span class="stats-strip__label-line">международных</span><span class="stats-strip__label-line">проектов</span></span></li>
-                    <li class="stats-strip__item"><span class="stats-strip__number">100</span><span class="stats-strip__label"><span class="stats-strip__label-line">общественных</span><span class="stats-strip__label-line">проектов</span></span></li>
-                    <li class="stats-strip__item"><span class="stats-strip__number">134</span><span class="stats-strip__label">партнёров</span></li>
-                </ul>
+                <div class="marquee-line stats-strip__line">
+                    <ul class="stats-strip__list marquee-track" role="list">
+                        <li class="stats-strip__item"><span class="stats-strip__number">2000</span><span class="stats-strip__label"><span class="stats-strip__label-line">проектов</span><span class="stats-strip__label-line">запущено</span></span></li>
+                        <li class="stats-strip__item"><span class="stats-strip__number">150</span><span class="stats-strip__label"><span class="stats-strip__label-line">проектов</span><span class="stats-strip__label-line">Horeca</span></span></li>
+                        <li class="stats-strip__item"><span class="stats-strip__number">30</span><span class="stats-strip__label"><span class="stats-strip__label-line">международных</span><span class="stats-strip__label-line">проектов</span></span></li>
+                        <li class="stats-strip__item"><span class="stats-strip__number">100</span><span class="stats-strip__label"><span class="stats-strip__label-line">общественных</span><span class="stats-strip__label-line">проектов</span></span></li>
+                        <li class="stats-strip__item"><span class="stats-strip__number">134</span><span class="stats-strip__label">партнёров</span></li>
+                    </ul>
+                    <ul class="stats-strip__list marquee-track" role="list" aria-hidden="true">
+                        <li class="stats-strip__item"><span class="stats-strip__number">2000</span><span class="stats-strip__label"><span class="stats-strip__label-line">проектов</span><span class="stats-strip__label-line">запущено</span></span></li>
+                        <li class="stats-strip__item"><span class="stats-strip__number">150</span><span class="stats-strip__label"><span class="stats-strip__label-line">проектов</span><span class="stats-strip__label-line">Horeca</span></span></li>
+                        <li class="stats-strip__item"><span class="stats-strip__number">30</span><span class="stats-strip__label"><span class="stats-strip__label-line">международных</span><span class="stats-strip__label-line">проектов</span></span></li>
+                        <li class="stats-strip__item"><span class="stats-strip__number">100</span><span class="stats-strip__label"><span class="stats-strip__label-line">общественных</span><span class="stats-strip__label-line">проектов</span></span></li>
+                        <li class="stats-strip__item"><span class="stats-strip__number">134</span><span class="stats-strip__label">партнёров</span></li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -196,7 +205,6 @@
                 <article class="project-card project-card--accent project-area-clinic" data-bg="./assets/image/pj1.png" style="background-image: none;">
                     <div class="project-overlay"></div>
                     <div class="project-text">
-                        <span class="project-count">100 проектов</span>
                         <h3 class="project-title">клиники</h3>
                     </div>
                 </article>
@@ -204,7 +212,6 @@
                 <article class="project-card project-area-housing" data-bg="./assets/image/pj15.png" style="background-image: none;">
                     <div class="project-overlay project-overlay--light"></div>
                     <div class="project-text">
-                        <span class="project-count">100 проектов</span>
                         <h3 class="project-title">строители</h3>
                     </div>
                 </article>
@@ -212,7 +219,6 @@
                 <article class="project-card project-area-horeca" data-bg="./assets/image/pj3.png" style="background-image: none;">
                     <div class="project-overlay project-overlay--light"></div>
                     <div class="project-text">
-                        <span class="project-count">100 проектов</span>
                         <h3 class="project-title">HoReCa</h3>
                     </div>
                 </article>
@@ -220,14 +226,12 @@
                 <a class="project-card project-area-food" href="project-kp1.html" data-bg="./assets/image/pj17.png" style="background-image: none;">
                     <div class="project-overlay project-overlay--light"></div>
                     <div class="project-text">
-                        <span class="project-count">100 проектов</span>
                         <h3 class="project-title">фудмаркеты</h3>
                     </div>
                 </a>
 
                 <a class="project-card project-card--plain project-area-design" href="project-kp2.html" data-bg="./assets/image/pj16.png" style="background-image: none;">
                     <div class="project-text">
-                        <span class="project-count">100 проектов</span>
                         <h3 class="project-title">предметный дизайн</h3>
                     </div>
                 </a>
@@ -240,14 +244,12 @@
                 <article class="project-card project-area-residence" data-bg="./assets/image/pj3.png" style="background-image: none;">
                     <div class="project-overlay project-overlay--light"></div>
                     <div class="project-text">
-                        <span class="project-count">100 проектов</span>
                         <h3 class="project-title">резиденции</h3>
                     </div>
                 </article>
 
                 <article class="project-card project-card--plain project-area-builders" data-bg="./assets/image/pj18.jpg" style="background-image: none;">
                     <div class="project-text">
-                        <span class="project-count">100 проектов</span>
                         <h3 class="project-title">жилые комплексы</h3>
                     </div>
                 </article>
@@ -255,7 +257,6 @@
                 <article class="project-card project-area-landscape" data-bg="./assets/image/pj7.png" style="background-image: none;">
                     <div class="project-overlay project-overlay--light"></div>
                     <div class="project-text">
-                        <span class="project-count">100 проектов</span>
                         <h3 class="project-title">благоустройство</h3>
                     </div>
                 </article>
@@ -263,7 +264,6 @@
                 <article class="project-card project-area-public" data-bg="./assets/image/pj8.png" style="background-image: none;">
                     <div class="project-overlay project-overlay--light"></div>
                     <div class="project-text">
-                        <span class="project-count">100 проектов</span>
                         <h3 class="project-title">общественные пространства</h3>
                     </div>
                 </article>
@@ -271,7 +271,6 @@
                 <article class="project-card project-area-commercial" data-bg="./assets/image/pj4.png" style="background-image: none;">
                     <div class="project-overlay project-overlay--light"></div>
                     <div class="project-text">
-                        <span class="project-count">100 проектов</span>
                         <h3 class="project-title">коммерческие</h3>
                     </div>
                 </article>

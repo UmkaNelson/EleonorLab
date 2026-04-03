@@ -597,11 +597,13 @@
   }
 
   .headline-top {
-    width: 100%;
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto;
   }
 
   .headline-row--design {
-    text-align: center;
+    text-align: right;
   }
   
   .headline-part {
@@ -621,6 +623,8 @@
 
   .design-word {
     transform: none;
+    width: 100%;
+    text-align: right;
   }
   
   /* 2. Блок "будущего" и параллелограмма - разделяем на 2 строки */
@@ -2101,22 +2105,38 @@
 .stats-strip__inner {
   position: relative;
   z-index: 1;
-  max-width: 1400px;
+  max-width: none;
+  width: 100%;
   margin: 0 auto;
   min-height: var(--stats-strip-band-size);
-  padding: 0 clamp(12px, 3vw, 24px);
+  padding: 0;
   display: flex;
   align-items: center;
+}
+
+.stats-strip__line {
+  width: 100%;
+  border-bottom: none;
+  --marquee-gap: clamp(20px, 4vw, 48px);
+  --marquee-duration: 38s;
+}
+
+.stats-strip__line .marquee-track {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .stats-strip__list {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: clamp(10px, 2vw, 24px);
+  justify-content: flex-start;
+  gap: var(--marquee-gap);
   list-style: none;
   margin: 0;
   padding: 0;
+  width: max-content;
+  min-width: max-content;
+  flex: 0 0 auto;
   font-size: 0;
 }
 
@@ -2265,54 +2285,34 @@
 @media (max-width: 768px) {
   .stats-strip {
     --stats-strip-gap: clamp(10px, 2.6vw, 16px);
+    --stats-strip-band-size: clamp(34px, 10vw, 44px);
     margin-block: var(--stats-strip-gap);
   }
 
   .stats-strip__inner {
-    min-height: auto;
-    display: block;
+    min-height: var(--stats-strip-band-size);
+    display: flex;
+    align-items: center;
     padding: 0;
   }
 
-  .stats-strip__list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: stretch;
-    gap: 0;
+  .stats-strip__line {
+    --marquee-gap: clamp(18px, 5vw, 30px);
+    --marquee-duration: 44s;
   }
 
   .stats-strip__item {
-    display: grid;
-    grid-template-columns: 4ch 12ch;
-    column-gap: 22px;
-    min-height: 56px;
-    padding: 12px 10px;
-    justify-content: end;
-    align-content: center;
-    align-items: start;
-    white-space: normal;
-  }
-
-  .stats-strip__item:nth-child(n + 3) {
-    border-top: 1px solid #000000;
-  }
-
-  .stats-strip__item:last-child {
-    grid-column: 1;
-  }
-
-  .stats-strip__list::after {
-    content: "";
-    grid-column: 2;
-    grid-row: 3;
-    border-top: 1px solid #000000;
+    min-height: 0;
+    padding: 0;
+    gap: clamp(6px, 2vw, 10px);
+    white-space: nowrap;
   }
 
   .stats-strip__number {
-    font-size: clamp(22px, 6vw, 28px);
+    font-size: clamp(20px, 5.5vw, 26px);
     line-height: 1;
-    min-width: 4ch;
-    text-align: right;
+    min-width: auto;
+    text-align: left;
     font-variant-numeric: tabular-nums;
     transform: translateY(0.09em);
   }
@@ -2320,7 +2320,7 @@
   .stats-strip__label {
     font-size: var(--strip-sub-size, clamp(13px, 2.8vw, 15px));
     line-height: 1.08;
-    max-width: 12ch;
+    max-width: none;
   }
 
   .stats-strip__label-line {
@@ -2333,10 +2333,8 @@
 }
 
 @media (max-width: 600px) {
-  .stats-strip__item {
-    min-height: 52px;
-    padding: 10px 8px;
-    column-gap: 20px;
+  .stats-strip__line {
+    --marquee-gap: clamp(14px, 4vw, 24px);
   }
 
   .presentation-prompt {
@@ -2424,6 +2422,8 @@
   display: flex;
   gap: 0;
   overflow: hidden;
+  --marquee-gap: clamp(32px, 8vw, 64px);
+  --marquee-duration: 32s;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
@@ -2434,23 +2434,21 @@
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: clamp(32px, 8vw, 64px);
-  padding-right: clamp(32px, 8vw, 64px);
+  gap: var(--marquee-gap);
   padding: 10px 0;
-  animation: marquee-left 22s linear infinite;
+  padding-right: var(--marquee-gap);
+  min-width: max-content;
+  flex: 0 0 auto;
   white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.marquee-track::after {
-  content: "";
-  display: block;
-  width: clamp(32px, 8vw, 64px);
-  flex-shrink: 0;
+  animation: marquee-left var(--marquee-duration) linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  white-space: nowrap;
 }
 
 .marquee-line--bottom .marquee-track {
-  animation: marquee-right 22s linear infinite;
+  animation: marquee-right var(--marquee-duration) linear infinite;
 }
 
 .marquee-item {
@@ -2479,18 +2477,18 @@
 }
 
 @keyframes marquee-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-100%, 0, 0); }
 }
 
 @keyframes marquee-right {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
+  from { transform: translate3d(-100%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
 }
 
 @media (max-width: 768px) {
   .marquee-track {
-    animation-duration: 28s;
+    animation-duration: 42s;
   }
 }
 
