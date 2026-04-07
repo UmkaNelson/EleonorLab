@@ -1303,21 +1303,21 @@
 }
 
 /* Project pages: remove "посмотрите все проекты" and align CTA/cards to one line */
-.project-entry ~ .sample1-block .about-quick-projects__all {
+.sample1-block .about-quick-projects__all {
   display: none !important;
 }
 
-.project-entry ~ .sample1-block .about-quick-projects__layout {
+.sample1-block .about-quick-projects__layout {
   grid-template-columns: 1fr;
   column-gap: 0;
 }
 
-.project-entry ~ .sample1-block .about-quick-projects__cards,
-.project-entry ~ .sample1-block .about-quick-projects__more {
+.sample1-block .about-quick-projects__cards,
+.sample1-block .about-quick-projects__more {
   grid-column: 1;
 }
 
-.project-entry ~ .sample1-block .about-story__cta {
+.sample1-block .about-story__cta {
   max-width: none;
 }
 
@@ -3395,34 +3395,34 @@
 }
 
 /* Project pages: align "Есть задача" and quick cards to the project photo left edge */
-.project-entry ~ .sample1-block {
+.sample1-block {
   padding-left: clamp(16px, 4vw, 28px);
   padding-right: clamp(16px, 4vw, 28px);
 }
 
-.project-entry ~ .sample1-block .sample1-block__container {
+.sample1-block .sample1-block__container {
   width: min(1200px, 100%);
   margin-left: auto;
   margin-right: auto;
 }
 
-.project-entry ~ .sample1-block .about-quick-projects__all {
+.sample1-block .about-quick-projects__all {
   display: none !important;
 }
 
-.project-entry ~ .sample1-block .about-quick-projects__layout {
+.sample1-block .about-quick-projects__layout {
   grid-template-columns: 1fr;
   column-gap: 0;
 }
 
-.project-entry ~ .sample1-block .about-quick-projects__cards,
-.project-entry ~ .sample1-block .about-quick-projects__more {
+.sample1-block .about-quick-projects__cards,
+.sample1-block .about-quick-projects__more {
   grid-column: 1;
   margin-left: 0;
   justify-self: start;
 }
 
-.project-entry ~ .sample1-block .about-story__cta {
+.sample1-block .about-story__cta {
   max-width: none;
   margin-left: 0;
   margin-right: 0;
