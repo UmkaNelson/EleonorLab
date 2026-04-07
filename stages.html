@@ -31,14 +31,6 @@
             <div class="projects-filter-container">
                 <h1 class="stages-page__title" id="stages-page-title">Этапы работы над проектом</h1>
 
-                <div class="stages-page__chips" aria-label="Категории этапов">
-                    <button class="stages-chip" type="button">проект</button>
-                    <button class="stages-chip" type="button">архитектура</button>
-                    <button class="stages-chip" type="button">документация</button>
-                    <button class="stages-chip" type="button">надзор</button>
-                    <button class="stages-chip" type="button">строительство</button>
-                </div>
-
                 <div class="stages-page__content">
                     <article class="stages-page__block">
                         <h2 class="stages-page__block-title">Подготовительный этап</h2>
@@ -74,14 +66,20 @@
                     </article>
                 </div>
 
-                <figure class="stages-page__visual">
-                    <img src="./assets/image/pj21.png" alt="Планировочное решение проекта" width="1200" height="840" loading="lazy" decoding="async">
-                </figure>
-
-                <div class="stages-page__visual-nav" aria-hidden="true">
-                    <span>←</span>
-                    <span>→</span>
-                </div>
+                <section class="stages-page__slider stages-page__slider--plan" aria-label="Слайдер планировочного решения" data-stages-slider data-stages-pdf="./assets/image/stages/prs.pdf" data-stages-pdf-pages="55">
+                    <div class="stages-page__slider-track">
+                        <figure class="stages-page__slide is-active" data-stages-slide data-stages-slide-type="image">
+                            <img src="./assets/image/stages/1.png" alt="Планировочное решение проекта, слайд 1" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                        <figure class="stages-page__slide stages-page__slide--pdf" data-stages-slide data-stages-slide-type="pdf">
+                            <iframe src="./assets/image/stages/prs.pdf#page=1&view=FitH" title="Презентация проекта — страница 1" loading="lazy"></iframe>
+                        </figure>
+                    </div>
+                    <div class="stages-page__slider-nav" aria-label="Навигация слайдера планировочного решения">
+                        <button class="stages-page__slider-arrow" type="button" data-stages-prev aria-label="Предыдущий слайд">←</button>
+                        <button class="stages-page__slider-arrow" type="button" data-stages-next aria-label="Следующий слайд">→</button>
+                    </div>
+                </section>
 
                 <article class="stages-page__block stages-page__block--concept">
                     <h2 class="stages-page__block-title">Концепция</h2>
@@ -102,14 +100,23 @@
                     </ul>
                 </article>
 
-                <figure class="stages-page__visual stages-page__visual--last">
-                    <img src="./assets/image/pj22.png" alt="Визуализация концепции интерьера" width="1200" height="840" loading="lazy" decoding="async">
-                </figure>
-
-                <div class="stages-page__visual-nav" aria-hidden="true">
-                    <span>←</span>
-                    <span>→</span>
-                </div>
+                <section class="stages-page__slider stages-page__slider--concept-gallery" aria-label="Слайдер секции Концепция" data-stages-slider>
+                    <div class="stages-page__slider-track">
+                        <figure class="stages-page__slide is-active" data-stages-slide>
+                            <img src="./assets/image/stages/2.png" alt="Концепция, слайд 1" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                        <figure class="stages-page__slide" data-stages-slide>
+                            <img src="./assets/image/stages/3.png" alt="Концепция, слайд 2" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                        <figure class="stages-page__slide" data-stages-slide>
+                            <img src="./assets/image/stages/4.png" alt="Концепция, слайд 3" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                    </div>
+                    <div class="stages-page__slider-nav" aria-label="Навигация слайдера Концепция">
+                        <button class="stages-page__slider-arrow" type="button" data-stages-prev aria-label="Предыдущий слайд">←</button>
+                        <button class="stages-page__slider-arrow" type="button" data-stages-next aria-label="Следующий слайд">→</button>
+                    </div>
+                </section>
 
                 <article class="stages-page__block stages-page__block--visualization">
                     <h2 class="stages-page__block-title">Визуализация</h2>
@@ -124,14 +131,29 @@
                     </ul>
                 </article>
 
-                <figure class="stages-page__visual stages-page__visual--third">
-                    <img src="./assets/image/pj23.png" alt="Визуализация интерьера проекта" width="1200" height="840" loading="lazy" decoding="async">
-                </figure>
-
-                <div class="stages-page__visual-nav" aria-hidden="true">
-                    <span>←</span>
-                    <span>→</span>
-                </div>
+                <section class="stages-page__slider stages-page__slider--visualization-gallery" aria-label="Слайдер секции Визуализация" data-stages-slider>
+                    <div class="stages-page__slider-track">
+                        <figure class="stages-page__slide is-active" data-stages-slide>
+                            <img src="./assets/image/stages/5.png" alt="Визуализация, слайд 1" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                        <figure class="stages-page__slide" data-stages-slide>
+                            <img src="./assets/image/stages/6.png" alt="Визуализация, слайд 2" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                        <figure class="stages-page__slide" data-stages-slide>
+                            <img src="./assets/image/stages/7.png" alt="Визуализация, слайд 3" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                        <figure class="stages-page__slide" data-stages-slide>
+                            <img src="./assets/image/stages/8.png" alt="Визуализация, слайд 4" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                        <figure class="stages-page__slide" data-stages-slide>
+                            <img src="./assets/image/stages/9.png" alt="Визуализация, слайд 5" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                    </div>
+                    <div class="stages-page__slider-nav" aria-label="Навигация слайдера Визуализация">
+                        <button class="stages-page__slider-arrow" type="button" data-stages-prev aria-label="Предыдущий слайд">←</button>
+                        <button class="stages-page__slider-arrow" type="button" data-stages-next aria-label="Следующий слайд">→</button>
+                    </div>
+                </section>
 
                 <article class="stages-page__block stages-page__block--docs">
                     <h3 class="stages-page__subhead">Рабочая документация</h3>
@@ -183,6 +205,24 @@
                         </li>
                     </ul>
                 </article>
+
+                <section class="stages-page__slider stages-page__slider--supervision" aria-label="Слайдер после блока Авторский надзор и комплектация" data-stages-slider>
+                    <div class="stages-page__slider-track">
+                        <figure class="stages-page__slide is-active" data-stages-slide>
+                            <img src="./assets/image/stages/20.png" alt="Авторский надзор и комплектация, слайд 1" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                        <figure class="stages-page__slide" data-stages-slide>
+                            <img src="./assets/image/stages/21.png" alt="Авторский надзор и комплектация, слайд 2" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                        <figure class="stages-page__slide" data-stages-slide>
+                            <img src="./assets/image/stages/22.png" alt="Авторский надзор и комплектация, слайд 3" width="1200" height="840" loading="lazy" decoding="async">
+                        </figure>
+                    </div>
+                    <div class="stages-page__slider-nav" aria-label="Навигация слайдера Авторский надзор и комплектация">
+                        <button class="stages-page__slider-arrow" type="button" data-stages-prev aria-label="Предыдущий слайд">←</button>
+                        <button class="stages-page__slider-arrow" type="button" data-stages-next aria-label="Следующий слайд">→</button>
+                    </div>
+                </section>
             </div>
         </section>
 

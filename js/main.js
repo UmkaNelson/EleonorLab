@@ -69,6 +69,7 @@ class EleonorLab {
         this.initScrollTopButtons();
         this.initBackButtons();
         this.initAboutOfficeSlider();
+        this.initStagesSliders();
         this.toggleDarkNav();
         this.updateHeaderContrast();
         this.syncSideNavThemeWithToggle();
@@ -515,6 +516,65 @@ class EleonorLab {
 
         nextButton.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % slides.length;
+            render();
+        });
+    }
+
+    initStagesSliders() {
+        const sliders = Array.from(document.querySelectorAll('[data-stages-slider]'));
+        if (sliders.length === 0) return;
+
+        sliders.forEach((slider) => {
+            const slides = Array.from(slider.querySelectorAll('[data-stages-slide]'));
+            const prevButton = slider.querySelector('[data-stages-prev]');
+            const nextButton = slider.querySelector('[data-stages-next]');
+            if (slides.length === 0 || !prevButton || !nextButton) return;
+
+            const pdfPath = (slider.getAttribute('data-stages-pdf') || '').trim();
+            const pdfPagesRaw = parseInt(slider.getAttribute('data-stages-pdf-pages') || '0', 10);
+            const pdfPages = Number.isFinite(pdfPagesRaw) ? Math.max(0, pdfPagesRaw) : 0;
+
+            const pdfSlide = slides.find((slide) => slide.getAttribute('data-stages-slide-type') === 'pdf');
+            const pdfFrame = pdfSlide ? pdfSlide.querySelector('iframe') : null;
+            const hasPdfPagination = !!(pdfPath && pdfPages > 0 && pdfSlide && pdfFrame);
+
+            let currentIndex = 0;
+            const totalSlides = hasPdfPagination ? 1 + pdfPages : slides.length;
+
+            const render = () => {
+                slides.forEach((slide) => slide.classList.remove('is-active'));
+
+                if (hasPdfPagination) {
+                    if (currentIndex === 0) {
+                        slides[0].classList.add('is-active');
+                        return;
+                    }
+
+                    pdfSlide.classList.add('is-active');
+                    const targetSrc = `${pdfPath}#page=${currentIndex}&view=FitH`;
+                    if (pdfFrame.dataset.currentSrc !== targetSrc) {
+                        pdfFrame.src = targetSrc;
+                        pdfFrame.dataset.currentSrc = targetSrc;
+                    }
+                    return;
+                }
+
+                const activeSlide = slides[currentIndex] || slides[0];
+                if (activeSlide) {
+                    activeSlide.classList.add('is-active');
+                }
+            };
+
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                render();
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                render();
+            });
+
             render();
         });
     }
