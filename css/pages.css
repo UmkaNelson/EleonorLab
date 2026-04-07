@@ -2064,10 +2064,12 @@
 
 .project-entry__meta-text {
   margin: 0 0 8px;
-  font-family: var(--font-primary);
-  font-size: clamp(0.76rem, 1.05vw, 0.9rem);
-  font-weight: 500;
-  line-height: 1.22;
+  font-family: "TT Commons", var(--font-primary);
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0;
   color: #000000;
 }
 
@@ -2077,7 +2079,7 @@
 
 .project-entry__meta-item--task .project-entry__meta-text {
   margin: 0;
-  line-height: 1.24;
+  line-height: 20px;
 }
 
 .project-entry__meta-item--task .project-entry__meta-text + .project-entry__meta-text {
@@ -2297,7 +2299,10 @@
   }
 
   .project-entry__meta-text {
-    font-size: clamp(0.9rem, 3.8vw, 1.05rem);
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    letter-spacing: 0;
   }
 
   .project-entry__gallery {
