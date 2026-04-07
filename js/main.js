@@ -60,12 +60,15 @@ class EleonorLab {
         this.initFeatureSlider();
         this.initMarquee();
         this.initLazyBackgrounds();
+        this.normalizeSideNavItems();
         this.mountHeaderNavigationToggle();
+        this.ensureDesktopHeaderNavigation();
         this.initHeaderBehavior();
         this.setupSideNavToggle();
         this.initProjectsFilter();
         this.initScrollTopButtons();
         this.initBackButtons();
+        this.initAboutOfficeSlider();
         this.toggleDarkNav();
         this.updateHeaderContrast();
         this.syncSideNavThemeWithToggle();
@@ -106,7 +109,9 @@ class EleonorLab {
 
     // Resize Handler
     handleResize() {
+        this.normalizeSideNavItems();
         this.mountHeaderNavigationToggle();
+        this.ensureDesktopHeaderNavigation();
         this.syncHeaderMetrics();
         this.handleHeaderBehaviorOnScroll(true);
         this.handleMobileMenu();
@@ -338,12 +343,28 @@ class EleonorLab {
             sideNav.classList.toggle('side-nav--open', open);
             toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
             document.body.classList.toggle('side-nav-open', open);
+            document.body.style.overflow = open ? 'hidden' : '';
             this.handleHeaderBehaviorOnScroll(true);
 
             // Recalculate contrast immediately after menu state change
             // so the toggle color does not lag until next scroll/resize.
             scheduleSync();
         };
+
+        let closeButton = sideNav.querySelector('.side-nav-close');
+        if (!closeButton) {
+            closeButton = document.createElement('button');
+            closeButton.type = 'button';
+            closeButton.className = 'side-nav-close';
+            closeButton.setAttribute('aria-label', 'Закрыть меню');
+            closeButton.textContent = '×';
+            sideNav.prepend(closeButton);
+        }
+
+        if (closeButton.dataset.boundClose !== 'true') {
+            closeButton.dataset.boundClose = 'true';
+            closeButton.addEventListener('click', () => updateState(false));
+        }
 
         toggle.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -354,6 +375,18 @@ class EleonorLab {
         document.addEventListener('click', (e) => {
             const isInside = sideNav.contains(e.target) || toggle.contains(e.target);
             if (!isInside) {
+                updateState(false);
+            }
+        });
+
+        sideNav.querySelectorAll('.side-nav-link').forEach((link) => {
+            if (link.dataset.boundMenuClose === 'true') return;
+            link.dataset.boundMenuClose = 'true';
+            link.addEventListener('click', () => updateState(false));
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
                 updateState(false);
             }
         });
@@ -446,6 +479,46 @@ class EleonorLab {
         });
     }
 
+    initAboutOfficeSlider() {
+        const slider = document.querySelector('[data-about-office-slider]');
+        if (!slider) return;
+
+        const image = slider.querySelector('[data-about-office-image]');
+        const prevButton = slider.querySelector('[data-about-office-prev]');
+        const nextButton = slider.querySelector('[data-about-office-next]');
+        if (!image || !prevButton || !nextButton) return;
+
+        const slides = [
+            { src: './assets/image/about/10.png', alt: 'Офис EleonorLab, фото 10' },
+            { src: './assets/image/about/11.png', alt: 'Офис EleonorLab, фото 11' },
+            { src: './assets/image/about/12.png', alt: 'Офис EleonorLab, фото 12' },
+            { src: './assets/image/about/13.png', alt: 'Офис EleonorLab, фото 13' }
+        ];
+
+        let currentIndex = 0;
+        const currentSrc = image.getAttribute('src') || '';
+        const initialIndex = slides.findIndex((slide) => slide.src === currentSrc);
+        if (initialIndex >= 0) {
+            currentIndex = initialIndex;
+        }
+
+        const render = () => {
+            const slide = slides[currentIndex];
+            image.setAttribute('src', slide.src);
+            image.setAttribute('alt', slide.alt);
+        };
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            render();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            render();
+        });
+    }
+
     // Move burger into the header row so logo / CTA / burger share one line
     mountHeaderNavigationToggle() {
         const headerContainer = document.querySelector('.header .header-container');
@@ -460,6 +533,91 @@ class EleonorLab {
         } else {
             toggle.classList.remove('side-nav-toggle--in-header');
         }
+    }
+
+    normalizeSideNavItems() {
+        const sideNav = document.getElementById('side-nav');
+        if (!sideNav) return;
+
+        const links = Array.from(sideNav.querySelectorAll('.side-nav-link'));
+        links.forEach((link) => {
+            const href = (link.getAttribute('href') || '').trim().toLowerCase();
+            const item = link.closest('.side-nav-item');
+            if (!item) return;
+
+            const hideInMenu = href === 'index.html' || href === '#media';
+            item.classList.toggle('side-nav-item--hidden', hideInMenu);
+
+            if (href === 'stages.html') {
+                link.textContent = 'этапы проекта';
+            }
+        });
+    }
+
+    ensureDesktopHeaderNavigation() {
+        const headerContainer = document.querySelector('.header .header-container');
+        if (!headerContainer) return;
+
+        const navItems = [
+            { href: 'projects.html', label: 'проекты' },
+            { href: 'about.html', label: 'о нас' },
+            { href: 'stages.html', label: 'этапы проекта' },
+            { href: 'contacts.html', label: 'контакты' }
+        ];
+
+        let desktopNav = headerContainer.querySelector('.header-desktop-nav');
+        if (!desktopNav) {
+            desktopNav = document.createElement('nav');
+            desktopNav.className = 'header-desktop-nav';
+            desktopNav.setAttribute('aria-label', 'Основная навигация');
+        }
+
+        desktopNav.innerHTML = '';
+        navItems.forEach((item) => {
+            const link = document.createElement('a');
+            link.className = 'header-desktop-link';
+            link.href = item.href;
+            link.textContent = item.label;
+            desktopNav.appendChild(link);
+        });
+
+        const ctaButton = headerContainer.querySelector('.start-work-btn');
+        if (ctaButton) {
+            headerContainer.insertBefore(desktopNav, ctaButton);
+        } else if (desktopNav.parentElement !== headerContainer) {
+            headerContainer.appendChild(desktopNav);
+        }
+
+        let desktopSocial = headerContainer.querySelector('.header-desktop-social');
+        if (!desktopSocial) {
+            desktopSocial = document.createElement('div');
+            desktopSocial.className = 'header-desktop-social';
+            desktopSocial.setAttribute('aria-label', 'Социальные сети');
+        }
+
+        const sourceSocial = Array.from(document.querySelectorAll('.side-social .social-circle'));
+        desktopSocial.innerHTML = '';
+        sourceSocial.forEach((source) => {
+            const clone = source.cloneNode(true);
+            clone.classList.add('header-desktop-social-link');
+            desktopSocial.appendChild(clone);
+        });
+
+        const toggle = headerContainer.querySelector('.side-nav-toggle');
+        if (toggle) {
+            headerContainer.insertBefore(desktopSocial, toggle);
+        } else if (desktopSocial.parentElement !== headerContainer) {
+            headerContainer.appendChild(desktopSocial);
+        }
+
+        const currentPage = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+        const projectLikePage = currentPage.startsWith('project-kp') || currentPage === 'project-sp.html' || currentPage === 'projects.html';
+
+        desktopNav.querySelectorAll('.header-desktop-link').forEach((link) => {
+            const target = (link.getAttribute('href') || '').toLowerCase();
+            const isActive = currentPage === target || (target === 'projects.html' && projectLikePage);
+            link.classList.toggle('is-active', isActive);
+        });
     }
 
     // Единая CTA-кнопка в шапке на всех страницах
@@ -917,6 +1075,16 @@ class EleonorLab {
     handleMobileMenu() {
         if (window.innerWidth > 768) {
             this.closeMobileMenu();
+            const sideNav = document.getElementById('side-nav');
+            const toggle = document.querySelector('.side-nav-toggle');
+            if (sideNav) {
+                sideNav.classList.remove('side-nav--open');
+            }
+            if (toggle) {
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+            document.body.classList.remove('side-nav-open');
+            document.body.style.overflow = '';
         }
     }
 
