@@ -13,8 +13,8 @@
   --color-shadow: rgba(0, 0, 0, 0.1);
   
   /* Шрифты */
-  --font-primary: 'TT Commons', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-secondary: 'TT Commons', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-primary: 'TT Commons Pro Trl Exp', 'TT Commons', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-secondary: 'TT Commons Pro Trl Exp', 'TT Commons', -apple-system, BlinkMacSystemFont, sans-serif;
   
   /* Анимации */
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);

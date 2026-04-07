@@ -675,7 +675,7 @@
 
 .about-hero__lead {
   margin: 0;
-  font-family: 'TT Commons Pro Trl Exp', var(--font-primary);
+  font-family: var(--font-primary);
   font-size: 64px;
   font-weight: 400;
   font-style: normal;
@@ -692,7 +692,7 @@
 .about-hero__sub {
   margin: clamp(14px, 2.4vw, 24px) 0 0;
   width: min(100%, 620px);
-  font-family: 'TT Commons Pro Trl Exp', var(--font-primary);
+  font-family: var(--font-primary);
   font-size: 32px;
   font-weight: 400;
   font-style: normal;
@@ -738,7 +738,7 @@
 
 .about-hero__title {
   margin: 0;
-  font-family: 'TT Commons Pro Trl Exp', var(--font-primary);
+  font-family: var(--font-primary);
   font-size: 96px;
   font-weight: 700;
   font-style: normal;
@@ -1035,7 +1035,7 @@
 
 .about-story__office-title {
   margin: 0;
-  font-family: 'TT Commons Pro Trl Exp', var(--font-primary);
+  font-family: var(--font-primary);
   font-size: 64px;
   font-weight: 400;
   font-style: normal;
@@ -1052,7 +1052,7 @@
 .about-story__office-text {
   margin: clamp(14px, 2.3vw, 22px) 0 0;
   max-width: 860px;
-  font-family: 'TT Commons Pro Trl Exp', var(--font-primary);
+  font-family: var(--font-primary);
   font-size: 32px;
   font-weight: 400;
   font-style: normal;
