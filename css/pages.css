@@ -2213,6 +2213,14 @@
   background-image: url("../assets/image/pj10/1.png");
 }
 
+.project-list-card--kp11 .project-list-card__media {
+  background-image: url("../assets/image/pj11/1.png");
+}
+
+.project-list-card--kp12 .project-list-card__media {
+  background-image: url("../assets/image/pj12/1.png");
+}
+
 .project-list-card__title {
   margin: 0;
   font-family: var(--font-primary);
@@ -2286,6 +2294,24 @@
   font-size: 64px;
   line-height: 66px;
   letter-spacing: -0.01em;
+}
+
+.project-entry__title--kp11 {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.project-entry__title--kp12 {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 @media (min-width: 769px) {
