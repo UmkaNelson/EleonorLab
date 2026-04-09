@@ -2205,6 +2205,10 @@
   background-image: url("../assets/image/pj8/1.png");
 }
 
+.project-list-card--kp9 .project-list-card__media {
+  background-image: url("../assets/image/pj9/1.png");
+}
+
 .project-list-card__title {
   margin: 0;
   font-family: var(--font-primary);
@@ -2260,6 +2264,15 @@
   line-height: 0.96;
   letter-spacing: -0.01em;
   color: #000000;
+}
+
+.project-entry__title--kp9 {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 66px;
+  letter-spacing: -0.01em;
 }
 
 @media (min-width: 769px) {
