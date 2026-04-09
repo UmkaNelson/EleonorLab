@@ -3029,6 +3029,19 @@
   margin-top: -8px;
 }
 
+.tour-project-sh2-page .tour-signup__title {
+  max-width: none;
+  white-space: nowrap;
+}
+
+.tour-project-page .tour-signup__title {
+  max-width: none;
+}
+
+.tour-project-page:not(.tour-project-sh2-page) .tour-signup__title {
+  white-space: nowrap;
+}
+
 .tour-project-page .projects-min-footer {
   padding-left: 0;
   padding-right: 0;
@@ -3047,6 +3060,16 @@
   font-weight: 600;
   line-height: 0.96;
   letter-spacing: 0.01em;
+}
+
+.tour-signup__title-line {
+  display: block;
+}
+
+@media (min-width: 981px) {
+  .tour-project-page .tour-signup__title-line {
+    white-space: nowrap;
+  }
 }
 
 .tour-signup__grid {
@@ -3289,6 +3312,14 @@
   .tour-project-page .tour-signup__column--right {
     margin-top: 0;
   }
+
+  .tour-project-sh2-page .tour-signup__title {
+    white-space: normal;
+  }
+
+  .tour-project-page .tour-signup__title {
+    white-space: normal;
+  }
 }
 
 @media (max-width: 640px) {
@@ -3521,6 +3552,56 @@
   color: #5a5a5a;
 }
 
+.tour-project-sh2__intro {
+  margin-top: clamp(42px, 6.4vw, 64px);
+  max-width: none;
+}
+
+.tour-project-sh2__lead {
+  margin: 0;
+  font-family: "TT Commons", var(--font-secondary), var(--font-primary);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 66px;
+  letter-spacing: -0.01em;
+  color: #222222;
+}
+
+.tour-project-sh2__lead-line {
+  display: block;
+}
+
+.tour-project-sh2__sub {
+  margin: clamp(24px, 3.5vw, 34px) 0 0;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 66px;
+  letter-spacing: -0.01em;
+  color: #4f4f4f;
+}
+
+.tour-project-sh2__sub-line {
+  display: block;
+}
+
+.tour-project-sh2__summary {
+  margin: clamp(56px, 8vw, 86px) 0 0;
+  font-family: "TT Commons", var(--font-secondary), var(--font-primary);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 66px;
+  letter-spacing: -0.01em;
+  color: #222222;
+}
+
+.tour-project-sh2__summary-line {
+  display: block;
+}
+
 .tour-project__expect-actions {
   margin-top: clamp(48px, 6vw, 64px);
   display: flex;
@@ -3639,6 +3720,22 @@
   .tour-project__expect-note {
     font-size: clamp(1rem, 3.9vw, 1.3rem);
     line-height: 1.28;
+  }
+
+  .tour-project-sh2__lead {
+    font-size: clamp(1.65rem, 7.1vw, 2.65rem);
+    line-height: 1.05;
+  }
+
+  .tour-project-sh2__sub {
+    font-size: clamp(1rem, 4.2vw, 1.3rem);
+    line-height: 1.28;
+    letter-spacing: 0;
+  }
+
+  .tour-project-sh2__summary {
+    font-size: clamp(1.55rem, 6.7vw, 2.35rem);
+    line-height: 1.07;
   }
 
   .tour-project__expect-actions {
