@@ -1727,6 +1727,7 @@
   z-index: 3;
   filter: none;
   visibility: visible;
+  cursor: pointer;
 }
 
 .project-slide.project-slide_next {

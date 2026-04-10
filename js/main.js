@@ -1086,6 +1086,18 @@ class EleonorLab {
 
         const goNext = () => goTo((currentIndex + 1) % slides.length);
         const goPrev = () => goTo((currentIndex - 1 + slides.length) % slides.length);
+        const getSlideLink = (slide) => {
+            const cta = slide ? slide.querySelector('.slide-cta[href]') : null;
+            return cta ? cta.getAttribute('href') : '';
+        };
+        const shouldIgnoreSlideClick = (target) => {
+            return Boolean(target.closest('.slide-next, .slide-cta, a, button'));
+        };
+        const openSlideLink = (slide) => {
+            const href = getSlideLink(slide);
+            if (!href) return;
+            window.location.href = href;
+        };
 
         slider.querySelectorAll('.slide-next').forEach(button => {
             button.addEventListener('click', goNext);
@@ -1099,8 +1111,23 @@ class EleonorLab {
         let touchEndX = 0;
         let touchEndY = 0;
         let touchTracking = false;
+        let suppressSlideClick = false;
         const swipeMinDistance = 42;
         const swipeMaxVertical = 90;
+
+        slides.forEach((slide) => {
+            slide.addEventListener('click', (event) => {
+                if (suppressSlideClick) {
+                    suppressSlideClick = false;
+                    return;
+                }
+
+                if (!slide.classList.contains('project-slide_active') || isSwitching) return;
+                if (shouldIgnoreSlideClick(event.target)) return;
+
+                openSlideLink(slide);
+            });
+        });
 
         slider.addEventListener('touchstart', (e) => {
             if (!e.touches || e.touches.length !== 1) return;
@@ -1138,11 +1165,17 @@ class EleonorLab {
             if (absDx <= absDy) return;
             if (absDy > swipeMaxVertical) return;
 
+            suppressSlideClick = true;
+
             if (dx < 0) {
                 goNext();
             } else {
                 goPrev();
             }
+
+            setTimeout(() => {
+                suppressSlideClick = false;
+            }, 50);
         }, { passive: true });
 
         const keyHandler = (e) => {
