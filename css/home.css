@@ -3105,13 +3105,17 @@
   position: relative;
   z-index: 3;
   padding: clamp(18px, 4vw, 28px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(8px, 1vw, 12px);
 }
 
 .project-count {
   display: block;
   font-size: clamp(14px, 2vw, 16px);
   font-weight: 500;
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 
 .project-title {
@@ -3120,6 +3124,27 @@
   font-weight: 800;
   line-height: 1.05;
   text-transform: uppercase;
+}
+
+.project-text::after {
+  content: "";
+  display: block;
+  align-self: flex-start;
+  width: clamp(54px, 4.8vw, 72px);
+  height: clamp(12px, 1vw, 14px);
+  margin-top: 2px;
+  background-color: currentColor;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 14' fill='none' stroke='black' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'><path d='M1 7H65'/><path d='M59 1L65 7L59 13'/></svg>") center / contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 14' fill='none' stroke='black' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'><path d='M1 7H65'/><path d='M59 1L65 7L59 13'/></svg>") center / contain no-repeat;
+  transition: transform var(--transition), background-color var(--transition);
+}
+
+.project-card:hover .project-text {
+  color: var(--project-text-hover);
+}
+
+.project-card:hover .project-text::after {
+  transform: translateX(5px);
 }
 
 @media (max-width: 900px) {
