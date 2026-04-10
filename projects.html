@@ -38,17 +38,17 @@
                     </button>
 
                     <div class="projects-filter-panel" id="projects-filter-panel" aria-hidden="true">
-                        <div class="projects-filter-panel__head">
+                        <button class="projects-filter-panel__head projects-filter-reset" type="button" data-filter-reset aria-label="Сбросить фильтр">
                             <span class="projects-filter-panel__label">все проекты</span>
                             <span class="projects-filter-panel__icon" aria-hidden="true">↓</span>
-                        </div>
+                        </button>
 
                         <ul class="projects-filter-options" role="list">
                             <li><button class="projects-filter-option" type="button" data-filter-value="horeca">HoReCa</button></li>
                             <li><button class="projects-filter-option" type="button" data-filter-value="residential-complexes">Жилые комплексы</button></li>
                             <li><button class="projects-filter-option" type="button" data-filter-value="food-market">Фудмаркет</button></li>
                             <li><button class="projects-filter-option" type="button" data-filter-value="landscaping">Благоустройство</button></li>
-                            <li><button class="projects-filter-option projects-filter-option--selected" type="button" data-filter-value="private-residences">Частные резиденции</button></li>
+                            <li><button class="projects-filter-option" type="button" data-filter-value="private-residences">Частные резиденции</button></li>
                             <li><button class="projects-filter-option" type="button" data-filter-value="residential-interiors">Жилые интерьеры</button></li>
                             <li><button class="projects-filter-option" type="button" data-filter-value="clinics">Клиники</button></li>
                             <li><button class="projects-filter-option" type="button" data-filter-value="commercial">Коммерческие</button></li>
@@ -62,51 +62,51 @@
         <section class="projects-cards-section" aria-label="Список проектов">
             <div class="projects-filter-container">
                 <div class="projects-cards-grid">
-                    <a class="project-list-card project-list-card--link project-list-card--kp1" href="project-kp1.html" aria-label="Уличный «Фудмаркет» в Краснодаре">
+                    <a class="project-list-card project-list-card--link project-list-card--kp1" href="project-kp1.html" aria-label="Уличный «Фудмаркет» в Краснодаре" data-project-tags="food-market horeca commercial">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">Уличный «Фудмаркет» в Краснодаре</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp2" href="project-kp2.html" aria-label="Предметный дизайн стул">
+                    <a class="project-list-card project-list-card--link project-list-card--kp2" href="project-kp2.html" aria-label="Предметный дизайн стул" data-project-tags="object-design">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">Предметный дизайн стул</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp3" href="project-kp3.html" aria-label="АРТ- КАФЕ Парк облаков">
+                    <a class="project-list-card project-list-card--link project-list-card--kp3" href="project-kp3.html" aria-label="АРТ- КАФЕ Парк облаков" data-project-tags="horeca commercial">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">АРТ- КАФЕ Парк облаков</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp4" href="project-kp4.html" aria-label="Фудмаркет 3 000 м²">
+                    <a class="project-list-card project-list-card--link project-list-card--kp4" href="project-kp4.html" aria-label="Фудмаркет 3 000 м²" data-project-tags="food-market horeca commercial">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">Фудмаркет 3 000 м²</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp5" href="project-kp5.html" aria-label="На клавишах, салон красоты">
+                    <a class="project-list-card project-list-card--link project-list-card--kp5" href="project-kp5.html" aria-label="На клавишах, салон красоты" data-project-tags="commercial">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">На клавишах, салон красоты</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp6" href="project-kp6.html" aria-label="Вилла на Пальме, ДУБАЙ">
+                    <a class="project-list-card project-list-card--link project-list-card--kp6" href="project-kp6.html" aria-label="Вилла на Пальме, ДУБАЙ" data-project-tags="private-residences">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">Вилла на Пальме, Дубай</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp7" href="project-kp7.html" aria-label="СЕННОЙ РЫНОК РЕКОНСТРУКЦИЯ">
+                    <a class="project-list-card project-list-card--link project-list-card--kp7" href="project-kp7.html" aria-label="СЕННОЙ РЫНОК РЕКОНСТРУКЦИЯ" data-project-tags="food-market commercial">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">Сенной рынок<br>реконструкция</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp8" href="project-kp8.html" aria-label="ПРОЕКТ ЗАЦЕПИ КОФЕ">
+                    <a class="project-list-card project-list-card--link project-list-card--kp8" href="project-kp8.html" aria-label="ПРОЕКТ ЗАЦЕПИ КОФЕ" data-project-tags="horeca commercial">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">Проект<br>Зацепи кофе</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp9" href="project-kp9.html" aria-label="Абрау-Club">
+                    <a class="project-list-card project-list-card--link project-list-card--kp9" href="project-kp9.html" aria-label="Абрау-Club" data-project-tags="horeca commercial">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">Абрау-Club</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp10" href="project-kp10.html" aria-label="Телеканал Краснодар">
+                    <a class="project-list-card project-list-card--link project-list-card--kp10" href="project-kp10.html" aria-label="Телеканал Краснодар" data-project-tags="commercial">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">Телеканал Краснодар</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp11" href="project-kp11.html" aria-label="Квартира на Обрывной">
+                    <a class="project-list-card project-list-card--link project-list-card--kp11" href="project-kp11.html" aria-label="Квартира на Обрывной" data-project-tags="residential-interiors">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">Квартира на Обрывной</h3>
                     </a>
-                    <a class="project-list-card project-list-card--link project-list-card--kp12" href="project-kp12.html" aria-label="Жилые комплексы Арт Групп">
+                    <a class="project-list-card project-list-card--link project-list-card--kp12" href="project-kp12.html" aria-label="Жилые комплексы Арт Групп" data-project-tags="residential-complexes">
                         <div class="project-list-card__media"></div>
                         <h3 class="project-list-card__title project-list-card__title--normal">Жилые комплексы Арт Групп</h3>
                     </a>
@@ -119,6 +119,7 @@
                     <article class="project-list-card"><div class="project-list-card__media"></div><h3 class="project-list-card__title">проект 19</h3></article>
                     <article class="project-list-card"><div class="project-list-card__media"></div><h3 class="project-list-card__title">проект 20</h3></article>
                 </div>
+                <p class="projects-filter-empty" data-project-filter-empty hidden>По выбранным фильтрам проектов нет.</p>
             </div>
         </section>
     </main>
@@ -180,3 +181,4 @@
     <script src="./js/main.js"></script>
 </body>
 </html>
+

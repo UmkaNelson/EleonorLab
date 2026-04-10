@@ -405,8 +405,19 @@ class EleonorLab {
         const toggle = filter.querySelector('.projects-filter-toggle');
         const panel = filter.querySelector('.projects-filter-panel');
         const toggleIcon = filter.querySelector('.projects-filter-toggle__icon');
+        const toggleLabel = filter.querySelector('.projects-filter-toggle__label');
+        const resetButton = filter.querySelector('[data-filter-reset]');
+        const resetLabel = resetButton ? resetButton.querySelector('.projects-filter-panel__label') : null;
         const options = Array.from(filter.querySelectorAll('.projects-filter-option'));
-        if (!toggle || !panel) return;
+        const cards = Array.from(document.querySelectorAll('.projects-cards-grid .project-list-card'));
+        const emptyState = document.querySelector('[data-project-filter-empty]');
+        if (!toggle || !panel || options.length === 0 || cards.length === 0) return;
+
+        const validValues = new Set(options.map((option) => option.dataset.filterValue).filter(Boolean));
+        const labelsMap = new Map(
+            options.map((option) => [option.dataset.filterValue, option.textContent.trim()])
+        );
+        let activeFilter = null;
 
         const setOpen = (open) => {
             filter.classList.toggle('is-open', open);
@@ -417,7 +428,95 @@ class EleonorLab {
             }
         };
 
+        const readFiltersFromUrl = () => {
+            const params = new URLSearchParams(window.location.search);
+            const rawValue = params.get('filter');
+            if (!rawValue) return [];
+
+            return rawValue
+                .split(',')
+                .map((value) => value.trim())
+                .filter((value, index, array) => value && validValues.has(value) && array.indexOf(value) === index);
+        };
+
+        const writeFiltersToUrl = () => {
+            const url = new URL(window.location.href);
+            if (!activeFilter) {
+                url.searchParams.delete('filter');
+            } else {
+                url.searchParams.set('filter', activeFilter);
+            }
+
+            window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+        };
+
+        const updateToggleText = () => {
+            if (!toggleLabel) return;
+
+            if (!activeFilter) {
+                toggleLabel.textContent = 'все проекты';
+                return;
+            }
+
+            toggleLabel.textContent = labelsMap.get(activeFilter) || activeFilter;
+        };
+
+        const syncResetState = () => {
+            if (!resetButton) return;
+
+            const isDisabled = !activeFilter;
+            resetButton.classList.toggle('is-disabled', isDisabled);
+            resetButton.setAttribute('aria-disabled', isDisabled ? 'true' : 'false');
+
+            if (resetLabel) {
+                resetLabel.textContent = isDisabled ? 'все проекты' : 'сбросить фильтр';
+            }
+        };
+
+        const syncOptionsState = () => {
+            options.forEach((option) => {
+                const isActive = activeFilter === option.dataset.filterValue;
+                option.classList.toggle('is-active', isActive);
+                option.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
+        };
+
+        const applyFilters = () => {
+            let visibleCardsCount = 0;
+
+            cards.forEach((card) => {
+                const tags = (card.dataset.projectTags || '')
+                    .split(/\s+/)
+                    .map((value) => value.trim())
+                    .filter(Boolean);
+
+                const isVisible = !activeFilter
+                    ? true
+                    : tags.includes(activeFilter);
+
+                card.hidden = !isVisible;
+                if (isVisible) {
+                    visibleCardsCount += 1;
+                }
+            });
+
+            if (emptyState) {
+                emptyState.hidden = visibleCardsCount !== 0;
+            }
+
+            syncOptionsState();
+            syncResetState();
+            updateToggleText();
+            writeFiltersToUrl();
+        };
+
+        const setFilter = (nextFilter) => {
+            activeFilter = nextFilter && validValues.has(nextFilter) ? nextFilter : null;
+            applyFilters();
+        };
+
         setOpen(false);
+        setFilter(readFiltersFromUrl()[0] || null);
 
         toggle.addEventListener('click', (e) => {
             e.preventDefault();
@@ -439,10 +538,21 @@ class EleonorLab {
 
         options.forEach(option => {
             option.addEventListener('click', () => {
-                options.forEach(item => item.classList.remove('is-active'));
-                option.classList.add('is-active');
+                const value = option.dataset.filterValue;
+                if (!value) return;
+
+                setFilter(activeFilter === value ? null : value);
+                setOpen(false);
             });
         });
+
+        if (resetButton) {
+            resetButton.addEventListener('click', () => {
+                if (!activeFilter) return;
+                setFilter(null);
+                setOpen(false);
+            });
+        }
     }
 
     initScrollTopButtons() {
