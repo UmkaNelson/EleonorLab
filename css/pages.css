@@ -3251,6 +3251,28 @@
   color: #ffffff;
 }
 
+.contacts-ref-page .social-circle[aria-label="WhatsApp"] {
+  position: relative;
+}
+
+.contacts-ref-page .social-circle[aria-label="WhatsApp"]::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 68%;
+  height: 68%;
+  background: #ffffff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.contacts-ref-page .social-circle[aria-label="WhatsApp"] img {
+  position: relative;
+  z-index: 1;
+}
+
 .contacts-ref-page .social-circle svg path {
   fill: #ffffff;
 }
