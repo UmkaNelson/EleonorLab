@@ -18,10 +18,11 @@
 
 .stages-page__title {
   margin: 0;
-  font-family: var(--font-primary);
-  font-size: clamp(1.6rem, 3.6vw, 3rem);
-  font-weight: 500;
-  line-height: 1;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 96px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 66px;
   letter-spacing: -0.01em;
   color: #000000;
 }
@@ -301,6 +302,11 @@
     padding-top: clamp(28px, 9vw, 52px);
   }
 
+  .stages-page__title {
+    font-size: clamp(2.4rem, 7.5vw, 4.8rem);
+    line-height: 0.88;
+  }
+
   .stages-chip {
     font-size: clamp(0.95rem, 3.8vw, 1.3rem);
     min-height: 34px;
@@ -342,6 +348,11 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+  }
+
+  .stages-page__title {
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 0.9;
   }
 
   .stages-page__link,
