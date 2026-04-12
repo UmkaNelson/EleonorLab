@@ -599,11 +599,30 @@ class EleonorLab {
         const nextButton = slider.querySelector('[data-about-office-next]');
         if (!image || !prevButton || !nextButton) return;
 
+        const buildResponsiveSrcset = (src, intrinsicWidth) => {
+            const base = src.replace(/\.(?:png|jpe?g|webp)$/i, '');
+            const candidates = [];
+
+            if (intrinsicWidth > 480) {
+                candidates.push(`${base}-480w.webp 480w`);
+            }
+            if (intrinsicWidth > 960) {
+                candidates.push(`${base}-960w.webp 960w`);
+            }
+            if (intrinsicWidth > 1440) {
+                candidates.push(`${base}-1440w.webp 1440w`);
+            }
+
+            candidates.push(`${src} ${intrinsicWidth}w`);
+            return candidates.join(', ');
+        };
+
+        const imageSizes = '(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1280px';
         const slides = [
-            { src: './assets/image/about/10.png', alt: 'Офис EleonorLab, фото 10' },
-            { src: './assets/image/about/11.png', alt: 'Офис EleonorLab, фото 11' },
-            { src: './assets/image/about/12.png', alt: 'Офис EleonorLab, фото 12' },
-            { src: './assets/image/about/13.png', alt: 'Офис EleonorLab, фото 13' }
+            { src: './assets/image/about/10.webp', alt: '???? EleonorLab, ???? 10', width: 2400 },
+            { src: './assets/image/about/11.webp', alt: '???? EleonorLab, ???? 11', width: 2400 },
+            { src: './assets/image/about/12.webp', alt: '???? EleonorLab, ???? 12', width: 1600 },
+            { src: './assets/image/about/13.webp', alt: '???? EleonorLab, ???? 13', width: 1600 }
         ];
 
         let currentIndex = 0;
@@ -617,6 +636,8 @@ class EleonorLab {
             const slide = slides[currentIndex];
             image.setAttribute('src', slide.src);
             image.setAttribute('alt', slide.alt);
+            image.setAttribute('srcset', buildResponsiveSrcset(slide.src, slide.width));
+            image.setAttribute('sizes', imageSizes);
         };
 
         prevButton.addEventListener('click', () => {
