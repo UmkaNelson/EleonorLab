@@ -24,6 +24,7 @@
   --header-height: 80px;
   --container-padding: clamp(1rem, 5vw, 2rem);
   --container-max: 1200px;
+  --mobile-page-gutter: 18px;
   --floating-ui-bottom: clamp(16px, 4vw, 28px);
 }
 
@@ -124,7 +125,7 @@ img {
 /* ===== MEDIA QUERIES (GLOBAL) ===== */
 @media (max-width: 768px) {
   .container {
-    padding: 0 1rem;
+    padding: 0 var(--mobile-page-gutter);
   }
   
   .mobile-hide {

@@ -1,4 +1,4 @@
-/* ===== PROJECTS PAGE ===== */
+﻿/* ===== PROJECTS PAGE ===== */
 .projects-main {
   padding-top: var(--header-height);
   min-height: 100vh;
@@ -13,7 +13,7 @@
 }
 
 .stages-page {
-  padding: clamp(34px, 6vw, 70px) clamp(16px, 4vw, 28px) clamp(56px, 9vw, 100px);
+  padding: var(--page-head-offset, clamp(34px, 6vw, 70px)) clamp(16px, 4vw, 28px) clamp(56px, 9vw, 100px);
 }
 
 .stages-page__title {
@@ -460,7 +460,7 @@
   letter-spacing: 0.05em;
 }
 
-/* Анимация появления проектов с задержкой */
+/* РђРЅРёРјР°С†РёСЏ РїРѕСЏРІР»РµРЅРёСЏ РїСЂРѕРµРєС‚РѕРІ СЃ Р·Р°РґРµСЂР¶РєРѕР№ */
 .project-item:nth-child(1) { animation-delay: 0.1s; }
 .project-item:nth-child(2) { animation-delay: 0.15s; }
 .project-item:nth-child(3) { animation-delay: 0.2s; }
@@ -732,6 +732,7 @@
 .projects-reset-main {
   flex: 1 0 auto;
   padding-top: var(--header-height);
+  --page-head-offset: clamp(34px, 6vw, 70px);
 }
 
 /* ===== BUILDERS PAGE ===== */
@@ -939,7 +940,7 @@
 .about-hero {
   width: min(1200px, 100%);
   margin: 0 auto;
-  padding: clamp(26px, 5.5vw, 68px) 0 0;
+  padding: var(--page-head-offset, clamp(34px, 6vw, 70px)) 0 0;
 }
 
 .about-hero__intro {
@@ -1218,11 +1219,15 @@
 }
 
 .about-story__pride-list li::before {
-  content: "•";
+  content: "";
   position: absolute;
   left: 0;
-  top: 0;
-  line-height: 1.18;
+  top: 0.56em;
+  width: 0.22em;
+  height: 0.22em;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translateY(-50%);
 }
 
 .about-story__pride-media {
@@ -1609,7 +1614,7 @@
   margin-top: 0;
 }
 
-/* Project pages: remove "посмотрите все проекты" and align CTA/cards to one line */
+/* Project pages: remove "РїРѕСЃРјРѕС‚СЂРёС‚Рµ РІСЃРµ РїСЂРѕРµРєС‚С‹" and align CTA/cards to one line */
 .sample1-block .about-quick-projects__all {
   display: none !important;
 }
@@ -2003,7 +2008,7 @@
 
 /* ===== PROJECTS FILTER SECTION ===== */
 .projects-filter-section {
-  padding: clamp(40px, 8vw, 84px) clamp(16px, 4vw, 28px) clamp(56px, 9vw, 120px);
+  padding: var(--page-head-offset, clamp(34px, 6vw, 70px)) clamp(16px, 4vw, 28px) clamp(28px, 4.5vw, 60px);
 }
 
 .projects-filter-container {
@@ -2013,11 +2018,12 @@
 
 .projects-page-title {
   margin: 0;
-  font-family: var(--font-primary);
-  font-size: clamp(2.2rem, 7vw, 4.6rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 96px;
+  font-weight: 800;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: -0.01em;
   color: #000000;
   text-transform: lowercase;
 }
@@ -2306,6 +2312,14 @@
   background-image: url("../assets/image/pj18/1.png");
 }
 
+.project-list-card--kp19 .project-list-card__media {
+  background-image: url("../assets/image/pj19/1.png");
+}
+
+.project-list-card--kp20 .project-list-card__media {
+  background-image: url("../assets/image/pj20/1.png");
+}
+
 .project-list-card__title {
   margin: 0;
   font-family: var(--font-primary);
@@ -2344,11 +2358,12 @@
 
 .project-entry__page-title {
   margin: 0;
-  font-family: var(--font-primary);
-  font-size: clamp(2.2rem, 7vw, 4.6rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 96px;
+  font-weight: 800;
+  font-style: normal;
+  line-height: 100%;
+  letter-spacing: -0.01em;
   color: #000000;
   text-transform: lowercase;
 }
@@ -2998,7 +3013,7 @@
 .contacts-ref__head {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: end;
+  align-items: start;
   gap: clamp(22px, 5vw, 60px);
   padding-bottom: clamp(12px, 2.3vw, 18px);
   border-bottom: none;
@@ -4182,7 +4197,7 @@
   }
 }
 
-/* Project pages: align "Есть задача" and quick cards to the project photo left edge */
+/* Project pages: align "Р•СЃС‚СЊ Р·Р°РґР°С‡Р°" and quick cards to the project photo left edge */
 .sample1-block {
   padding-left: clamp(16px, 4vw, 28px);
   padding-right: clamp(16px, 4vw, 28px);
@@ -4210,8 +4225,31 @@
   justify-self: start;
 }
 
+@media (max-width: 768px) {
+  .about-hero,
+  .about-story,
+  .str-section,
+  .stages-page,
+  .projects-filter-section,
+  .projects-cards-section,
+  .project-entry,
+  .contacts-ref,
+  .projects-min-footer,
+  .sample1-block {
+    padding-left: var(--mobile-page-gutter);
+    padding-right: var(--mobile-page-gutter);
+  }
+
+  .tour-project__container,
+  .tour-project-page .tour-signup__container {
+    padding-left: var(--mobile-page-gutter);
+    padding-right: var(--mobile-page-gutter);
+  }
+}
+
 .sample1-block .about-story__cta {
   max-width: none;
   margin-left: 0;
   margin-right: 0;
 }
+
