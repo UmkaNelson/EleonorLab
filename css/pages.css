@@ -1,4 +1,4 @@
-﻿/* ===== PROJECTS PAGE ===== */
+/* ===== PROJECTS PAGE ===== */
 .projects-main {
   padding-top: var(--header-height);
   min-height: 100vh;
@@ -971,11 +971,11 @@
   margin: clamp(14px, 2.4vw, 24px) 0 0;
   width: min(100%, 620px);
   font-family: var(--font-primary);
-  font-size: 32px;
-  font-weight: 400;
+  font-size: clamp(1.08rem, 1.66vw, 1.62rem);
+  font-weight: 300;
   font-style: normal;
-  line-height: 100%;
-  letter-spacing: 0;
+  line-height: 1.18;
+  letter-spacing: 0.012em;
   color: rgba(0, 0, 0, 0.84);
 }
 
@@ -1121,6 +1121,13 @@
   font-weight: 400;
 }
 
+.about-story__principle .about-story__text {
+  font-size: clamp(1.08rem, 1.66vw, 1.62rem);
+  font-weight: 300;
+  letter-spacing: 0.012em;
+  line-height: 1.18;
+}
+
 .about-story__heading-line {
   display: block;
   white-space: nowrap;
@@ -1130,17 +1137,22 @@
   margin: clamp(14px, 2.3vw, 22px) 0 0;
   max-width: 560px;
   font-family: var(--font-primary);
-  font-size: clamp(0.98rem, 1.2vw, 1.12rem);
-  font-weight: 500;
-  line-height: 1.2;
+  font-size: clamp(1.08rem, 1.66vw, 1.62rem);
+  font-weight: 300;
+  line-height: 1.18;
+  letter-spacing: 0.012em;
   color: rgba(0, 0, 0, 0.84);
 }
 
-.about-story__text--extra {
+.about-story__text--extra,
+.about-story__text.about-story__text--extra,
+.about-story__office-text {
+  font-family: var(--font-primary);
   font-size: clamp(1.08rem, 1.66vw, 1.62rem);
   font-weight: 300;
   letter-spacing: 0.012em;
   line-height: 1.18;
+  color: rgba(0, 0, 0, 0.84);
 }
 
 .about-story__text-line {
@@ -1170,9 +1182,9 @@
 .about-story__pride-title {
   margin: 0;
   font-family: var(--font-primary);
-  font-size: clamp(2rem, 4.15vw, 4.6rem);
-  font-weight: 500;
-  line-height: 1.04;
+  font-size: clamp(1.9rem, 4vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.03;
   letter-spacing: -0.01em;
   color: #000000;
 }
@@ -1361,11 +1373,11 @@
   margin: clamp(14px, 2.3vw, 22px) 0 0;
   max-width: 860px;
   font-family: var(--font-primary);
-  font-size: 32px;
-  font-weight: 400;
+  font-size: clamp(1.08rem, 1.66vw, 1.62rem);
+  font-weight: 300;
   font-style: normal;
-  line-height: 100%;
-  letter-spacing: 0;
+  line-height: 1.18;
+  letter-spacing: 0.012em;
   color: rgba(0, 0, 0, 0.84);
 }
 
@@ -1753,7 +1765,9 @@
   }
 
   .about-story__pride-title {
-    font-size: clamp(1.5rem, 8.6vw, 2.35rem);
+    font-size: clamp(1.9rem, 4vw, 4.2rem);
+    line-height: 1.03;
+    font-weight: 400;
   }
 
   .about-story__pride-copy {
@@ -1783,8 +1797,10 @@
   }
 
   .about-story__office-text {
-    font-size: 0.95rem;
-    line-height: 1.24;
+    font-size: clamp(1.08rem, 1.66vw, 1.62rem);
+    line-height: 1.18;
+    letter-spacing: 0.012em;
+    font-weight: 300;
   }
 
   .about-story__text {
