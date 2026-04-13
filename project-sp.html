@@ -58,21 +58,31 @@
             </section>
 
             <section class="tour-project__trip" aria-label="Фото тура и приглашение">
-                <div class="tour-project__trip-grid">
-                    <figure class="tour-project__trip-item">
-                        <img width="1107" height="2400" src="./assets/image/sp/2.webp" srcset="./assets/image/sp/2-480w.webp 480w, ./assets/image/sp/2-960w.webp 960w, ./assets/image/sp/2.webp 1107w" sizes="(max-width: 768px) 100vw, (max-width: 1280px) 30vw, 360px" alt="Design tour, кадр 1" loading="lazy" decoding="async">
-                    </figure>
-                    <figure class="tour-project__trip-item">
-                        <img width="1107" height="2400" src="./assets/image/sp/3.webp" srcset="./assets/image/sp/3-480w.webp 480w, ./assets/image/sp/3-960w.webp 960w, ./assets/image/sp/3.webp 1107w" sizes="(max-width: 768px) 100vw, (max-width: 1280px) 30vw, 360px" alt="Design tour, кадр 2" loading="lazy" decoding="async">
-                    </figure>
-                    <figure class="tour-project__trip-item">
-                        <img width="1107" height="2400" src="./assets/image/sp/4.webp" srcset="./assets/image/sp/4-480w.webp 480w, ./assets/image/sp/4-960w.webp 960w, ./assets/image/sp/4.webp 1107w" sizes="(max-width: 768px) 100vw, (max-width: 1280px) 30vw, 360px" alt="Design tour, кадр 3" loading="lazy" decoding="async">
-                    </figure>
-                </div>
+                <div class="tour-project__trip-slider" data-tour-trip-slider>
+                    <div class="tour-project__trip-viewport" data-tour-trip-viewport>
+                        <div class="tour-project__trip-track" data-tour-trip-track>
+                            <figure class="tour-project__trip-item" data-tour-trip-slide>
+                                <img width="4284" height="5712" src="./assets/image/sp/7.png" alt="Design tour, photo 1" loading="lazy" decoding="async">
+                            </figure>
+                            <figure class="tour-project__trip-item" data-tour-trip-slide>
+                                <img width="4032" height="3024" src="./assets/image/sp/8.png" alt="Design tour, photo 2" loading="lazy" decoding="async">
+                            </figure>
+                            <figure class="tour-project__trip-item" data-tour-trip-slide>
+                                <img width="4032" height="3024" src="./assets/image/sp/9.png" alt="Design tour, photo 3" loading="lazy" decoding="async">
+                            </figure>
+                            <figure class="tour-project__trip-item" data-tour-trip-slide>
+                                <img width="1980" height="3520" src="./assets/image/sp/10.png" alt="Design tour, photo 4" loading="lazy" decoding="async">
+                            </figure>
+                            <figure class="tour-project__trip-item" data-tour-trip-slide>
+                                <img width="4032" height="3024" src="./assets/image/sp/11.png" alt="Design tour, photo 5" loading="lazy" decoding="async">
+                            </figure>
+                        </div>
+                    </div>
 
-                <div class="tour-project__trip-arrows" aria-hidden="true">
-                    <span>←</span>
-                    <span>→</span>
+                    <div class="tour-project__trip-arrows">
+                        <button class="tour-project__trip-arrow" type="button" data-tour-trip-prev aria-label="Previous photos">&larr;</button>
+                        <button class="tour-project__trip-arrow" type="button" data-tour-trip-next aria-label="Next photos">&rarr;</button>
+                    </div>
                 </div>
 
                 <div class="tour-project__invite">

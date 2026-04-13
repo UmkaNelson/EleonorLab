@@ -69,6 +69,7 @@ class EleonorLab {
         this.initScrollTopButtons();
         this.initBackButtons();
         this.initAboutOfficeSlider();
+        this.initTourTripSlider();
         this.initStagesSliders();
         this.toggleDarkNav();
         this.updateHeaderContrast();
@@ -647,6 +648,72 @@ class EleonorLab {
 
         nextButton.addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % slides.length;
+            render();
+        });
+    }
+
+    initTourTripSlider() {
+        const sliders = Array.from(document.querySelectorAll('[data-tour-trip-slider]'));
+        if (sliders.length === 0) return;
+
+        sliders.forEach((slider) => {
+            const track = slider.querySelector('[data-tour-trip-track]');
+            const slides = Array.from(slider.querySelectorAll('[data-tour-trip-slide]'));
+            const prevButton = slider.querySelector('[data-tour-trip-prev]');
+            const nextButton = slider.querySelector('[data-tour-trip-next]');
+            if (!track || slides.length === 0 || !prevButton || !nextButton) return;
+
+            let currentIndex = 0;
+            let resizeFrame = null;
+
+            const getVisibleCount = () => {
+                const raw = parseInt(getComputedStyle(slider).getPropertyValue('--tour-trip-visible-count') || '3', 10);
+                return Number.isFinite(raw) && raw > 0 ? raw : 3;
+            };
+
+            const render = () => {
+                const visibleCount = getVisibleCount();
+                const maxIndex = Math.max(0, slides.length - visibleCount);
+                currentIndex = Math.min(currentIndex, maxIndex);
+
+                const offset = slides[currentIndex]
+                    ? slides[currentIndex].offsetLeft - slides[0].offsetLeft
+                    : 0;
+
+                track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+
+                prevButton.disabled = currentIndex === 0;
+                nextButton.disabled = currentIndex >= maxIndex;
+                prevButton.classList.toggle('is-disabled', prevButton.disabled);
+                nextButton.classList.toggle('is-disabled', nextButton.disabled);
+            };
+
+            prevButton.addEventListener('click', () => {
+                if (currentIndex === 0) return;
+                currentIndex -= 1;
+                render();
+            });
+
+            nextButton.addEventListener('click', () => {
+                const visibleCount = getVisibleCount();
+                const maxIndex = Math.max(0, slides.length - visibleCount);
+                if (currentIndex >= maxIndex) return;
+                currentIndex += 1;
+                render();
+            });
+
+            window.addEventListener('resize', () => {
+                if (resizeFrame) {
+                    cancelAnimationFrame(resizeFrame);
+                }
+                resizeFrame = requestAnimationFrame(render);
+            });
+
+            if (typeof ResizeObserver !== 'undefined') {
+                const observer = new ResizeObserver(() => render());
+                observer.observe(slider);
+            }
+
             render();
         });
     }

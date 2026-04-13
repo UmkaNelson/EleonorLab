@@ -2067,7 +2067,7 @@
   }
 
   .feature-slider + .stats-strip {
-    border-top: none;
+    border-top: 1px solid #000000;
   }
 }
 
