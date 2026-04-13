@@ -1885,7 +1885,7 @@
 }
 
 .slide-cta {
-  display: inline-flex;
+  display: none !important;
   align-items: center;
   gap: 0.5rem;
   color: #ffffff;
@@ -2972,7 +2972,7 @@
 
 @media (min-width: 960px) {
   .contact-cta-container {
-    padding-left: clamp(180px, 13vw, 220px);
+    padding-left: clamp(60px, 7vw, 140px);
     padding-right: clamp(60px, 7vw, 140px);
   }
 }

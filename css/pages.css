@@ -350,9 +350,13 @@
     gap: 12px;
   }
 
+  .stages-page {
+    padding: clamp(30px, 7vw, 46px) clamp(16px, 4vw, 28px) clamp(40px, 10vw, 64px);
+  }
+
   .stages-page__title {
-    font-size: clamp(2rem, 9vw, 3rem);
-    line-height: 0.9;
+    font-size: clamp(2rem, 12vw, 3rem);
+    line-height: 100%;
   }
 
   .stages-page__link,
@@ -1489,12 +1493,20 @@
 }
 
 .about-story__cta-text {
-  margin: clamp(8px, 1.3vw, 14px) 0 0;
+  --about-cta-line-gap: clamp(8px, 1.3vw, 14px);
+  margin: var(--about-cta-line-gap) 0 0;
   font-family: var(--font-primary);
   font-size: clamp(2rem, 3.5vw, 3.5rem);
   font-weight: 500;
-  line-height: 1.02;
+  line-height: 1;
   color: #6f6f6f;
+  display: flex;
+  flex-direction: column;
+  gap: var(--about-cta-line-gap);
+}
+
+.about-story__cta-text br {
+  display: none;
 }
 
 .about-story__cta-text a {
@@ -1506,6 +1518,17 @@
 .about-story__cta-text a:hover,
 .about-story__cta-text a:active {
   color: inherit;
+}
+
+/* Highlight only the phone link inside quick-project CTA block */
+.sample1-block .about-story__cta-text a[href^="tel:"] {
+  transition: color var(--transition), text-shadow var(--transition);
+}
+
+.sample1-block .about-story__cta-text a[href^="tel:"]:hover,
+.sample1-block .about-story__cta-text a[href^="tel:"]:focus-visible {
+  color: rgba(202, 111, 135, 0.98);
+  text-shadow: 0 0 14px rgba(202, 111, 135, 0.35);
 }
 
 .about-quick-projects {
@@ -1696,7 +1719,16 @@
     font-size: clamp(1.05rem, 2.9vw, 1.36rem);
   }
 
-  .about-hero__title,
+  .about-hero {
+    padding-top: clamp(30px, 7vw, 46px);
+    padding-bottom: clamp(40px, 10vw, 64px);
+  }
+
+  .about-hero__title {
+    font-size: clamp(2rem, 12vw, 3rem);
+    line-height: 100%;
+  }
+
   .about-hero__bottom p {
     font-size: clamp(1.05rem, 2.9vw, 1.36rem);
   }
@@ -2382,6 +2414,18 @@
   letter-spacing: -0.01em;
   color: #000000;
   text-transform: lowercase;
+}
+
+.project-entry__page-title--link {
+  display: block;
+  text-decoration: none;
+}
+
+.project-entry__page-title--link:hover,
+.project-entry__page-title--link:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.12em;
 }
 
 .project-entry__title {
