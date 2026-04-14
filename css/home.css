@@ -3288,7 +3288,15 @@
     border: none;
     background: transparent;
     color: #000000;
-    transform: none !important;
+    transform: translateZ(0) !important;
+    transition: transform 0.22s ease, filter 0.22s ease;
+    will-change: transform;
+  }
+
+  .header-desktop-social-link.social-circle:hover,
+  .header-desktop-social-link.social-circle:focus-visible {
+    transform: translateY(-2px) scale(1.06) !important;
+    filter: brightness(0.94);
   }
 
   .header-desktop-social-link.social-circle img {
