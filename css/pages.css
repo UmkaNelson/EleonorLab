@@ -1520,15 +1520,18 @@
   color: inherit;
 }
 
-/* Highlight only the phone link inside quick-project CTA block */
 .sample1-block .about-story__cta-text a[href^="tel:"] {
-  transition: color var(--transition), text-shadow var(--transition);
+  color: #000000;
+  transition: color var(--transition);
+}
+
+.sample1-block .about-story__cta-text a[href^="tel:"]:visited {
+  color: #000000;
 }
 
 .sample1-block .about-story__cta-text a[href^="tel:"]:hover,
 .sample1-block .about-story__cta-text a[href^="tel:"]:focus-visible {
-  color: rgba(202, 111, 135, 0.98);
-  text-shadow: 0 0 14px rgba(202, 111, 135, 0.35);
+  color: #6f6f6f;
 }
 
 .about-quick-projects {
