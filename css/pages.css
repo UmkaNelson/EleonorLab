@@ -3131,6 +3131,14 @@
   line-height: 1.05;
 }
 
+.contacts-ref__main-link[href^="mailto:"] {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 .contacts-ref__link-note {
   margin: 6px 0 0;
   color: rgba(255, 255, 255, 0.72);
@@ -3205,6 +3213,16 @@
   width: 100%;
 }
 
+.contacts-ref__mobile-title {
+  display: none;
+  margin: 0 0 clamp(14px, 3vw, 22px);
+  font-size: clamp(2.3rem, 5.2vw, 4.15rem);
+  font-weight: 700;
+  line-height: 0.93;
+  text-transform: lowercase;
+  letter-spacing: 0.01em;
+}
+
 .contacts-ref__form {
   width: 100%;
 }
@@ -3227,6 +3245,10 @@
   outline: none;
 }
 
+.contacts-ref__field input::placeholder {
+  color: transparent;
+}
+
 .contacts-ref__field span {
   position: absolute;
   left: 0;
@@ -3236,6 +3258,14 @@
   text-transform: lowercase;
   line-height: 1;
   pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.contacts-ref__field input:focus + span,
+.contacts-ref__field input:not(:placeholder-shown) + span,
+.contacts-ref__field input:-webkit-autofill + span {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 
 .contacts-ref__consent {
@@ -3319,11 +3349,51 @@
 }
 
 @media (max-width: 768px) {
+  .contacts-ref-page .header.home-header,
+  .contacts-ref-page .side-nav-toggle,
+  .contacts-ref-page .side-nav {
+    display: none !important;
+  }
+
+  .contacts-ref {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 56px);
+  }
+
   .contacts-ref__back {
-    top: auto;
-    left: auto;
+    top: calc(env(safe-area-inset-top, 0px) + 10px);
     right: clamp(10px, 4vw, 16px);
-    bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+    left: auto;
+    bottom: auto;
+  }
+
+  .contacts-ref__title--right {
+    display: none;
+  }
+
+  .contacts-ref__mobile-title {
+    display: block;
+  }
+
+  .contacts-ref-page .projects-min-footer--compact .projects-min-footer__inner {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+
+  .contacts-ref-page .projects-min-footer__to-top {
+    order: 1;
+    justify-self: end;
+  }
+
+  .contacts-ref-page .projects-min-footer__copy {
+    order: 2;
+    grid-column: auto;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .contacts-ref-page .projects-min-footer__years {
+    order: 3;
+    justify-self: center;
   }
 }
 
@@ -3336,13 +3406,17 @@
   }
 
   .contacts-ref__main-link {
-    font-size: clamp(1.5rem, 9vw, 2.2rem);
+    font-size: clamp(1.28rem, 7.2vw, 1.9rem);
+    font-weight: 400;
+    line-height: 1.08;
   }
 
   .contacts-ref__link-note,
   .contacts-ref__label,
   .contacts-ref__address {
-    font-size: clamp(1.45rem, 8.6vw, 2.05rem);
+    font-size: clamp(1.2rem, 7vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.02;
   }
 
   .contacts-ref__submit {
