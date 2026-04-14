@@ -3905,7 +3905,17 @@
     row-gap: 24px;
   }
 
+  /* Tour special pages: force single-column flow in mobile */
+  .tour-project-page .tour-signup__grid {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
   .tour-signup__grid::before {
+    display: none;
+  }
+
+  .tour-project-page .tour-signup__grid::before {
     display: none;
   }
 
@@ -3922,6 +3932,23 @@
     margin-top: clamp(20px, 4vw, 30px);
   }
 
+  .tour-project-page .tour-signup__submit-note {
+    order: 1;
+    margin-top: clamp(10px, 2.6vw, 16px);
+  }
+
+  .tour-project-page .tour-signup__contacts--mobile {
+    order: 2;
+  }
+
+  .tour-project-page .tour-signup__column--left {
+    order: 1;
+  }
+
+  .tour-project-page .tour-signup__column--right {
+    order: 2;
+  }
+
   .tour-signup__column--right {
     padding-top: 0;
   }
@@ -3936,6 +3963,14 @@
 
   .tour-project-page .tour-signup__title {
     white-space: normal;
+  }
+
+  /* Milan page: override desktop nowrap rule with matching specificity */
+  .tour-project-page:not(.tour-project-sh2-page) .tour-signup__title,
+  .tour-project-page:not(.tour-project-sh2-page) .tour-signup__title-line {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 }
 
@@ -4402,8 +4437,139 @@
     gap: 12px;
   }
 
+  .tour-project__expect-more {
+    align-self: center;
+  }
+
   .tour-project__expect-actions .tour-project__expect-note {
     margin-left: 0;
+  }
+
+  /* Tour pages mobile: slightly smaller contact block typography */
+  .tour-project-page .tour-signup__contact-link {
+    font-size: clamp(1.2rem, 5.6vw, 1.7rem);
+    line-height: 1.06;
+  }
+
+  .tour-project-page .tour-signup__contact-note {
+    font-size: clamp(1.08rem, 5.1vw, 1.45rem);
+    line-height: 1.02;
+  }
+
+  /* Tour pages: keep mobile header/menu aligned and prevent side shift */
+  .tour-project-page {
+    overflow-x: hidden;
+  }
+
+  .tour-project-page,
+  .tour-project-page .tour-signup,
+  .tour-project-page .tour-signup__container,
+  .tour-project-page .tour-signup__grid,
+  .tour-project-page .tour-signup__column,
+  .tour-project-page .tour-signup__contacts {
+    min-width: 0;
+  }
+
+  .tour-project-page .header .header-container {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    padding-left: var(--mobile-page-gutter) !important;
+    padding-right: var(--mobile-page-gutter) !important;
+  }
+
+  .tour-project-page .header .home-logo,
+  .tour-project-page .header .header-logo {
+    justify-self: start !important;
+    margin-left: 0 !important;
+    min-width: 0;
+  }
+
+  .tour-project-page .header-desktop-nav,
+  .tour-project-page .header-desktop-social {
+    display: none !important;
+  }
+
+  .tour-project-page .header .header-container > .side-nav-toggle.side-nav-toggle--in-header,
+  .tour-project-page .side-nav-toggle {
+    position: fixed !important;
+    top: calc(env(safe-area-inset-top, 0px) + ((var(--header-height) - 40px) / 2)) !important;
+    right: clamp(10px, 4vw, 16px) !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    grid-column: auto;
+    justify-self: auto !important;
+    margin: 0 !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 3310 !important;
+  }
+
+  .tour-project-page .side-nav {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    max-width: none !important;
+    max-height: none !important;
+    transform: translateX(100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    z-index: 3300 !important;
+  }
+
+  .tour-project-page .side-nav.side-nav--open,
+  .tour-project-page.side-nav-open .side-nav {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .tour-project-page.side-nav-open .side-nav-toggle {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .tour-project-page .tour-signup__contact-link {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Tour pages mobile: footer bottom in 3 rows (like contacts page) */
+  .tour-project-page .projects-min-footer.projects-min-footer--compact {
+    border-top: none !important;
+  }
+
+  .tour-project-page .projects-min-footer--compact .projects-min-footer__inner::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  .tour-project-page .projects-min-footer--compact .projects-min-footer__inner {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+  }
+
+  .tour-project-page .projects-min-footer__to-top {
+    order: 1;
+    justify-self: end;
+  }
+
+  .tour-project-page .projects-min-footer__copy {
+    order: 2;
+    grid-column: auto;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .tour-project-page .projects-min-footer__years {
+    order: 3;
+    justify-self: center;
   }
 }
 
