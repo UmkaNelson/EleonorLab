@@ -4629,3 +4629,72 @@
   margin-right: 0;
 }
 
+/* ===== MOBILE TEXT FLOW FIX (PHASE 1 + PHASE 2) ===== */
+@media (max-width: 768px) {
+  /* Phase 1: safe wrapping baseline for long text blocks */
+  .about-hero__lead,
+  .about-hero__sub,
+  .about-hero__bottom p,
+  .about-story__bio p,
+  .about-story__heading,
+  .about-story__text,
+  .about-story__pride-title,
+  .about-story__pride-copy,
+  .about-story__office-title,
+  .about-story__office-text,
+  .str-subtitle,
+  .str-copy,
+  .str-benefits__title,
+  .str-benefits__item,
+  .project-entry__title,
+  .project-entry__meta-title,
+  .project-entry__meta-text,
+  .project-entry__meta-list,
+  .project-entry__story-title,
+  .project-entry__story-copy,
+  .project-entry__story-points,
+  .tour-project__lead,
+  .tour-project__text,
+  .tour-project__invite-lead,
+  .tour-project__invite-text,
+  .tour-project__expect-title,
+  .tour-project__expect-list li,
+  .tour-project__expect-note,
+  .tour-project-sh2__lead,
+  .tour-project-sh2__sub,
+  .tour-project-sh2__summary {
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Phase 2: disable forced line slicing wrappers on mobile */
+  .about-hero__lead-line,
+  .about-hero__sub-line,
+  .about-hero__bottom-line,
+  .about-story__bio-line,
+  .about-story__heading-line,
+  .about-story__text-line,
+  .about-story__pride-title-line,
+  .about-story__office-title-line,
+  .about-story__office-text-line,
+  .str-subtitle__line,
+  .str-copy__line,
+  .str-benefits__line,
+  .project-entry__title-line,
+  .project-entry__story-line,
+  .tour-project__lead-line,
+  .tour-project__text-line,
+  .tour-project__invite-line,
+  .tour-project__invite-text-line,
+  .tour-project__expect-line,
+  .tour-project-sh2__lead-line,
+  .tour-project-sh2__sub-line,
+  .tour-project-sh2__summary-line {
+    display: inline;
+    white-space: normal;
+  }
+}
+
