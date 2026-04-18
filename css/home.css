@@ -2938,6 +2938,16 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
+.contact-cta-social a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+
+.contact-cta-social a:hover {
+  opacity: 0.8;
+}
+
 .contact-cta-top {
   display: inline-block;
   margin-top: clamp(12px, 2vh, 20px);

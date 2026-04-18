@@ -2009,6 +2009,16 @@
   color: #ffffff;
 }
 
+.projects-min-footer__socials a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+
+.projects-min-footer__socials a:hover {
+  opacity: 0.8;
+}
+
 .projects-min-footer__cta {
   display: inline-flex;
   align-items: center;
@@ -4697,4 +4707,3 @@
     white-space: normal;
   }
 }
-
