@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://umkanelson.github.io/EleonorLab/sitemap.xml
+Sitemap: https://eleonorlab.com/sitemap.xml

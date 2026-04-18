@@ -15,6 +15,72 @@ class EleonorLab {
         this.initScrollManagement();
     }
 
+
+    getSiteBasePath() {
+        const marker = '/EleonorLab/';
+        const pathname = window.location.pathname || '/';
+        const markerIndex = pathname.indexOf(marker);
+
+        if (markerIndex !== -1) {
+            return pathname.slice(0, markerIndex + marker.length);
+        }
+
+        return '/';
+    }
+
+    toSitePath(route = '') {
+        const base = this.getSiteBasePath();
+        const normalizedRoute = String(route).replace(/^\/+/, '');
+        if (!normalizedRoute) return base;
+        return `${base}${normalizedRoute}`;
+    }
+
+    getCurrentRouteName() {
+        const base = this.getSiteBasePath();
+        let pathname = window.location.pathname || '/';
+
+        if (pathname.startsWith(base)) {
+            pathname = pathname.slice(base.length);
+        }
+
+        pathname = pathname.replace(/^\/+|\/+$/g, '');
+        if (!pathname || pathname === 'index.html') {
+            return 'home';
+        }
+
+        const segment = pathname.split('/').pop() || '';
+        if (segment === 'index.html') return 'home';
+        if (segment.endsWith('.html')) return segment.slice(0, -5).toLowerCase();
+        return segment.toLowerCase();
+    }
+
+    getRouteNameFromHref(href = '') {
+        const raw = String(href).trim();
+        if (!raw) return '';
+        if (raw === '#media' || raw.toLowerCase().endsWith('#media')) return 'media';
+
+        let resolved = raw;
+        try {
+            resolved = new URL(raw, window.location.href).pathname;
+        } catch (error) {
+            return '';
+        }
+
+        const base = this.getSiteBasePath();
+        if (resolved.startsWith(base)) {
+            resolved = resolved.slice(base.length);
+        }
+
+        resolved = resolved.replace(/^\/+|\/+$/g, '');
+        if (!resolved || resolved === 'index.html') return 'home';
+
+        const segment = resolved.split('/').pop() || '';
+        if (segment === 'index.html') return 'home';
+        if (segment.endsWith('.html')) return segment.slice(0, -5).toLowerCase();
+        return segment.toLowerCase();
+    }
+
+
     // Event Listeners
     setupEventListeners() {
         const onReady = () => {
@@ -85,7 +151,7 @@ class EleonorLab {
         
         if (discussProjectBtn) {
             discussProjectBtn.addEventListener('click', () => {
-                window.location.href = 'contacts.html';
+                window.location.href = this.toSitePath('contacts/');
             });
         }
         
@@ -586,7 +652,7 @@ class EleonorLab {
                     return;
                 }
 
-                window.location.href = 'index.html';
+                window.location.href = this.toSitePath('');
             });
         });
     }
@@ -793,41 +859,44 @@ class EleonorLab {
         }
     }
 
+
     normalizeSideNavItems() {
         const sideNav = document.getElementById('side-nav');
         if (!sideNav) return;
 
         const links = Array.from(sideNav.querySelectorAll('.side-nav-link'));
         links.forEach((link) => {
-            const href = (link.getAttribute('href') || '').trim().toLowerCase();
+            const href = (link.getAttribute('href') || '').trim();
+            const routeName = this.getRouteNameFromHref(href);
             const item = link.closest('.side-nav-item');
             if (!item) return;
 
-            const hideInMenu = href === 'index.html' || href === '#media';
+            const hideInMenu = routeName === 'home' || routeName === 'media';
             item.classList.toggle('side-nav-item--hidden', hideInMenu);
 
-            if (href === 'stages.html') {
-                link.textContent = 'этапы проекта';
+            if (routeName === 'stages') {
+                link.textContent = '\u044d\u0442\u0430\u043f\u044b \u043f\u0440\u043e\u0435\u043a\u0442\u0430';
             }
         });
     }
+
 
     ensureDesktopHeaderNavigation() {
         const headerContainer = document.querySelector('.header .header-container');
         if (!headerContainer) return;
 
         const navItems = [
-            { href: 'projects.html', label: 'проекты' },
-            { href: 'about.html', label: 'о нас' },
-            { href: 'stages.html', label: 'этапы проекта' },
-            { href: 'contacts.html', label: 'контакты' }
+            { route: 'projects', href: this.toSitePath('projects/'), label: '\u043f\u0440\u043e\u0435\u043a\u0442\u044b' },
+            { route: 'about', href: this.toSitePath('about/'), label: '\u043e \u043d\u0430\u0441' },
+            { route: 'stages', href: this.toSitePath('stages/'), label: '\u044d\u0442\u0430\u043f\u044b \u043f\u0440\u043e\u0435\u043a\u0442\u0430' },
+            { route: 'contacts', href: this.toSitePath('contacts/'), label: '\u043a\u043e\u043d\u0442\u0430\u043a\u0442\u044b' }
         ];
 
         let desktopNav = headerContainer.querySelector('.header-desktop-nav');
         if (!desktopNav) {
             desktopNav = document.createElement('nav');
             desktopNav.className = 'header-desktop-nav';
-            desktopNav.setAttribute('aria-label', 'Основная навигация');
+            desktopNav.setAttribute('aria-label', '\u041e\u0441\u043d\u043e\u0432\u043d\u0430\u044f \u043d\u0430\u0432\u0438\u0433\u0430\u0446\u0438\u044f');
         }
 
         desktopNav.innerHTML = '';
@@ -835,6 +904,7 @@ class EleonorLab {
             const link = document.createElement('a');
             link.className = 'header-desktop-link';
             link.href = item.href;
+            link.dataset.route = item.route;
             link.textContent = item.label;
             desktopNav.appendChild(link);
         });
@@ -850,7 +920,7 @@ class EleonorLab {
         if (!desktopSocial) {
             desktopSocial = document.createElement('div');
             desktopSocial.className = 'header-desktop-social';
-            desktopSocial.setAttribute('aria-label', 'Социальные сети');
+            desktopSocial.setAttribute('aria-label', '\u0421\u043e\u0446\u0438\u0430\u043b\u044c\u043d\u044b\u0435 \u0441\u0435\u0442\u0438');
         }
 
         const sourceSocial = Array.from(document.querySelectorAll('.side-social .social-circle'));
@@ -868,12 +938,16 @@ class EleonorLab {
             headerContainer.appendChild(desktopSocial);
         }
 
-        const currentPage = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-        const projectLikePage = currentPage.startsWith('project-kp') || currentPage === 'project-sp.html' || currentPage === 'projects.html';
+        const currentRoute = this.getCurrentRouteName();
+        const projectLikePage =
+            currentRoute.startsWith('project-kp') ||
+            currentRoute === 'project-sp' ||
+            currentRoute === 'project-sp2' ||
+            currentRoute === 'projects';
 
         desktopNav.querySelectorAll('.header-desktop-link').forEach((link) => {
-            const target = (link.getAttribute('href') || '').toLowerCase();
-            const isActive = currentPage === target || (target === 'projects.html' && projectLikePage);
+            const targetRoute = (link.dataset.route || this.getRouteNameFromHref(link.getAttribute('href') || '')).toLowerCase();
+            const isActive = currentRoute === targetRoute || (targetRoute === 'projects' && projectLikePage);
             link.classList.toggle('is-active', isActive);
         });
     }
@@ -888,7 +962,7 @@ class EleonorLab {
             button.dataset.boundCta = 'true';
 
             button.addEventListener('click', () => {
-                window.location.href = 'contacts.html';
+                window.location.href = this.toSitePath('contacts/');
             });
         });
     }
@@ -1477,4 +1551,3 @@ document.addEventListener('DOMContentLoaded', () => {
 if (typeof window !== 'undefined') {
     window.EleonorLab = EleonorLab;
 }
-

@@ -8,7 +8,15 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS_DIR = ROOT / "assets" / "image"
-HTML_FILES = sorted(ROOT.glob("*.html"))
+EXCLUDED_DIRS = {
+    ".git",
+    "assets",
+    "css",
+    "js",
+    "font",
+    "scripts",
+    "__pycache__",
+}
 VARIANT_WIDTHS = (480, 960, 1440)
 QUALITY = 82
 DYNAMIC_IMAGE_REFS = (
@@ -27,6 +35,20 @@ SRCSET_ATTR_RE = re.compile(r'\s+srcset="[^"]*"')
 SIZES_ATTR_RE = re.compile(r'\s+sizes="[^"]*"')
 WIDTH_ATTR_RE = re.compile(r'\bwidth="(?P<width>\d+)"')
 HEIGHT_ATTR_RE = re.compile(r'\bheight="(?P<height>\d+)"')
+
+
+def iter_html_files() -> list[Path]:
+    files: list[Path] = []
+    files.extend(sorted(p for p in ROOT.glob("*.html") if not p.name.startswith("__")))
+    for page in sorted(ROOT.glob("*/index.html"), key=lambda p: p.parent.name):
+        parent = page.parent.name
+        if parent in EXCLUDED_DIRS or parent.startswith(".") or parent.startswith("__"):
+            continue
+        files.append(page)
+    return files
+
+
+HTML_FILES = iter_html_files()
 
 
 def normalize_ref(ref: str) -> str:
