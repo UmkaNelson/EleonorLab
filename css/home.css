@@ -2850,6 +2850,21 @@
   text-decoration: underline;
 }
 
+.contact-cta-phone,
+.contact-cta-phone:visited,
+.contact-cta-phone:active {
+  color: #ffffff;
+}
+
+.contact-cta-phone {
+  transition: color var(--transition);
+}
+
+.contact-cta-phone:hover,
+.contact-cta-phone:focus-visible {
+  color: rgba(255, 255, 255, 0.75);
+}
+
 .contact-cta-email {
   margin-top: clamp(10px, 2vh, 18px);
   max-width: 520px;
