@@ -137,6 +137,7 @@ class EleonorLab {
         this.initAboutOfficeSlider();
         this.initTourTripSlider();
         this.initStagesSliders();
+        this.initPrivacyPolicyModal();
         this.toggleDarkNav();
         this.updateHeaderContrast();
         this.syncSideNavThemeWithToggle();
@@ -1522,6 +1523,100 @@ class EleonorLab {
 
         const darkMode = toggle.classList.contains('on-dark-contrast');
         sideNav.classList.toggle('side-nav--panel-dark', darkMode);
+    }
+
+    initPrivacyPolicyModal() {
+        const triggerSelectors = [
+            '.contacts-ref__consent span',
+            '.contacts-ref__submit-note',
+            '.tour-signup__consent span',
+            '.tour-signup__submit-note',
+            '.contact-cta-consent'
+        ];
+        const triggers = Array.from(document.querySelectorAll(triggerSelectors.join(', ')));
+        if (!triggers.length) return;
+
+        let modal = document.getElementById('privacy-policy-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'privacy-policy-modal';
+            modal.className = 'privacy-policy-modal';
+            modal.setAttribute('aria-hidden', 'true');
+            modal.innerHTML = `
+                <div class="privacy-policy-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="privacy-policy-title">
+                    <div class="privacy-policy-modal__header">
+                        <h2 id="privacy-policy-title">Политика обработки персональных данных</h2>
+                        <button type="button" class="privacy-policy-modal__close" aria-label="Закрыть">×</button>
+                    </div>
+                    <div class="privacy-policy-modal__body">
+                        <div class="privacy-policy-modal__content" data-privacy-policy-content>Загрузка...</div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        const content = modal.querySelector('[data-privacy-policy-content]');
+        const closeButton = modal.querySelector('.privacy-policy-modal__close');
+        let isLoaded = false;
+
+        const openModal = async (event) => {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('privacy-policy-open');
+
+            if (!isLoaded && content) {
+                try {
+                    const policyUrl = this.toSitePath('assets/docs/privacy-policy.txt');
+                    const response = await fetch(`${policyUrl}?v=20260421`, { cache: 'no-store' });
+                    if (!response.ok) throw new Error('Не удалось загрузить текст политики');
+                    const text = await response.text();
+                    content.textContent = text;
+                    isLoaded = true;
+                } catch (error) {
+                    content.textContent = 'Не удалось загрузить текст политики обработки персональных данных. Попробуйте обновить страницу.';
+                }
+            }
+        };
+
+        const closeModal = () => {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('privacy-policy-open');
+        };
+
+        triggers.forEach((trigger) => {
+            trigger.classList.add('privacy-policy-trigger');
+            trigger.setAttribute('role', 'button');
+            trigger.setAttribute('tabindex', '0');
+            trigger.addEventListener('click', openModal);
+            trigger.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    openModal(event);
+                }
+            });
+        });
+
+        if (closeButton) {
+            closeButton.addEventListener('click', closeModal);
+        }
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+                closeModal();
+            }
+        });
     }
 
     // Utility Methods
