@@ -3220,6 +3220,7 @@
   max-width: 100%;
   overflow-wrap: anywhere;
   word-break: break-word;
+  font-size: clamp(1.5rem, 2.8vw, 2.75rem);
 }
 
 .contacts-ref__link-note {

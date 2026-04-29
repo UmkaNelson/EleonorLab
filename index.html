@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="telegram-form-endpoint" content="https://eleonorlab-forms.autolux-krasnodar.workers.dev/submit">
     <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
     <link rel="apple-touch-icon" href="./assets/icons/favicon.png">
     <title>ELEONOR LAB | Архитектурное бюро</title>
@@ -71,13 +72,13 @@
     <link rel="preload" href="./assets/image/logo-main.png" as="image" fetchpriority="high">
     
     <!-- Шрифты -->
-    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/fonts.css?v=20260426">
     
     <!-- CSS файлы -->
-    <link rel="stylesheet" href="./css/base.css">
-    <link rel="stylesheet" href="./css/components.css">
-    <link rel="stylesheet" href="./css/layout.css">
-    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/base.css?v=20260426">
+    <link rel="stylesheet" href="./css/components.css?v=20260426">
+    <link rel="stylesheet" href="./css/layout.css?v=20260426">
+    <link rel="stylesheet" href="./css/home.css?v=20260426">
 </head>
 <body class="home-page">
     <!-- Логотип без навигации -->
@@ -450,6 +451,8 @@
                                 <input type="email" name="email" required>
                             </label>
 
+                            <input type="file" name="attachment" hidden>
+
                             <button type="button" class="contact-cta-attach">
                                 <span class="attach-icon">+</span>
                                 прикрепить файл
@@ -545,9 +548,12 @@
         </nav>
     </main>
 
-    <script src="./js/main.js"></script>
+    <script src="./js/main.js?v=20260426"></script>
 </body>
 </html>
+
+
+
 
 
 

@@ -138,6 +138,8 @@ class EleonorLab {
         this.initTourTripSlider();
         this.initStagesSliders();
         this.initPrivacyPolicyModal();
+        this.initPrivacySubmitLocks();
+        this.initTelegramForms();
         this.toggleDarkNav();
         this.updateHeaderContrast();
         this.syncSideNavThemeWithToggle();
@@ -1617,6 +1619,258 @@ class EleonorLab {
                 closeModal();
             }
         });
+    }
+
+    initTelegramForms() {
+        const endpoint = this.getTelegramFormsEndpoint();
+        if (!endpoint) return;
+
+        const contactRefForm = document.getElementById('contactForm');
+        if (contactRefForm) {
+            this.bindTelegramSubmit(contactRefForm, {
+                endpoint,
+                source: 'contacts_page'
+            });
+        }
+
+        const tourSignupForm = document.getElementById('tourSignupForm');
+        if (tourSignupForm) {
+            const tourTitle = document.querySelector('.tour-signup__title');
+            const titleText = tourTitle ? tourTitle.textContent.replace(/\s+/g, ' ').trim() : '';
+            this.bindTelegramSubmit(tourSignupForm, {
+                endpoint,
+                source: 'tour_signup',
+                extra: titleText ? { tour_title: titleText } : null
+            });
+        }
+
+        const ctaPrimaryForm = document.querySelector('.contact-cta-section .contact-cta-form:not(.secondary-form)');
+        if (ctaPrimaryForm) {
+            const attachButton = ctaPrimaryForm.querySelector('.contact-cta-attach');
+            const fileInput = ctaPrimaryForm.querySelector('input[type="file"][name="attachment"]');
+            if (attachButton && fileInput) {
+                attachButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    fileInput.click();
+                });
+            }
+
+            this.bindTelegramSubmit(ctaPrimaryForm, {
+                endpoint,
+                source: 'homepage_contact_cta',
+                collect: (form) => this.collectHomeCtaFormData(form),
+                onSuccess: (form) => this.resetHomeCtaSecondaryForm(form),
+                fileInputSelector: 'input[type="file"][name="attachment"]'
+            });
+        }
+    }
+
+    initPrivacySubmitLocks() {
+        const forms = Array.from(document.querySelectorAll('form'));
+        if (!forms.length) return;
+
+        forms.forEach((form) => {
+            const submitButton = form.querySelector('button[type="submit"]');
+            const privacyCheckbox = form.querySelector('input[type="checkbox"][name="privacy"][required]');
+            if (!submitButton || !privacyCheckbox) return;
+
+            const syncState = () => this.syncPrivacySubmitState(form, submitButton);
+            syncState();
+            privacyCheckbox.addEventListener('change', syncState);
+        });
+    }
+
+    getTelegramFormsEndpoint() {
+        const metaEndpoint = document.querySelector('meta[name="telegram-form-endpoint"]');
+        const fromMeta = metaEndpoint ? (metaEndpoint.getAttribute('content') || '').trim() : '';
+        const fromGlobal = (window.__ELEONORLAB_TELEGRAM_ENDPOINT__ || '').trim();
+        const endpoint = fromGlobal || fromMeta;
+
+        if (!endpoint) return '';
+
+        try {
+            const resolved = new URL(endpoint, window.location.origin);
+            return resolved.toString();
+        } catch (error) {
+            console.warn('Invalid telegram-form-endpoint:', endpoint);
+            return '';
+        }
+    }
+
+    bindTelegramSubmit(form, options = {}) {
+        if (!form || form.dataset.telegramBound === '1') return;
+        form.dataset.telegramBound = '1';
+
+        const endpoint = options.endpoint || '';
+        if (!endpoint) return;
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const defaultSubmitLabel = submitButton ? submitButton.textContent : '';
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const payload = {
+                source: options.source || 'website_form',
+                page_url: window.location.href,
+                page_path: window.location.pathname,
+                submitted_at: new Date().toISOString(),
+                fields: options.collect ? options.collect(form) : this.collectFormData(form)
+            };
+
+            if (options.extra && typeof options.extra === 'object') {
+                payload.extra = options.extra;
+            }
+
+            try {
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.textContent = '\u041E\u0442\u043F\u0440\u0430\u0432\u043A\u0430...';
+                }
+
+                const fileInput = options.fileInputSelector ? form.querySelector(options.fileInputSelector) : null;
+                const selectedFile = fileInput && fileInput.files && fileInput.files.length ? fileInput.files[0] : null;
+
+                let response;
+                if (selectedFile) {
+                    const multipartPayload = new FormData();
+                    multipartPayload.append('payload', JSON.stringify(payload));
+                    multipartPayload.append('attachment', selectedFile, selectedFile.name || 'attachment');
+
+                    response = await fetch(endpoint, {
+                        method: 'POST',
+                        body: multipartPayload
+                    });
+                } else {
+                    response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                }
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                form.reset();
+                if (typeof options.onSuccess === 'function') {
+                    options.onSuccess(form);
+                }
+                this.resetTagGroupsAfterSubmit(form);
+
+                if (submitButton) {
+                    submitButton.textContent = '\u041E\u0442\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E';
+                    setTimeout(() => {
+                        submitButton.textContent = defaultSubmitLabel;
+                        this.syncPrivacySubmitState(form, submitButton);
+                    }, 1800);
+                }
+            } catch (error) {
+                console.error('Telegram form submit failed:', error);
+                if (submitButton) {
+                    submitButton.textContent = '\u041E\u0448\u0438\u0431\u043A\u0430';
+                    setTimeout(() => {
+                        submitButton.textContent = defaultSubmitLabel;
+                        this.syncPrivacySubmitState(form, submitButton);
+                    }, 1800);
+                }
+            }
+        });
+    }
+
+    syncPrivacySubmitState(form, submitButton) {
+        if (!submitButton) return;
+        const privacyCheckbox = form.querySelector('input[type="checkbox"][name="privacy"][required]');
+        if (!privacyCheckbox) {
+            submitButton.disabled = false;
+            return;
+        }
+        submitButton.disabled = !privacyCheckbox.checked;
+    }
+
+    collectFormData(form) {
+        const output = {};
+        const formData = new FormData(form);
+
+        formData.forEach((rawValue, key) => {
+            const fieldKey = String(key).trim();
+            if (!fieldKey) return;
+            const value = this.normalizeFieldValue(rawValue);
+            if (value === '') return;
+            output[fieldKey] = value;
+        });
+
+        form.querySelectorAll('input[type="checkbox"][name]').forEach((checkbox) => {
+            const key = String(checkbox.name || '').trim();
+            if (!key) return;
+            if (output[key] !== undefined) return;
+            output[key] = checkbox.checked ? 'yes' : 'no';
+        });
+
+        return output;
+    }
+
+    collectHomeCtaFormData(primaryForm) {
+        const merged = this.collectFormData(primaryForm);
+        const container = primaryForm.closest('.contact-cta-container');
+        const secondaryForm = container ? container.querySelector('.contact-cta-form.secondary-form') : null;
+
+        if (secondaryForm) {
+            const secondaryData = this.collectFormData(secondaryForm);
+            Object.keys(secondaryData).forEach((key) => {
+                if (merged[key] === undefined || merged[key] === '') {
+                    merged[key] = secondaryData[key];
+                } else {
+                    merged[`secondary_${key}`] = secondaryData[key];
+                }
+            });
+
+            const activeTag = secondaryForm.querySelector('.contact-cta-tag.active');
+            if (activeTag) {
+                const contactMethod = this.normalizeFieldValue(activeTag.textContent || '');
+                if (contactMethod) {
+                    merged.contact_method = contactMethod;
+                }
+            }
+        }
+
+        return merged;
+    }
+
+    normalizeFieldValue(value) {
+        if (typeof value === 'string') {
+            return value.replace(/\s+/g, ' ').trim();
+        }
+        return String(value ?? '').trim();
+    }
+
+    resetTagGroupsAfterSubmit(form) {
+        const container = form.closest('.contact-cta-container');
+        if (!container) return;
+
+        const tags = Array.from(container.querySelectorAll('.contact-cta-tag'));
+        if (!tags.length) return;
+
+        tags.forEach((tag, index) => {
+            tag.classList.toggle('active', index === 0);
+        });
+    }
+
+    resetHomeCtaSecondaryForm(primaryForm) {
+        const container = primaryForm.closest('.contact-cta-container');
+        if (!container) return;
+
+        const secondaryForm = container.querySelector('.contact-cta-form.secondary-form');
+        if (!secondaryForm) return;
+        secondaryForm.reset();
     }
 
     // Utility Methods
