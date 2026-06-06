@@ -687,17 +687,27 @@ class EleonorLab {
             return candidates.join(', ');
         };
 
+        const normalizePathname = (path) => {
+            if (!path) return '';
+
+            try {
+                return new URL(path, window.location.href).pathname;
+            } catch (error) {
+                return String(path);
+            }
+        };
+
         const imageSizes = '(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1280px';
         const slides = [
-            { src: './assets/image/about/10.webp', alt: '???? EleonorLab, ???? 10', width: 2400 },
-            { src: './assets/image/about/11.webp', alt: '???? EleonorLab, ???? 11', width: 2400 },
-            { src: './assets/image/about/12.webp', alt: '???? EleonorLab, ???? 12', width: 1600 },
-            { src: './assets/image/about/13.webp', alt: '???? EleonorLab, ???? 13', width: 1600 }
+            { src: this.toSitePath('assets/image/about/10.webp'), alt: 'Офис EleonorLab, фото 10', width: 2400 },
+            { src: this.toSitePath('assets/image/about/11.webp'), alt: 'Офис EleonorLab, фото 11', width: 2400 },
+            { src: this.toSitePath('assets/image/about/12.webp'), alt: 'Офис EleonorLab, фото 12', width: 1600 },
+            { src: this.toSitePath('assets/image/about/13.webp'), alt: 'Офис EleonorLab, фото 13', width: 1600 }
         ];
 
         let currentIndex = 0;
         const currentSrc = image.getAttribute('src') || '';
-        const initialIndex = slides.findIndex((slide) => slide.src === currentSrc);
+        const initialIndex = slides.findIndex((slide) => normalizePathname(slide.src) === normalizePathname(currentSrc));
         if (initialIndex >= 0) {
             currentIndex = initialIndex;
         }
