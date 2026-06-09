@@ -179,6 +179,24 @@
   letter-spacing: 0;
 }
 
+.stages-page__list.stages-page__list--documentation {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.stages-page__list.stages-page__list--supervision {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
 .stages-page__list li {
   margin: 0 0 6px;
 }
@@ -327,7 +345,7 @@
 }
 
 .stages-page__block--docs {
-  width: min(740px, 100%);
+  width: 100%;
   margin-left: 0;
   margin-right: auto;
   margin-top: clamp(32px, 5.5vw, 52px);
@@ -340,6 +358,33 @@
   font-weight: 700;
   line-height: 1.06;
   color: #000000;
+}
+
+.stages-page__subhead.stages-page__subhead--documentation {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.stages-page__subhead.stages-page__subhead--specification {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.stages-page__subhead.stages-page__subhead--supervision {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 .stages-page__subhead + .stages-page__list,
@@ -369,6 +414,15 @@
   font-weight: 300;
   letter-spacing: 0.012em;
   line-height: 1.18;
+}
+
+.stages-page__paragraph.stages-page__paragraph--specification {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
 }
 
 @media (max-width: 900px) {
