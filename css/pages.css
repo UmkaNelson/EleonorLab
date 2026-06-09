@@ -2231,10 +2231,13 @@
 }
 
 .projects-filter-toggle__icon {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
   font-size: 1.16em;
   line-height: 1;
-  transform: translateY(-1px);
+  transform: translateY(0.08em);
 }
 
 .projects-filter-panel {
@@ -2287,9 +2290,13 @@
 }
 
 .projects-filter-panel__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
   font-size: 1.16em;
   line-height: 1;
-  transform: translateY(-1px);
+  transform: translateY(0.08em);
 }
 
 .projects-filter-options {
@@ -2654,14 +2661,29 @@
   text-decoration: none;
 }
 
+.projects-filter-toggle__label,
+.projects-filter-panel__label,
+.project-entry__crumb-link {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 32px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
 .project-entry__crumb-link:hover {
   opacity: 0.68;
 }
 
 .project-entry__crumb-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
   font-size: 1.16em;
   line-height: 1;
-  transform: translateY(-1px);
+  transform: translateY(0.08em);
 }
 
 .project-entry__chips {
