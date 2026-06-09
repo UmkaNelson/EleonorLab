@@ -3100,25 +3100,34 @@
   --project-text-hover: #ffffff;
 }
 
-/* "строители": белый по умолчанию, при hover — черный */
+/* "коммерческие": белый по умолчанию, при hover — черный */
 .project-area-housing {
   --project-text-default: #ffffff;
   --project-text-hover: #000000;
 }
 
-/* "фудмаркеты": текст всегда белый */
+/* Серые карточки: текст всегда белый. */
 .project-area-food {
   --project-text-default: #ffffff;
   --project-text-hover: #ffffff;
+  background-color: #636363;
 }
 
-/* "жилые комплексы": текст всегда белый */
 .project-area-builders {
   --project-text-default: #ffffff;
   --project-text-hover: #ffffff;
+  background-color: #636363;
 }
 
-.project-card.project-area-builders {
+.project-area-realization {
+  --project-text-default: #ffffff;
+  --project-text-hover: #ffffff;
+  background-color: #636363;
+}
+
+.project-card.project-area-food,
+.project-card.project-area-builders,
+.project-card.project-area-realization {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
