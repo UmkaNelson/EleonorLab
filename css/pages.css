@@ -90,6 +90,42 @@
   color: #000000;
 }
 
+.stages-page__block-title.stages-page__block-title--prep {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.stages-page__block-title.stages-page__block-title--planning {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.stages-page__block-title.stages-page__block-title--concept {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.stages-page__block-title.stages-page__block-title--visualization {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
 .stages-page__list {
   margin: 0;
   padding-left: 1.1em;
@@ -107,6 +143,42 @@
   line-height: 1.18;
 }
 
+.stages-page__list.stages-page__list--prep {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.stages-page__list.stages-page__list--planning {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.stages-page__list.stages-page__list--concept {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.stages-page__list.stages-page__list--visualization {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
 .stages-page__list li {
   margin: 0 0 6px;
 }
@@ -121,9 +193,9 @@
 
 .stages-page__visual {
   margin: clamp(34px, 6vw, 62px) 0 0;
-  width: min(980px, 100%);
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .stages-page__visual img {
@@ -134,9 +206,9 @@
 
 .stages-page__visual-nav {
   margin-top: clamp(14px, 2.2vw, 20px);
-  width: min(980px, 100%);
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -151,9 +223,9 @@
 }
 
 .stages-page__slider {
-  width: min(980px, 100%);
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .stages-page__slider--plan {
@@ -231,8 +303,8 @@
 
 .stages-page__block--concept {
   margin-top: clamp(30px, 5.5vw, 48px);
-  width: min(740px, 100%);
-  margin-left: auto;
+  width: 100%;
+  margin-left: 0;
   margin-right: auto;
 }
 
@@ -244,10 +316,9 @@
   margin-top: clamp(20px, 3.8vw, 34px);
 }
 
-.stages-page__block--visualization,
-.stages-page__block--docs {
-  width: min(740px, 100%);
-  margin-left: auto;
+.stages-page__block--visualization {
+  width: 100%;
+  margin-left: 0;
   margin-right: auto;
 }
 
@@ -256,6 +327,9 @@
 }
 
 .stages-page__block--docs {
+  width: min(740px, 100%);
+  margin-left: 0;
+  margin-right: auto;
   margin-top: clamp(32px, 5.5vw, 52px);
 }
 
@@ -4551,6 +4625,23 @@
   justify-self: start;
 }
 
+@media (min-width: 769px) {
+  .about-hero__title,
+  .stages-page__title,
+  .projects-page-title,
+  .str-title,
+  .contacts-ref__title,
+  .project-entry__page-title,
+  .tour-project__title {
+    font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+    font-size: 64px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+}
+
 @media (max-width: 768px) {
   .about-hero,
   .about-story,
@@ -4645,5 +4736,18 @@
   .tour-project-sh2__summary-line {
     display: inline;
     white-space: normal;
+  }
+
+  .about-hero__title,
+  .stages-page__title,
+  .projects-page-title,
+  .str-title,
+  .contacts-ref__title,
+  .contacts-ref__mobile-title,
+  .project-entry__page-title,
+  .tour-project__title {
+    font-size: clamp(2rem, 12vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
   }
 }
