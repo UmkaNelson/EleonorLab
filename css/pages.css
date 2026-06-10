@@ -825,6 +825,214 @@
   }
 }
 
+/* ===== ДИЗАЙН-ТУР: МИЛАН ===== */
+.tour-project-milan-page .tour-project__title,
+.tour-project-milan-page .tour-project__lead,
+.tour-project-milan-page .tour-project__text,
+.tour-project-milan-page .tour-project__invite-lead,
+.tour-project-milan-page .tour-project__invite-text,
+.tour-project-milan-page .tour-project__expect-title,
+.tour-project-milan-page .tour-project__expect-list,
+.tour-project-milan-page .tour-project__expect-list li,
+.tour-project-milan-page .tour-project__expect-note {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-style: normal;
+}
+
+.tour-project-milan-page .tour-project__lead,
+.tour-project-milan-page .tour-project__invite-lead,
+.tour-project-milan-page .tour-project__invite-text,
+.tour-project-milan-page .tour-project__expect-title,
+.tour-project-milan-page .tour-project__expect-list li,
+.tour-project-milan-page .tour-project__expect-note {
+  font-weight: 400;
+}
+
+.tour-project-milan-page .tour-project__invite-line {
+  white-space: normal;
+}
+
+.tour-project-milan-page .tour-project__text,
+.tour-project-milan-page .tour-project__invite-text,
+.tour-project-milan-page .tour-project__expect-title,
+.tour-project-milan-page .tour-project__expect-list,
+.tour-project-milan-page .tour-project__expect-list li,
+.tour-project-milan-page .tour-project__expect-note {
+  color: #000000;
+}
+
+.tour-project-milan-page .tour-project__expect-actions {
+  display: block;
+  margin-top: clamp(44px, 6vw, 64px);
+}
+
+.tour-project-milan-page .tour-project__expect-note {
+  margin: 0;
+}
+
+.sample1-block.tour-help {
+  padding-top: clamp(72px, 9vw, 116px);
+  padding-bottom: 72px;
+}
+
+.tour-switcher {
+  position: relative;
+  width: 100%;
+  border-top: 1px solid #000000;
+  background: #ffffff;
+}
+
+.tour-switcher__container {
+  width: min(var(--container-max), 100%);
+  margin: 0 auto;
+  padding: clamp(50px, 5.6vw, 68px) 0 56px;
+  display: grid;
+  grid-template-columns: minmax(150px, 170px) minmax(0, 380px);
+  column-gap: clamp(20px, 3vw, 36px);
+  align-items: start;
+}
+
+.tour-switcher__label {
+  margin: 0;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 24px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #000000;
+}
+
+.tour-switcher__card {
+  display: block;
+  color: #000000;
+  text-decoration: none;
+}
+
+.tour-switcher__media {
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #d1d1d1;
+}
+
+.tour-switcher__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 64%;
+  transition: transform 0.35s ease;
+}
+
+.tour-switcher__title {
+  margin: 10px 0 0;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #000000;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tour-switcher__card:hover .tour-switcher__media img {
+    transform: scale(1.02);
+  }
+}
+
+@media (min-width: 769px) {
+  .tour-project-milan-page .tour-project__title {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .tour-project-milan-page .tour-project__lead {
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+  }
+
+  .tour-project-milan-page .tour-project__text {
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .tour-project-milan-page .tour-project__invite-lead {
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+  }
+
+  .tour-project-milan-page .tour-project__invite-text,
+  .tour-project-milan-page .tour-project__expect-note {
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .tour-project-milan-page .tour-project__expect-title,
+  .tour-project-milan-page .tour-project__expect-list li {
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+  }
+}
+
+@media (max-width: 768px) {
+  .tour-project-milan-page .tour-project__lead,
+  .tour-project-milan-page .tour-project__invite-lead {
+    font-size: clamp(1.45rem, 7.4vw, 2rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  .tour-project-milan-page .tour-project__text {
+    font-size: 16px;
+    line-height: 1.15;
+    letter-spacing: 0;
+  }
+
+  .tour-project-milan-page .tour-project__invite-text,
+  .tour-project-milan-page .tour-project__expect-note {
+    font-size: clamp(1.35rem, 6.5vw, 1.8rem);
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .tour-project-milan-page .tour-project__expect-title,
+  .tour-project-milan-page .tour-project__expect-list li {
+    font-size: clamp(1.45rem, 7.4vw, 2rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  .tour-switcher__container {
+    padding: 36px var(--mobile-page-gutter) 40px;
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
+  .sample1-block.tour-help {
+    padding-top: 56px;
+    padding-bottom: 48px;
+  }
+
+  .tour-switcher__label {
+    font-size: 20px;
+  }
+
+  .tour-switcher__card {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
 @media (max-width: 480px) {
   .projects-grid {
     grid-template-columns: 1fr;
@@ -4446,6 +4654,29 @@
   height: auto;
 }
 
+.tour-project__photo-row {
+  margin: clamp(26px, 3.8vw, 40px) 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(12px, 1.8vw, 20px);
+}
+
+.tour-project__photo-row-item {
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #d1d1d1;
+}
+
+.tour-project__photo-row-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .tour-project__expect {
   margin: clamp(68px, 9.6vw, 108px) 0 0;
   max-width: none;
@@ -4603,6 +4834,10 @@
 }
 
 @media (max-width: 768px) {
+  .tour-project__photo-row {
+    grid-template-columns: 1fr;
+  }
+
   .tour-project__container,
   .tour-project-page .tour-signup__container,
   .tour-project-page .projects-min-footer__inner {
