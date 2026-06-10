@@ -2396,7 +2396,7 @@
 
 /* Layout B (резиденции/коммерческие) */
 .projects-grid--layout-b {
-  grid-template-rows: 1.6fr 1.4fr 1.8fr 1.4fr;
+  grid-template-rows: 1.6fr 1.4fr 1.8fr auto;
   grid-template-areas:
     "residence builders"
     "landscape public"
@@ -3138,6 +3138,11 @@
   background-repeat: no-repeat;
   background-position: center;
   background-color: #ffffff;
+}
+
+.project-card.project-area-tour {
+  min-height: 240px;
+  aspect-ratio: 1924 / 700;
 }
 
 .project-text {

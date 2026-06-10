@@ -2634,6 +2634,12 @@
   }
 
   .project-entry__title {
+    font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+    font-size: 64px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 66px;
+    letter-spacing: -0.01em;
     align-self: baseline;
     margin-top: 0;
   }
@@ -3000,7 +3006,142 @@
   height: auto;
 }
 
+/* ===== PROJECT KP2: PRODUCT DESIGN ===== */
+.project-entry--kp2 .project-entry__crumb-current {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 32px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.kp2-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 24px);
+}
+
+.kp2-gallery--intro {
+  margin-top: clamp(36px, 5vw, 58px);
+}
+
+.kp2-gallery--final {
+  margin-top: clamp(56px, 7vw, 84px);
+}
+
+.kp2-gallery__item,
+.kp2-task__media {
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: #d1d1d1;
+}
+
+.kp2-gallery__item img,
+.kp2-task__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.kp2-task {
+  margin-top: clamp(36px, 5vw, 58px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 24px);
+  align-items: start;
+}
+
+.kp2-task__content {
+  min-width: 0;
+}
+
+.kp2-task__title {
+  margin: 0 0 18px;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 32px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #000000;
+}
+
+.kp2-task__text {
+  margin: 0;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: #000000;
+}
+
+.kp2-task__text + .kp2-task__text {
+  margin-top: 16px;
+}
+
+.kp2-story {
+  margin-top: clamp(44px, 6vw, 70px);
+  max-width: min(900px, 100%);
+}
+
+.kp2-story__title {
+  margin: 0;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 32px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 66px;
+  letter-spacing: -0.01em;
+  color: #000000;
+}
+
+.kp2-story__intro,
+.kp2-story__list {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #000000;
+}
+
+.kp2-story__intro {
+  margin: 10px 0 0;
+}
+
+.kp2-story__list {
+  margin: 14px 0 0;
+  padding-left: 1.35em;
+}
+
+.kp2-story__list li {
+  margin: 0;
+  padding-left: 0.18em;
+}
+
+.kp2-story__list strong,
+.kp2-story__list li::marker {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
 @media (max-width: 768px) {
+  .kp2-desktop-break {
+    display: none;
+  }
+
   .project-entry {
     padding-top: clamp(28px, 7vw, 40px);
   }
@@ -3092,6 +3233,11 @@
   .project-entry__duo {
     grid-template-columns: 1fr;
     row-gap: 14px;
+  }
+
+  .kp2-gallery,
+  .kp2-task {
+    grid-template-columns: 1fr;
   }
 
   .projects-min-footer__top {
