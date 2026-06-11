@@ -4725,19 +4725,60 @@
 }
 
 .tour-project-sh2__intro {
-  margin-top: clamp(42px, 6.4vw, 64px);
+  margin-top: clamp(56px, 7vw, 88px);
   max-width: none;
+}
+
+.tour-project-sh2-page .tour-project__title {
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.tour-project-sh2__gallery {
+  display: grid;
+  width: 100%;
+  gap: clamp(12px, 1.6vw, 20px);
+}
+
+.tour-project-sh2__gallery--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.tour-project-sh2__gallery--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(46px, 6vw, 76px);
+}
+
+.tour-project-sh2__photo {
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #eeeeee;
+}
+
+.tour-project-sh2__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .tour-project-sh2__lead {
   margin: 0;
-  font-family: "TT Commons", var(--font-secondary), var(--font-primary);
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
   font-style: normal;
-  font-weight: 500;
-  font-size: 64px;
-  line-height: 66px;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 40px;
   letter-spacing: -0.01em;
-  color: #222222;
+  color: #000000;
 }
 
 .tour-project-sh2__lead-line {
@@ -4745,14 +4786,14 @@
 }
 
 .tour-project-sh2__sub {
-  margin: clamp(24px, 3.5vw, 34px) 0 0;
+  margin: clamp(58px, 7.5vw, 96px) 0 0;
   font-family: "TT Commons Pro Trl Exp", var(--font-primary);
   font-style: normal;
   font-weight: 400;
   font-size: 32px;
-  line-height: 66px;
+  line-height: 40px;
   letter-spacing: -0.01em;
-  color: #4f4f4f;
+  color: #000000;
 }
 
 .tour-project-sh2__sub-line {
@@ -4760,18 +4801,40 @@
 }
 
 .tour-project-sh2__summary {
-  margin: clamp(56px, 8vw, 86px) 0 0;
-  font-family: "TT Commons", var(--font-secondary), var(--font-primary);
+  margin: clamp(54px, 7vw, 88px) 0 0;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
   font-style: normal;
-  font-weight: 500;
-  font-size: 64px;
-  line-height: 66px;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
   letter-spacing: -0.01em;
-  color: #222222;
+  color: #000000;
 }
 
 .tour-project-sh2__summary-line {
   display: block;
+}
+
+.tour-project-sh2__date {
+  margin: clamp(28px, 3.8vw, 48px) 0 0;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.01em;
+  color: #000000;
+}
+
+.tour-project-sh2__cta {
+  margin: clamp(28px, 3.8vw, 48px) 0 0;
+  font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: 0;
+  color: #000000;
 }
 
 .tour-project__expect-actions {
@@ -4897,19 +4960,54 @@
   }
 
   .tour-project-sh2__lead {
-    font-size: clamp(1.65rem, 7.1vw, 2.65rem);
-    line-height: 1.05;
+    font-size: clamp(1.45rem, 7vw, 2.25rem);
+    line-height: 1.12;
   }
 
   .tour-project-sh2__sub {
-    font-size: clamp(1rem, 4.2vw, 1.3rem);
-    line-height: 1.28;
-    letter-spacing: 0;
+    margin-top: 48px;
+    font-size: clamp(1.35rem, 6.2vw, 2rem);
+    line-height: 1.2;
   }
 
   .tour-project-sh2__summary {
-    font-size: clamp(1.55rem, 6.7vw, 2.35rem);
-    line-height: 1.07;
+    margin-top: 44px;
+    font-size: clamp(1.35rem, 6.2vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .tour-project-sh2-page .tour-project__title {
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .tour-project-sh2__intro {
+    margin-top: 48px;
+  }
+
+  .tour-project-sh2__gallery--two,
+  .tour-project-sh2__gallery--three {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .tour-project-sh2__gallery--two {
+    margin-top: 24px;
+  }
+
+  .tour-project-sh2__gallery--three {
+    margin-top: 40px;
+  }
+
+  .tour-project-sh2__date {
+    margin-top: 24px;
+    font-size: clamp(1.35rem, 6.2vw, 2rem);
+    line-height: 1.2;
+  }
+
+  .tour-project-sh2__cta {
+    margin-top: 28px;
+    font-size: clamp(1.35rem, 6.2vw, 2rem);
+    line-height: 1.1;
   }
 
   .tour-project__expect-actions {
@@ -5160,7 +5258,9 @@
   .tour-project__expect-note,
   .tour-project-sh2__lead,
   .tour-project-sh2__sub,
-  .tour-project-sh2__summary {
+  .tour-project-sh2__summary,
+  .tour-project-sh2__date,
+  .tour-project-sh2__cta {
     min-width: 0;
     max-width: 100%;
     white-space: normal;
