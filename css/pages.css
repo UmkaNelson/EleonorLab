@@ -2643,7 +2643,8 @@
 }
 
 .project-list-card--kp2 .project-list-card__media {
-  background-image: url("../assets/image/pj2/1.webp");
+  background-image: url("../assets/image/pj2/1.png");
+  background-position: center 58%;
 }
 
 .project-list-card--kp3 .project-list-card__media {
@@ -2931,6 +2932,61 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+.project-entry__hero--kp11 {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.project-entry__hero--kp11 img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 58%;
+}
+
+.project-entry__hero--kp15 {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.project-entry__hero--kp15 img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 43%;
+}
+
+.project-entry__hero--kp19 {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.project-entry__hero--kp19 img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 62%;
+}
+
+.project-entry__hero--kp5 {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.project-entry__hero--kp5 img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 47%;
+}
+
+.project-entry__hero--kp8 {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.project-entry__hero--kp8 img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
 }
 
 .project-entry__meta-grid {
