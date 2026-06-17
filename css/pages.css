@@ -5253,6 +5253,66 @@
   }
 }
 
+/* О нас: мобильная типографика контента как на странице этапов работы */
+@media (max-width: 768px) {
+  .about-reset-page .about-hero__title {
+    font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+    font-size: clamp(2rem, 12vw, 3rem);
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .about-reset-page .about-hero__bottom-intro,
+  .about-reset-page .about-story__bio-intro,
+  .about-reset-page .about-story__principle .about-story__heading,
+  .about-reset-page .about-story__philosophy-heading,
+  .about-reset-page .about-story__office-title {
+    font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+    font-size: 16px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0;
+    color: #000000;
+    white-space: normal;
+  }
+
+  .about-reset-page .about-hero__lead,
+  .about-reset-page .about-hero__sub,
+  .about-reset-page .about-hero__bottom p:not(.about-hero__bottom-intro),
+  .about-reset-page .about-story__bio-copy p,
+  .about-reset-page .about-story__principle .about-story__text.about-story__principle-text,
+  .about-reset-page .about-story__philosophy .about-story__text.about-story__philosophy-text,
+  .about-reset-page .about-story__office-text {
+    font-family: "TT Commons Pro Trl Exp", var(--font-primary);
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: 0;
+    color: rgba(0, 0, 0, 0.84);
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .about-reset-page .about-hero__lead-line,
+  .about-reset-page .about-hero__sub-line,
+  .about-reset-page .about-hero__bottom-line,
+  .about-reset-page .about-story__bio-copy-line,
+  .about-reset-page .about-story__bio-line,
+  .about-reset-page .about-story__heading-line,
+  .about-reset-page .about-story__principle-text-line,
+  .about-reset-page .about-story__philosophy-heading-line,
+  .about-reset-page .about-story__philosophy-text-line,
+  .about-reset-page .about-story__office-title-line,
+  .about-reset-page .about-story__office-text-line {
+    display: inline;
+    white-space: normal;
+  }
+}
+
 @media (max-width: 768px) {
   .about-hero,
   .about-story,
