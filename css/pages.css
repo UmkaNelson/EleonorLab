@@ -1213,18 +1213,6 @@
   object-position: center;
 }
 
-.str-page .sample1-block .about-story__cta-title,
-.str-page .sample1-block .about-story__cta-text {
-  font-size: clamp(2.6rem, 5vw, 4rem);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.01em;
-}
-
-.str-page .sample1-block .about-story__cta-text {
-  --about-cta-line-gap: clamp(4px, 0.8vw, 8px);
-}
-
 .str-text-stack {
   width: var(--str-content-width);
   margin-top: clamp(46px, 5.4vw, 68px);
