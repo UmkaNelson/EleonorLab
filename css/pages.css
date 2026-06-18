@@ -4859,6 +4859,19 @@
   margin-top: clamp(46px, 6vw, 76px);
 }
 
+.tour-project-sh2__slider {
+  margin-top: clamp(46px, 6vw, 76px);
+}
+
+.tour-project-sh2__slider .tour-project__trip-item {
+  aspect-ratio: 3 / 4;
+  background: #eeeeee;
+}
+
+.tour-project-sh2__slider .tour-project__trip-item img {
+  object-fit: cover;
+}
+
 .tour-project-sh2__photo {
   width: 100%;
   margin: 0;
@@ -5100,6 +5113,10 @@
   }
 
   .tour-project-sh2__gallery--three {
+    margin-top: 40px;
+  }
+
+  .tour-project-sh2__slider {
     margin-top: 40px;
   }
 

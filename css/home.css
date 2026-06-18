@@ -3194,6 +3194,7 @@
 @media (max-width: 900px) {
   .projects-grid {
     grid-template-columns: 1fr;
+    min-width: 0;
   }
 
   .projects-grid--layout-a {
@@ -3215,6 +3216,16 @@
       "public"
       "commercial"
       "tour";
+  }
+
+  .project-card.project-area-tour {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 0;
+    aspect-ratio: 1924 / 767;
+    background-size: cover;
+    background-position: center;
   }
 }
 
