@@ -105,6 +105,91 @@ function getField(body, key) {
   return normalizeText(fields[key] || '');
 }
 
+function getTelegramChatId(env) {
+  return normalizeText(env.TELEGRAM_CHAT_ID);
+}
+
+function getMigrationChatId(payload) {
+  const migrationId = payload?.parameters?.migrate_to_chat_id;
+  return normalizeText(migrationId);
+}
+
+async function readTelegramFailure(response) {
+  const raw = await response.text();
+  let payload = null;
+
+  try {
+    payload = JSON.parse(raw);
+  } catch {
+    payload = null;
+  }
+
+  return {
+    status: response.status,
+    raw,
+    payload
+  };
+}
+
+function buildTelegramError(error, failure) {
+  return {
+    ok: false,
+    error,
+    details: normalizeText(failure?.raw || '').slice(0, 500)
+  };
+}
+
+async function postTelegramJson(env, method, createBody, preferredChatId = '') {
+  const chatIds = [preferredChatId || getTelegramChatId(env)].filter(Boolean);
+  let failure = null;
+
+  for (let index = 0; index < chatIds.length && index < 2; index += 1) {
+    const chatId = chatIds[index];
+    const response = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/${method}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify(createBody(chatId))
+    });
+
+    if (response.ok) {
+      return { ok: true, chatId };
+    }
+
+    failure = await readTelegramFailure(response);
+    const migratedChatId = getMigrationChatId(failure.payload);
+    if (migratedChatId && !chatIds.includes(migratedChatId)) {
+      chatIds.push(migratedChatId);
+    }
+  }
+
+  return { ok: false, failure };
+}
+
+async function postTelegramFormData(env, method, createBody, preferredChatId = '') {
+  const chatIds = [preferredChatId || getTelegramChatId(env)].filter(Boolean);
+  let failure = null;
+
+  for (let index = 0; index < chatIds.length && index < 2; index += 1) {
+    const chatId = chatIds[index];
+    const response = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/${method}`, {
+      method: 'POST',
+      body: createBody(chatId)
+    });
+
+    if (response.ok) {
+      return { ok: true, chatId };
+    }
+
+    failure = await readTelegramFailure(response);
+    const migratedChatId = getMigrationChatId(failure.payload);
+    if (migratedChatId && !chatIds.includes(migratedChatId)) {
+      chatIds.push(migratedChatId);
+    }
+  }
+
+  return { ok: false, failure };
+}
+
 function buildHomepageCtaText(body, attachmentName) {
   const dateTime = getMoscowDateTimeParts(body.submitted_at);
   const lines = [];
@@ -226,43 +311,35 @@ export default {
     const attachmentName = attachment?.name ? normalizeText(attachment.name) : '';
 
     const text = buildTelegramText(body, attachmentName);
-    const telegramResponse = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
-      body: JSON.stringify({
-        chat_id: env.TELEGRAM_CHAT_ID,
-        text,
-        disable_web_page_preview: true
-      })
-    });
+    const messageResult = await postTelegramJson(env, 'sendMessage', (chatId) => ({
+      chat_id: chatId,
+      text,
+      disable_web_page_preview: true
+    }));
 
-    if (!telegramResponse.ok) {
-      const raw = await telegramResponse.text();
+    if (!messageResult.ok) {
       return jsonResponse(
         request,
         env,
-        { ok: false, error: 'Telegram sendMessage failed', details: raw.slice(0, 500) },
+        buildTelegramError('Telegram sendMessage failed', messageResult.failure),
         502
       );
     }
 
     if (attachment) {
-      const tgForm = new FormData();
-      tgForm.append('chat_id', env.TELEGRAM_CHAT_ID);
-      tgForm.append('caption', `Файл к заявке: ${attachmentName || 'attachment'}`);
-      tgForm.append('document', attachment, attachmentName || 'attachment');
+      const fileResult = await postTelegramFormData(env, 'sendDocument', (chatId) => {
+        const tgForm = new FormData();
+        tgForm.append('chat_id', chatId);
+        tgForm.append('caption', `Файл к заявке: ${attachmentName || 'attachment'}`);
+        tgForm.append('document', attachment, attachmentName || 'attachment');
+        return tgForm;
+      }, messageResult.chatId);
 
-      const fileResponse = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendDocument`, {
-        method: 'POST',
-        body: tgForm
-      });
-
-      if (!fileResponse.ok) {
-        const raw = await fileResponse.text();
+      if (!fileResult.ok) {
         return jsonResponse(
           request,
           env,
-          { ok: false, error: 'Telegram sendDocument failed', details: raw.slice(0, 500) },
+          buildTelegramError('Telegram sendDocument failed', fileResult.failure),
           502
         );
       }
