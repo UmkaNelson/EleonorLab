@@ -139,6 +139,7 @@ class EleonorLab {
         this.initStagesSliders();
         this.initPrivacyPolicyModal();
         this.initPrivacySubmitLocks();
+        this.initContactCtaTags();
         this.initTelegramForms();
         this.toggleDarkNav();
         this.updateHeaderContrast();
@@ -1654,8 +1655,8 @@ class EleonorLab {
             });
         }
 
-        const ctaPrimaryForm = document.querySelector('.contact-cta-section .contact-cta-form:not(.secondary-form)');
-        if (ctaPrimaryForm) {
+        const ctaPrimaryForms = Array.from(document.querySelectorAll('.contact-cta-section .contact-cta-form:not(.secondary-form)'));
+        ctaPrimaryForms.forEach((ctaPrimaryForm) => {
             const attachButton = ctaPrimaryForm.querySelector('.contact-cta-attach');
             const fileInput = ctaPrimaryForm.querySelector('input[type="file"][name="attachment"]');
             if (attachButton && fileInput) {
@@ -1672,7 +1673,7 @@ class EleonorLab {
                 onSuccess: (form) => this.resetHomeCtaSecondaryForm(form),
                 fileInputSelector: 'input[type="file"][name="attachment"]'
             });
-        }
+        });
     }
 
     initPrivacySubmitLocks() {
@@ -1830,7 +1831,7 @@ class EleonorLab {
 
     collectHomeCtaFormData(primaryForm) {
         const merged = this.collectFormData(primaryForm);
-        const container = primaryForm.closest('.contact-cta-container');
+        const container = this.getContactCtaScope(primaryForm);
         const secondaryForm = container ? container.querySelector('.contact-cta-form.secondary-form') : null;
 
         if (secondaryForm) {
@@ -1843,12 +1844,13 @@ class EleonorLab {
                 }
             });
 
-            const activeTag = secondaryForm.querySelector('.contact-cta-tag.active');
-            if (activeTag) {
-                const contactMethod = this.normalizeFieldValue(activeTag.textContent || '');
-                if (contactMethod) {
-                    merged.contact_method = contactMethod;
-                }
+        }
+
+        const activeTag = container ? container.querySelector('.contact-cta-tag.active') : null;
+        if (activeTag) {
+            const contactMethod = this.normalizeFieldValue(activeTag.textContent || '');
+            if (contactMethod) {
+                merged.contact_method = contactMethod;
             }
         }
 
@@ -1863,7 +1865,7 @@ class EleonorLab {
     }
 
     resetTagGroupsAfterSubmit(form) {
-        const container = form.closest('.contact-cta-container');
+        const container = this.getContactCtaScope(form);
         if (!container) return;
 
         const tags = Array.from(container.querySelectorAll('.contact-cta-tag'));
@@ -1875,12 +1877,33 @@ class EleonorLab {
     }
 
     resetHomeCtaSecondaryForm(primaryForm) {
-        const container = primaryForm.closest('.contact-cta-container');
+        const container = this.getContactCtaScope(primaryForm);
         if (!container) return;
 
         const secondaryForm = container.querySelector('.contact-cta-form.secondary-form');
         if (!secondaryForm) return;
         secondaryForm.reset();
+    }
+
+    getContactCtaScope(element) {
+        if (!element) return null;
+        return element.closest('.contact-cta-mobile') || element.closest('.contact-cta-container') || element.closest('.contact-cta-section');
+    }
+
+    initContactCtaTags() {
+        const groups = Array.from(document.querySelectorAll('.contact-cta-tags'));
+        if (!groups.length) return;
+
+        groups.forEach((group) => {
+            const tags = Array.from(group.querySelectorAll('.contact-cta-tag'));
+            tags.forEach((tag) => {
+                tag.addEventListener('click', () => {
+                    tags.forEach((item) => {
+                        item.classList.toggle('active', item === tag);
+                    });
+                });
+            });
+        });
     }
 
     // Utility Methods

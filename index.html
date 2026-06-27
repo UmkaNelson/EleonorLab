@@ -46,7 +46,7 @@
                        "telephone":  "+7-961-504-10-41",
                        "sameAs":  [
                                       "https://max.ru/u/f9LHodD0cOKlfWBNhClDPlM9r0DFFYSnsnmOJ9HG5GkXW0zJvDKVCdzQdPI",
-                                      "https://www.pinterest.ru/EleonoraLabb/_created/",
+                                      "https://t.me/eleonora_lab",
                                       "https://wa.me/79615041041"
                                   ]
                    },
@@ -78,7 +78,7 @@
     <link rel="stylesheet" href="./css/base.css?v=20260609-1">
     <link rel="stylesheet" href="./css/components.css?v=20260609-1">
     <link rel="stylesheet" href="./css/layout.css?v=20260609-1">
-    <link rel="stylesheet" href="./css/home.css?v=20260618-1">
+    <link rel="stylesheet" href="./css/home.css?v=20260627-2">
 </head>
 <body class="home-page">
     <!-- Логотип без навигации -->
@@ -258,6 +258,7 @@
                     </ul>
                 </div>
             </div>
+
         </section>
 
         <!-- Проектные направления 1 -->
@@ -519,6 +520,74 @@
                     </div>
                 </div>
             </div>
+
+            <div class="contact-cta-mobile" aria-label="Мобильная форма обсуждения проекта">
+                <h2 class="contact-cta-title">обсудим<br>ваш проект</h2>
+
+                <form class="contact-cta-form contact-cta-form--mobile">
+                    <label class="contact-cta-field">
+                        <span class="contact-cta-label">как вас зовут? <span class="required">*</span></span>
+                        <input type="text" name="name" required>
+                    </label>
+
+                    <label class="contact-cta-field">
+                        <span class="contact-cta-label">телефон</span>
+                        <input type="tel" name="phone">
+                    </label>
+
+                    <label class="contact-cta-field">
+                        <span class="contact-cta-label">email <span class="required">*</span></span>
+                        <input type="email" name="email" required>
+                    </label>
+
+                    <label class="contact-cta-field">
+                        <span class="contact-cta-label">компания</span>
+                        <input type="text" name="company">
+                    </label>
+
+                    <div class="contact-cta-methods">
+                        <span class="contact-cta-label">способ связи</span>
+                    </div>
+
+                    <input type="file" name="attachment" hidden>
+
+                    <button type="button" class="contact-cta-attach">
+                        <span class="attach-icon">+</span>
+                        прикрепить файл
+                    </button>
+
+                    <p class="contact-cta-consent">Нажимая на кнопку <Отправить>, я даю согласие на обработку своих персональных данных.</p>
+                    <button type="submit" class="contact-cta-submit">отправить</button>
+                </form>
+
+                <div class="contact-cta-bottom-block">
+                    <div class="contact-cta-phones">
+                        <a class="contact-cta-phone" href="tel:+79615041041">+7 961 504 10 41</a>
+                        <div class="contact-cta-subtext">звоните нам</div>
+                    </div>
+
+                    <div class="contact-cta-email">
+                        <div class="contact-cta-mail">eleonor.arch@gmail.com</div>
+                        <div class="contact-cta-subtext">пишите нам</div>
+                    </div>
+
+                    <div class="contact-cta-address">
+                        <p>Мы работаем по будням с 10:00 до 19:00</p>
+                        <p class="contact-cta-social"><a href="https://t.me/eleonora_lab" target="_blank" rel="noopener">telegram</a>, <a href="https://youtu.be/c7E8rsBDiyc?si=4UCSF_kg3Fg1kZTo" target="_blank" rel="noopener">youtube</a>, <a href="https://www.instagram.com/eleonorlab?igsh=aDVzMzN6bzQ5NmVs" target="_blank" rel="noopener">instagram</a>, <a href="https://max.ru/u/f9LHodD0cOKlfWBNhClDPlM9r0DFFYSnsnmOJ9HG5GkXW0zJvDKVCdzQdPI" target="_blank" rel="noopener">max</a></p>
+                    </div>
+
+                    <div class="contact-cta-footer">
+                        <span>© Все права защищены</span>
+                        <div class="contact-cta-years">
+                            <span>2015</span>
+                            <span class="years-line"></span>
+                            <span>2025</span>
+                        </div>
+                    </div>
+
+                    <a href="#top" class="contact-cta-top">Наверх ↑</a>
+                </div>
+            </div>
         </section>
 
         <nav class="side-nav" id="side-nav">
@@ -537,7 +606,7 @@
                 <img src="./assets/icons/max.png" alt="" loading="lazy" decoding="async" width="16" height="16">
             </a>
             <a href="https://t.me/eleonora_lab" class="social-circle" target="_blank" rel="noopener" aria-label="Telegram">
-                <img src="./assets/icons/4.png" alt="" loading="lazy" decoding="async" width="16" height="16">
+                <img src="./assets/icons/telegram.png" alt="" loading="lazy" decoding="async" width="16" height="16">
             </a>
             <a href="https://wa.me/79615041041" class="social-circle" target="_blank" aria-label="WhatsApp">
                 <img src="./assets/icons/3.png" alt="" loading="lazy" decoding="async" width="16" height="16">
@@ -546,10 +615,8 @@
         </nav>
     </main>
 
-    <script src="./js/main.js?v=20260426"></script>
+    <script src="./js/main.js?v=20260627-1"></script>
 </body>
 </html>
-
-
 
 

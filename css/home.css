@@ -2710,6 +2710,10 @@
   align-items: stretch;
 }
 
+.contact-cta-mobile {
+  display: none;
+}
+
 .contact-cta-divider {
   position: absolute;
   left: 50%;
@@ -2978,24 +2982,85 @@
 }
 
 @media (max-width: 960px) {
-  .contact-cta-container {
-    grid-template-columns: 1fr;
-    padding: 0 clamp(16px, 4vw, 32px);
+  .contact-cta-section {
+    min-height: auto;
+    align-items: flex-start;
   }
 
-  .contact-cta-divider {
+  .contact-cta-container {
     display: none;
   }
 
-  .contact-cta-right {
-    padding-left: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: clamp(20px, 3vh, 32px);
+  .contact-cta-mobile {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 4vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
 
-  .contact-cta-footer {
+  .contact-cta-mobile .contact-cta-title {
+    margin-bottom: 14px;
+  }
+
+  .contact-cta-mobile .contact-cta-form {
+    width: 100%;
+    max-width: none;
+    gap: 18px;
+  }
+
+  .contact-cta-mobile .contact-cta-methods {
+    margin-top: 0;
+  }
+
+  .contact-cta-mobile .contact-cta-tags {
+    gap: 9px;
+  }
+
+  .contact-cta-mobile .contact-cta-attach {
+    width: fit-content;
+  }
+
+  .contact-cta-mobile .contact-cta-submit {
+    width: min(240px, 100%);
+    min-width: 190px;
+    padding: 0 28px;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+
+  .contact-cta-mobile .contact-cta-consent {
+    margin-top: 0;
+  }
+
+  .contact-cta-mobile .contact-cta-bottom-block {
+    width: 100%;
+    margin-top: 24px;
+    gap: 18px;
+  }
+
+  .contact-cta-mobile .contact-cta-phones,
+  .contact-cta-mobile .contact-cta-email,
+  .contact-cta-mobile .contact-cta-address {
+    margin-top: 0;
+  }
+
+  .contact-cta-mobile .contact-cta-footer {
+    position: static;
+    left: auto;
+    bottom: auto;
+    transform: none;
     flex-direction: column;
     align-items: flex-start;
+    text-align: left;
+    margin-top: 8px;
+  }
+
+  .contact-cta-mobile .contact-cta-top {
+    align-self: flex-start;
+    margin-top: 2px;
   }
 }
 
