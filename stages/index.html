@@ -84,12 +84,13 @@
                ]
 }
     </script>
+    <link rel="preload" href="../assets/image/stages/1.webp" as="image" imagesrcset="../assets/image/stages/1-480w.webp 480w, ../assets/image/stages/1-960w.webp 960w, ../assets/image/stages/1-1440w.webp 1440w, ../assets/image/stages/1.webp 1678w" imagesizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1200px" fetchpriority="high">
 <link rel="stylesheet" href="../css/fonts.css?v=20260609-1">
     <link rel="stylesheet" href="../css/base.css?v=20260609-1">
     <link rel="stylesheet" href="../css/components.css?v=20260609-1">
     <link rel="stylesheet" href="../css/layout.css?v=20260609-1">
     <link rel="stylesheet" href="../css/home.css?v=20260609-3">
-    <link rel="stylesheet" href="../css/pages.css?v=20260619-1">
+    <link rel="stylesheet" href="../css/pages.css?v=20260630-1">
 </head>
 <body class="home-page projects-reset-page stages-reset-page">
     <header class="header home-header">
@@ -132,7 +133,7 @@
                 <section class="stages-page__slider stages-page__slider--plan" aria-label="Слайдер планировочного решения" data-stages-slider data-stages-pdf="../assets/image/stages/prs.pdf" data-stages-pdf-pages="55">
                     <div class="stages-page__slider-track">
                         <figure class="stages-page__slide is-active" data-stages-slide data-stages-slide-type="image">
-                            <img src="../assets/image/stages/1.webp" srcset="../assets/image/stages/1-480w.webp 480w, ../assets/image/stages/1-960w.webp 960w, ../assets/image/stages/1-1440w.webp 1440w, ../assets/image/stages/1.webp 1678w" sizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1200px" alt="Планировочное решение проекта, слайд 1" width="1200" height="840" loading="lazy" decoding="async">
+                            <img src="../assets/image/stages/1.webp" srcset="../assets/image/stages/1-480w.webp 480w, ../assets/image/stages/1-960w.webp 960w, ../assets/image/stages/1-1440w.webp 1440w, ../assets/image/stages/1.webp 1678w" sizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1200px" alt="Планировочное решение проекта, слайд 1" width="1200" height="840" loading="eager" fetchpriority="high" decoding="async">
                         </figure>
                         <figure class="stages-page__slide stages-page__slide--pdf" data-stages-slide data-stages-slide-type="pdf">
                             <iframe src="../assets/image/stages/prs.pdf#page=1&view=FitH" title="Презентация проекта — страница 1" loading="lazy"></iframe>
